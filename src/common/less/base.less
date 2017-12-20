@@ -1,0 +1,59 @@
+@import './variable.less';
+@theme_hover:red;
+/* reset */
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+[hidefocus],summary{outline:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+body{background:@base_color;font-size: @base_textSize;}
+a{
+    text-decoration: none;
+}
+.baseConfig{
+    font-size: @base_textSize;
+    color:@base_textColor;
+}
+.flex{
+    display: flex;    
+}
+.flex-center{
+    .flex();
+    justify-content: center;
+}
+.flex-end{
+    .flex();
+    justify-content: flex-end;
+}
+.flex-around{
+    .flex();
+    justify-content: space-around;
+}
+.flex-between{
+    .flex();
+    justify-content: space-between;
+}
+.flex-align{
+    align-items: flex-start;
+}
+.flex-align-center{
+    align-items: center;
+}
+.flex-align-end{
+    align-items: flex-end;
+}
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+
+

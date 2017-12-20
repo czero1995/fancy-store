@@ -1,0 +1,187 @@
+<template>
+
+	<div class="index">
+		<headers></headers>
+		<tip></tip>
+		<!-- Swiper -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" v-for="bannerItem in bannerList">
+					<img :src="bannerItem.img" />
+				</div>
+			</div>
+			<!-- Add Pagination -->
+			<div class="swiper-pagination"></div>
+		</div>
+		
+		<div class="content inlinkFlex-spacebetween" v-cloak>
+			<div v-for="(productItem,productIndex) in productList" class="floorItem">
+
+				<div class="productTop flex-between">
+					<p class="productTop-text">{{productItem.Category.TopText}}</p>
+					<div class="flex flex-aligin-center">
+						<p class="productTop-text">{{productIndex+1}}F</p>
+						<img src="../common/img/icon/arrowRight.png" class="arrowImg" />
+					</div>
+				</div>
+				<div class="productBox flex flex-wrap" v-cloak>
+					<div class="productItem" v-for="goodsItem in productItem.SalesProduct">
+						<div class="itemBox">
+							<div @click="onGoodsDetail(goodsItem)">
+								<img :src="goodsItem.GoodsImage" class="itemImg" />
+								<div class="itemText">
+									<p class="itemText">{{goodsItem.GoodsName}}</p>
+								</div>
+							</div>
+
+							<div class="addCartBox flex-between">
+								<p><span class="itemPrice">¥ {{goodsItem.GoodsPrice}}</span></p>
+								<img src="../common/img/icon/shop_addCart.png" @click="onAddCart(goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart" />
+								<img src="../common/img/icon/shop_addCart_select.png" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart" />
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+		<footers></footers>
+		
+	</div>
+
+</template>
+
+<script>
+	import Headers from './base/Header.vue';
+	import Footers from './base/Footer.vue';
+	import Tip from './base/Tip.vue';
+	import '../../src/common/css/swiper.min.css';
+	import Swiper from '../../src/common/js/swiper.min';
+	import { mapMutations } from 'vuex';
+	export default {
+
+		data() {
+			return {
+				bannerList: [],
+				productList: [],
+			}
+		},
+		components: {
+			Headers,
+			Footers,
+			Tip
+		},
+		mounted() {
+			setTimeout(() => {
+				var swiper = new Swiper('.swiper-container', {
+					pagination: '.swiper-pagination',
+					paginationClickable: true,
+					spaceBetween: 30,
+				});
+			}, 500)
+			this.getGoodsList();
+			this.getBannerList();
+		},
+		methods: {
+			/*获取商品列表*/
+			getGoodsList() {
+				const that = this;
+				this.$http.get('/api/homedata').then(function(res) {
+
+						that.productList = res.data.data;
+
+					})
+					.catch(function(error) {
+						console.log(error);
+					});
+			},
+			/*获取轮播列表*/
+			getBannerList() {
+				const that = this;
+				this.$http.get('/api/bannerdata').then(function(res) {
+						that.bannerList = res.data.data;
+						console.log(that.bannerList);
+					})
+					.catch(function(error) {
+						console.log(error);
+					});
+			},
+			onGoodsDetail(item) {
+				this.$router.push('/detail');
+				this.setGoods(item)
+			},
+			/*添加到购物车*/
+			onAddCart() {
+
+			},
+			...mapMutations({
+				setGoods: 'SET_GOODS',
+			})
+
+		}
+
+	}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="less" rel="stylesheet/less">
+	.content {
+		padding-left: .2rem;
+		padding-right: .2rem;
+	}
+	
+	.productTop-text {
+		font-size: .28rem;
+	}
+	
+	.arrowImg {
+		width: .4rem;
+		height: .4rem;
+	}
+	
+	.productItem {
+		width: 48%;
+		box-sizing: border-box;
+		margin-bottom: .4rem;
+		&:nth-child(odd){
+			margin-right: 2%;
+			border-right: 1px solid #ccc;
+		}
+		
+	}
+	
+	.swiper-container {
+		height: 2rem;
+	}
+	
+	.swiper-slide img {
+		width: 100%;
+		height: 100%;
+	}
+	
+	.itemImg {
+		width: 100%;
+		height: 100%;
+	}
+	.itemText{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		font-size: .22rem;
+		margin: .2rem 0;
+	}
+	.itemPrice{
+		font-size: .2rem;
+		color:red;
+	}
+	.addCartBox{
+		img{
+			width: .4rem;
+			height: .4rem;
+			padding-right: .2rem;
+		}
+	}
+</style>

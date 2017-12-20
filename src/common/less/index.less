@@ -1,0 +1,87 @@
+@import "base.less";
+#app {
+    background: @background;
+}
+
+.container {
+    padding-bottom: 0.88rem;
+}
+
+.swiper-container {
+    height: 3rem;
+    width: 100%;
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.content {
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.floorItem{
+    width: 100%;
+}
+
+.productTop {
+    padding-left: 0.2rem;
+    padding-right: 0.1rem;
+    margin-top: 0.1rem;
+    height: 0.6rem;
+    background: @white;
+    border-bottom: 1px solid @grey;
+    img {
+        margin-right: 0.1rem;
+    }
+}
+
+.productTop-text {
+    color: @black;
+}
+
+.top-item {
+    text-align: center;
+}
+
+.itemImg {
+    width: 100%;
+    height: 2.8rem;
+}
+
+.productItem:nth-of-type(odd) {
+    border-right: 1px solid @grey;
+}
+
+.productItem {
+    width: 50%;
+    background: @white;
+    box-sizing: border-box;
+}
+
+.itemBox {
+    width: 100%;
+    text-align: center;
+}
+
+.itemText {
+    text-align: left;
+    padding-left: 0.2rem;
+}
+
+
+.addCartBox {
+    text-align: right;
+    margin-right: 0.2rem;
+    img {
+        width: 0.4rem;
+        height: 0.4rem;
+    }
+}
+.footerTip {
+    width: 100%;
+    text-align: center;
+    padding: 0.3rem 0;
+    color: @textcolor;
+}
