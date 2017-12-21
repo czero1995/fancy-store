@@ -1,7 +1,7 @@
 <template>
   <footer class="flex flex-align-center">
   	
-				<div class="footer-item active">
+				<div class="footer-item" :class="{active:urlRouter == '/index'}">
 					<router-link to='./index'>
 						<i class="icon footerIcon footerHomeIcon"></i>
 						<p class="footer-title">首页</p>
@@ -9,20 +9,20 @@
 				</div>
 		
 		
-				<div class="footer-item">
+				<div class="footer-item" :class="{active:urlRouter == '/category'}">
 					<router-link to='./category'>
 							<i class="icon footerIcon footerCategoryIcon"></i>
 							<p class="footer-title">分类</p>
 						</router-link>
 				</div>
 		
-				<div class="footer-item">
+				<div class="footer-item" :class="{active:urlRouter == '/cart'}">
 					<router-link to='./cart'>
 						<i class="icon footerIcon footerCartIcon"></i>
 						<p class="footer-title">购物车</p>
 					</router-link>
 				</div>
-				<div class="footer-item">
+				<div class="footer-item" :class="{active:urlRouter == '/member'}">
 					<router-link to='./member'>
 							<i class="icon footerIcon footerMemberIcon"></i>
 							<p class="footer-title">我的</p>
@@ -34,11 +34,13 @@
 <script>
 	
 export default {
-  
+  props:['urlRouter'],
   data () {
     return {
-      
     }
+  },
+  mounted(){
+  	console.log(111,this.urlRouter);
   }
 }
 </script>
@@ -48,7 +50,7 @@ export default {
 @import '../../common/less/base.less';
 footer{
 	position: fixed;
-	bottom: 0;
+  bottom: 0;
 	width: 100%;
 	height: .88rem;
 	background: @base_color;

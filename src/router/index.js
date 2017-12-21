@@ -5,6 +5,7 @@ import Category from '@/components/Category/Category'
 import Cart from '@/components/Cart/Cart'
 import Member from '@/components/Member/Member'
 import Detail from '@/components/Detail/Detail'
+import OrderWait from '@/components/Order/OrderWait'
 Vue.use(Router)
 
 export default new Router({
@@ -32,6 +33,10 @@ export default new Router({
     {
       path: '/detail',
       component: Detail
+    },
+    {
+      path: '/orderwait',
+      component: OrderWait
     },
   ]
 })

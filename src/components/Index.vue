@@ -2,54 +2,57 @@
 
 	<div class="index">
 		<headers></headers>
-		<tip></tip>
-		<!-- Swiper -->
-		<div class="swiper-container">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide" v-for="bannerItem in bannerList">
-					<img :src="bannerItem.img" />
-				</div>
-			</div>
-			<!-- Add Pagination -->
-			<div class="swiper-pagination"></div>
-		</div>
-		
-		<div class="content inlinkFlex-spacebetween" v-cloak>
-			<div v-for="(productItem,productIndex) in productList" class="floorItem">
-
-				<div class="productTop flex-between">
-					<p class="productTop-text">{{productItem.Category.TopText}}</p>
-					<div class="flex flex-aligin-center">
-						<p class="productTop-text">{{productIndex+1}}F</p>
-						<img src="../common/img/icon/arrowRight.png" class="arrowImg" />
+		<tip ref="tip" :goodsname="goodsName"></tip>
+		<div class="container">
+			<!-- Swiper -->
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" v-for="bannerItem in bannerList">
+						<img :src="bannerItem.img" />
 					</div>
 				</div>
-				<div class="productBox flex flex-wrap" v-cloak>
-					<div class="productItem" v-for="goodsItem in productItem.SalesProduct">
-						<div class="itemBox">
-							<div @click="onGoodsDetail(goodsItem)">
-								<img :src="goodsItem.GoodsImage" class="itemImg" />
-								<div class="itemText">
-									<p class="itemText">{{goodsItem.GoodsName}}</p>
-								</div>
-							</div>
+				<!-- Add Pagination -->
+				<div class="swiper-pagination"></div>
+			</div>
 
-							<div class="addCartBox flex-between">
-								<p><span class="itemPrice">¥ {{goodsItem.GoodsPrice}}</span></p>
-								<img src="../common/img/icon/shop_addCart.png" @click="onAddCart(goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart" />
-								<img src="../common/img/icon/shop_addCart_select.png" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart" />
+			<div class="content inlinkFlex-spacebetween" v-cloak>
+				<div v-for="(productItem,productIndex) in productList" class="floorItem">
+
+					<div class="productTop flex-between">
+						<p class="productTop-text">{{productItem.Category.TopText}}</p>
+						<div class="flex flex-aligin-center">
+							<p class="productTop-text">{{productIndex+1}}F</p>
+							<img src="../common/img/icon/arrowRight.png" class="arrowImg" />
+						</div>
+					</div>
+					<div class="productBox flex flex-wrap" v-cloak>
+						<div class="productItem" v-for="goodsItem in productItem.SalesProduct">
+							<div class="itemBox">
+								<div @click="onGoodsDetail(goodsItem)">
+									<img :src="goodsItem.GoodsImage" class="itemImg" />
+									<div>
+										<p class="goods-name">{{goodsItem.GoodsName}}</p>
+									</div>
+								</div>
+
+								<div class="addCartBox flex-between">
+									<p><span class="goods-price">¥ {{goodsItem.GoodsPrice}}</span></p>
+									<img src="../common/img/icon/shop_addCart.png" @click="onAddCart(goodsItem,goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart" />
+									<img src="../common/img/icon/shop_addCart_select.png" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart" />
+								</div>
+
 							</div>
 
 						</div>
-
 					</div>
 				</div>
+
 			</div>
 
 		</div>
-		
-		<footers></footers>
-		
+
+		<footers :urlRouter="$route.path"></footers>
+
 	</div>
 
 </template>
@@ -67,6 +70,7 @@
 			return {
 				bannerList: [],
 				productList: [],
+				goodsName: '',
 			}
 		},
 		components: {
@@ -81,7 +85,7 @@
 					paginationClickable: true,
 					spaceBetween: 30,
 				});
-			}, 500)
+			}, 500);
 			this.getGoodsList();
 			this.getBannerList();
 		},
@@ -103,7 +107,6 @@
 				const that = this;
 				this.$http.get('/api/bannerdata').then(function(res) {
 						that.bannerList = res.data.data;
-						console.log(that.bannerList);
 					})
 					.catch(function(error) {
 						console.log(error);
@@ -114,11 +117,14 @@
 				this.setGoods(item)
 			},
 			/*添加到购物车*/
-			onAddCart() {
-
+			onAddCart(item, name) {
+				this.goodsName = name;
+				this.setCarts(item);
+				this.$refs.tip.showTip = true;
 			},
 			...mapMutations({
 				setGoods: 'SET_GOODS',
+				setCarts: 'SET_CARTS',
 			})
 
 		}
@@ -127,7 +133,8 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" rel="stylesheet/less">
+<style lang="less" scoped>
+
 	.content {
 		padding-left: .2rem;
 		padding-right: .2rem;
@@ -146,11 +153,10 @@
 		width: 48%;
 		box-sizing: border-box;
 		margin-bottom: .4rem;
-		&:nth-child(odd){
+		&:nth-child(odd) {
 			margin-right: 2%;
 			border-right: 1px solid #ccc;
 		}
-		
 	}
 	
 	.swiper-container {
@@ -166,19 +172,10 @@
 		width: 100%;
 		height: 100%;
 	}
-	.itemText{
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		font-size: .22rem;
-		margin: .2rem 0;
-	}
-	.itemPrice{
-		font-size: .2rem;
-		color:red;
-	}
-	.addCartBox{
-		img{
+
+	
+	.addCartBox {
+		img {
 			width: .4rem;
 			height: .4rem;
 			padding-right: .2rem;

@@ -1,7 +1,7 @@
 <template>
- <div class="tipContent model" v-show="showTip">
- 	<div class="model-content">
- 		添加成功
+ <div class="tipContent model" v-show="showTip" @click.stop="showTip=false">
+ 	<div class="model-content" @click.stop="showTip=true">
+ 		{{goodsname}}添加成功
  	</div>
  	
  </div>
@@ -10,11 +10,14 @@
 <script>
 	
 export default {
-  
+  props:['goodsname'],
   data () {
     return {
-      showTip:false
+      showTip:false,
     }
+  },
+  mounted(){
+  	console.log(this.goodsname)
   }
 }
 </script>
@@ -48,3 +51,18 @@ export default {
 }
 	
 </style>
+
+0 2017/12/20 22:12:45
+<tip ref="tip" :goodsname="goodsName"></tip>
+
+0 2017/12/20 22:12:59
+/*添加到购物车*/
+			onAddCart(item,name) {
+				this.goodsName=name;
+//				this.setCarts(item);
+				this.$refs.tip.showTip=true;
+			},
+			...mapMutations({
+				setGoods: 'SET_GOODS',
+				setCarts: 'SET_CARTS',
+			})
