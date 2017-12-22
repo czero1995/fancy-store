@@ -1,5 +1,6 @@
 <template>
-	<div class="category">
+	<transition name="slide-back" >
+	<div class="page">
 		<headers></headers>
 		<div class="container flex" id="container" v-cloak>
 			<div class="leftbar">
@@ -14,7 +15,7 @@
 					<div class="category-item flex">
 						<div class="item flex detail-item">
 							<div class="goods-img">
-								<img :src="categoryItem.GoodsImage" />
+								<img v-lazy="categoryItem.GoodsImage" />
 							</div>
 							<div class="goods-textBox">
 								<p class="goods-name">{{categoryItem.GoodsName}}</p>
@@ -32,7 +33,7 @@
 		</div>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
-
+</transition>
 </template>
 
 <script>
@@ -110,7 +111,11 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-	@import '../../common/less/base.less';
+	@import '../../common/less/variable.less';
+	.category{
+		padding-top: .8rem;
+		padding-bottom: .88rem;
+	}
 	.leftbar {
 		width: 1.8rem;
 		font-size: .28rem;

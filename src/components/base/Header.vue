@@ -1,8 +1,7 @@
 <template>
-	<header>
-		<p>零食商店</p>
-	</header>
-
+		<header>
+			<p>零食商店</p>
+		</header>
 </template>
 
 <script>
@@ -18,7 +17,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" rel="stylesheet/less">
-@import '../../common/less/base.less';
+@import '../../common/less/variable.less';
 	header{
 		height: .8rem;
 		text-align: center;

@@ -1,7 +1,7 @@
 <template>
   <footer class="flex flex-align-center">
   	
-				<div class="footer-item" :class="{active:urlRouter == '/index'}">
+				<div class="footer-item" :class="{active:urlRouter == '/index' || urlRouter == '/'}">
 					<router-link to='./index'>
 						<i class="icon footerIcon footerHomeIcon"></i>
 						<p class="footer-title">首页</p>
@@ -46,8 +46,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" rel="stylesheet/less">
-@import '../../common/less/base.less';
+<style lang="less" scoped>
+@import '../../common/less/variable.less';
 footer{
 	position: fixed;
   bottom: 0;

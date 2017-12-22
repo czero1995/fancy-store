@@ -13,6 +13,14 @@ const matutaions = {
 		state.orders = orders;
 		console.log('state.orders',state.orders)
 	},
+	[types.SET_PAYS](state,pays){
+		state.pays = pays;
+		console.log('state.pays',state.pays)
+	},
+	[types.SET_ADDRESS](state,address){
+		state.address = address;
+		console.log('state.address',state.address)
+	},
 
 }
  export default matutaions

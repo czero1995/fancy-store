@@ -1,5 +1,6 @@
 <template>
-	<div class="detail">
+	<transition name="slide-back" >
+	<div class="page">
 		<headersec></headersec>
 		<div class="container">
 			<img :src="goods.GoodsImage" class="goodsImg" />
@@ -9,7 +10,7 @@
 			</div>
 		</div>
 
-		<div class="detail-bottom flex flex-around flex-align-center">
+		<div class="detail-bottom flex-align-center flex-around">
 
 			<img src="../../common/img/icon/shop_addCart.png" @click="toCart" />
 			<div class="addCart" @click="onCartModel()">
@@ -20,15 +21,15 @@
 			</div>
 		</div>
 
-		<transition name="slide-fade" v-cloak>
-			<div class="model" v-show="addCartModel">
+		<transition name="slide-up" >
+			<div class="model" v-show="addCartModel" v-cloak>
 				<div class="model-content addCart-content" @click.stop="addCartModel=true">
 					<div class="cartModel-box flex">
 						<div class="cartModel-img">
 							<img :src="goods.GoodsImage" />
 						</div>
 						<div class="cartModel-text">
-							<div class="flex flex-between">
+							<div class="flex-between">
 								<p class="goods-name">{{$store.state.goods.GoodsName}}</p>
 								<img src="../../common/img/icon/close.png" class="cartClose" @click.stop="addCartModel=false" />
 							</div>
@@ -37,7 +38,7 @@
 						</div>
 
 					</div>
-					<div class="cartModel-bottom flex flex-between">
+					<div class="cartModel-bottom flex-between">
 						<p>购买数量</p>
 						<div class="goodsOp flex">
 							<img src="../../common/img/icon/shop_cut.png" @click="onCutCart()" />
@@ -45,47 +46,19 @@
 							<img src="../../common/img/icon/shop_add.png" @click="onAddCart()" />
 						</div>
 					</div>
-					<div class="cartModel-addCart" >
+					<div class="cartModel-addCart" v-show="!isBuy">
 						加入购物车
 					</div>
-				</div>
-
-			</div>
-		</transition>
-		<transition name="slide-fade" v-cloak>
-			<div class="model" v-show="buyModel">
-				<div class="model-content addCart-content" @click.stop="buyModel=true">
-					<div class="cartModel-box flex">
-						<div class="cartModel-img">
-							<img :src="goods.GoodsImage" />
-						</div>
-						<div class="cartModel-text">
-							<div class="flex flex-between">
-								<p class="goods-name">{{$store.state.goods.GoodsName}}</p>
-								<img src="../../common/img/icon/close.png" class="cartClose" @click.stop="buyModel=false" />
-							</div>
-
-							<p class="goods-price">¥{{$store.state.goods.GoodsPrice}}</p>
-						</div>
-
-					</div>
-					<div class="cartModel-bottom flex flex-between">
-						<p>购买数量</p>
-						<div class="goodsOp flex">
-							<img src="../../common/img/icon/shop_cut.png" @click="onCutCart()" />
-							<input type="text" :value="goodsNum" readonly="" />
-							<img src="../../common/img/icon/shop_add.png" @click="onAddCart()" />
-						</div>
-					</div>
-					<div class="cartModel-addCart" >
+					<div class="cartModel-addCart" v-show="isBuy">
 						立即购买
 					</div>
 				</div>
 
 			</div>
 		</transition>
-	</div>
 
+	</div>
+</transition>
 </template>
 
 <script>
@@ -96,7 +69,7 @@
 			return{
 				goodsNum:1,
 				addCartModel:false,
-				buyModel:false,
+				isBuy:true,
 			}
 		},
 		computed: {
@@ -116,9 +89,11 @@
 			},
 			onCartModel(){
 				this.addCartModel=true;
+				this.isBuy=false;
 			},
 			onBuyModel(){
-				this.buyModel=true;
+				this.addCartModel=true;
+				this.isBuy=true;
 			},
 			onAddCart() {
 				this.goodsNum++;
@@ -134,7 +109,11 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/base.less';
+	@import '../../common/less/variable.less';
+	.detial{
+		padding-top: .8rem;
+		padding-bottom: .88rem;
+	}
 	.goodsImg {
 		width: 100%;
 		height: 5rem;

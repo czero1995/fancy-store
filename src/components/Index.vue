@@ -1,6 +1,6 @@
 <template>
-
-	<div class="index">
+<transition name="slide-back" >
+	<div class="page">
 		<headers></headers>
 		<tip ref="tip" :goodsname="goodsName"></tip>
 		<div class="container">
@@ -15,7 +15,7 @@
 				<div class="swiper-pagination"></div>
 			</div>
 
-			<div class="content inlinkFlex-spacebetween" v-cloak>
+			<div class="content" v-cloak>
 				<div v-for="(productItem,productIndex) in productList" class="floorItem">
 
 					<div class="productTop flex-between">
@@ -29,9 +29,9 @@
 						<div class="productItem" v-for="goodsItem in productItem.SalesProduct">
 							<div class="itemBox">
 								<div @click="onGoodsDetail(goodsItem)">
-									<img :src="goodsItem.GoodsImage" class="itemImg" />
+									<img v-lazy="goodsItem.GoodsImage" class="itemImg" />
 									<div>
-										<p class="goods-name">{{goodsItem.GoodsName}}</p>
+										<p class="goods-name text-ellipsis">{{goodsItem.GoodsName}}</p>
 									</div>
 								</div>
 
@@ -54,7 +54,7 @@
 		<footers :urlRouter="$route.path"></footers>
 
 	</div>
-
+</transition>
 </template>
 
 <script>
@@ -64,6 +64,7 @@
 	import '../../src/common/css/swiper.min.css';
 	import Swiper from '../../src/common/js/swiper.min';
 	import { mapMutations } from 'vuex';
+	
 	export default {
 
 		data() {
@@ -121,6 +122,9 @@
 				this.goodsName = name;
 				this.setCarts(item);
 				this.$refs.tip.showTip = true;
+				setTimeout(()=>{
+					this.$refs.tip.showTip = false;
+				},800)
 			},
 			...mapMutations({
 				setGoods: 'SET_GOODS',
@@ -134,7 +138,15 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-
+	.index{
+		padding-top: .8rem;
+		padding-bottom: .88rem;
+		display: flex;
+		 flex-direction: column;
+	}
+	.container{
+		flex:1;
+	}
 	.content {
 		padding-left: .2rem;
 		padding-right: .2rem;

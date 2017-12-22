@@ -22,9 +22,9 @@
 			</div>
 
 		</div>
-		<div class="orderBottom flex flex-between">
+		<div class="orderBottom flex-between">
 			<span>总金额:{{allCoach}}</span>
-			<span>结算</span>
+			<span @click="onOrder">结算</span>
 		</div>
 	</div>
 
@@ -32,6 +32,7 @@
 
 <script>
 	import Headersec from '../base/HeaderSec.vue';
+	import { mapMutations } from 'vuex';
 	import { mapGetters } from 'vuex'
 	export default {
 		data() {
@@ -62,6 +63,12 @@
 			Headersec
 		},
 		methods: {
+			onOrder(){
+				this.setPays(this.orders);
+			},
+			...mapMutations({
+				setPays: 'SET_PAYS',
+			})
 		},
 	}
 </script>

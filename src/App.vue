@@ -14,9 +14,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+@import './common/less/base.less';
 	#app{
-		padding-top: .8rem;
-		padding-bottom: .88rem;
+		/*padding-top: .8rem;
+		padding-bottom: .88rem;*/
+		height: 100%;
 	}
 </style>

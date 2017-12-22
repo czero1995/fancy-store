@@ -1,10 +1,12 @@
 <template>
+	<transition name="slide-down" >
  <div class="tipContent model" v-show="showTip" @click.stop="showTip=false">
  	<div class="model-content" @click.stop="showTip=true">
  		{{goodsname}}添加成功
  	</div>
  	
  </div>
+ </transition>
 </template>
 
 <script>

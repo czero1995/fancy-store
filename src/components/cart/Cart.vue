@@ -1,11 +1,13 @@
 <template>
-	<div class="container">
+	<transition name="slide-back" >
+	<div class="page">
 		<headers></headers>
+		<div class="container">
 		<div v-show="!showCart">
-			暂无购物车数据，请前往添加
+			<img src="../../common/img/icon/404.png" alt="" />
 		</div>
 		<div v-show="showCart">
-			<div class="cart-item flex flex-align-center" v-for="cartItem in carts" v-cloak>
+			<div class="cart-item flex-align-center" v-for="cartItem in $store.state.carts" v-cloak>
 				<div class="goods-radio" @click="onGoodsRadio(cartItem)">
 					<img src="../../common/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
 					<img src="../../common/img/icon/radio_select.png" v-show="cartItem.goodsRadio" />
@@ -27,7 +29,8 @@
 			</div>
 			
 		</div>
-		<div class="cartBottom-detail flex flex-between" v-cloak>
+		</div>
+		<div class="cartBottom-detail flex-between" v-cloak>
 				<div class="flex">
 					<div class="shopRadio" @click="onSelectAll()">
 						<img src="../../common/img/icon/radio.png" v-show="!goodsRadioAll" />
@@ -44,6 +47,7 @@
 			</div>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
+	</transition>
 </template>
 
 <script>
@@ -160,7 +164,7 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/base.less';
+	@import '../../common/less/variable.less';
 	.container{
 		padding-bottom: .4rem;
 	}

@@ -1,23 +1,25 @@
 <template>
-	<div class="member">
+	<transition name="slide-back" >
+	<div class="page">
 		<headers></headers>
 		<div class="container">
 			<div class="floor floor_one"></div>
-			<div class="floor floor_item floor_two flex flex-between flex-align-center">
+			<div class="floor floor_item floor_two  flex-align-center flex-between ">
 				<p>个人信息</p>
 				<img src="../../common/img/icon/arrowRight.png" alt="" />
 			</div>
-			<div class="floor floor_item floor_two flex flex-between flex-align-center">
+			<div class="floor floor_item floor_two  flex-align-center flex-between" @click="onOrder">
 				<p>我的订单</p>
 				<img src="../../common/img/icon/arrowRight.png" alt="" />
 			</div>
-			<div class="floor floor_item floor_two flex flex-between flex-align-center">
+			<div class="floor floor_item floor_two  flex-align-center flex-between " @click="onAddress">
 				<p>地址选择</p>
 				<img src="../../common/img/icon/arrowRight.png" alt="" />
 			</div>
 		</div>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
+	</transition>
 </template>
 
 <script>
@@ -28,12 +30,20 @@
 			Headers,
 			Footers,
 		},
+		methods:{
+			onOrder(){
+				this.$router.push('./order')
+			},
+			onAddress(){
+				this.$router.push('./address')
+			}
+		}
 	}
 </script>
 
-<style lang="less" >
-	@import '../../common/less/base.less';
-	.member{
+<style lang="less" scoped>
+	@import '../../common/less/variable.less';
+	.page{
 		background: #66666608;
 	}
 	.floor_one{
