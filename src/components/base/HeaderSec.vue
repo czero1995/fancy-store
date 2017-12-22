@@ -1,7 +1,7 @@
 <template>
 	<header class="flex flex-align-center">
-		<img src="../../common/img/icon/arrowRight.png" @click="onBack"/>
-		<p>零食商店</p>
+		<img src="../../common/img/icon/arrowBack.png" @click="onBack"/>
+		<p>{{tabname}}</p>
 	</header>
 
 </template>
@@ -9,7 +9,7 @@
 <script>
 	
 export default {
-
+	props:['tabname'],
   data () {
     return {
 		

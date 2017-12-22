@@ -1,7 +1,6 @@
 <template>
-	<transition name="slide-back" >
 	<div class="page">
-		<headers></headers>
+		<headers tabname="我的"></headers>
 		<div class="container">
 			<div class="floor floor_one"></div>
 			<div class="floor floor_item floor_two  flex-align-center flex-between ">
@@ -19,7 +18,6 @@
 		</div>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
-	</transition>
 </template>
 
 <script>

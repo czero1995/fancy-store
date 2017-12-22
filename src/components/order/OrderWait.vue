@@ -1,43 +1,53 @@
 <template>
-	<div class="orderwait">
-		<headersec></headersec>
-		<div>
-			<div class="chooseAddress inlinkFlex-spacebetween">
-				<div class="flex flex-align-center chooseBox">
-					<img src="../../common/img/icon/item_address.png" />
-					<div class="flex flex-align-center flex-between">
-						<p>选择送货地址</p>
-						<img src="../../common/img/icon/arrowRight.png" alt="" />
-					</div>
-					
-				</div>
-				
+	<transition name="slide-back" >
+	<div class="page">
+		<headersec tabname="订单详情"></headersec>
+		<div class="container">
+			<div v-show="!havePage">
+				<nopage></nopage>
 			</div>
-		</div>
-		<div class="orderItem flex" v-for="orderItem in $store.state.orders">
-			<img :src="orderItem.GoodsImage" class="goodsImg" />
-			<div>
-				<p>{{orderItem.GoodsName}}</p>
-				<p>¥{{orderItem.GoodsPrice}}</p>
+			<div v-show="havePage">
+				<div class="chooseAddress">
+					<div class="flex-align-center chooseBox">
+						<img src="../../common/img/icon/item_address.png" />
+						<div class="flex-align-center flex-between">
+							<p>选择送货地址</p>
+							<img src="../../common/img/icon/arrowRight.png" alt="" />
+						</div>
+
+					</div>
+
+				</div>
+				<div class="orderItem flex" v-for="orderItem in $store.state.orders">
+					<img :src="orderItem.GoodsImage" class="goodsImg" />
+					<div>
+						<p class="goods-name">{{orderItem.GoodsName}}</p>
+						<p class="goods-num">x{{orderItem.GoodsNum}}</p>
+						<p class="goods-price">¥{{orderItem.GoodsPrice}}</p>
+					</div>
+
+				</div>
+				<div class="orderBottom flex-between">
+					<span>总金额:{{allCoach}}</span>
+					<span @click="onOrder">结算</span>
+				</div>
 			</div>
 
-		</div>
-		<div class="orderBottom flex-between">
-			<span>总金额:{{allCoach}}</span>
-			<span @click="onOrder">结算</span>
 		</div>
 	</div>
-
+	</transition>
 </template>
 
 <script>
 	import Headersec from '../base/HeaderSec.vue';
+	import Nopage from '../base/NoPage.vue';
 	import { mapMutations } from 'vuex';
 	import { mapGetters } from 'vuex'
 	export default {
 		data() {
 			return {
-				allCoach: 0
+				allCoach: 0,
+				havePage: false
 			}
 		},
 		computed: {
@@ -51,20 +61,29 @@
 		mounted() {
 			const that = this;
 			let sums = [];
-			var all;
-			that.orders.forEach(function(item) {
-				sums.push(item.GoodsPrice);
-			});
-			for(var i = 0; i < sums.length; i++) {
+			if(that.orders === undefined) {
+				that.havePage = false;
+
+			} else {
+				that.havePage = true;
+				that.orders.forEach(function(item) {
+					sums.push(item.GoodsPrice);
+				});
+				for(var i = 0; i < sums.length; i++) {
 					that.allCoach += parseInt(sums[i]);
+				}
 			}
+
 		},
 		components: {
-			Headersec
+			Headersec,
+			Nopage
 		},
 		methods: {
-			onOrder(){
+			onOrder() {
+				this.$router.push('./order');
 				this.setPays(this.orders);
+				
 			},
 			...mapMutations({
 				setPays: 'SET_PAYS',
@@ -75,24 +94,26 @@
 
 <style lang="less" scoped>
 	@import '../../common/less/base.less';
-	.chooseBox{
+	.chooseBox {
 		margin-top: .2rem;
 		margin-bottom: .2rem;
 		height: 1.6rem;
 		padding: 0 .2rem;
-		border:1px dashed @theme_background;
-		img{
+		font-size:.28rem;
+		border: 1px dashed @theme_background;
+		img {
 			width: .4rem;
 			height: .4rem;
 			margin-right: .2rem;
 		}
-		div{
+		div {
 			width: 100%;
 		}
-		p{
+		p {
 			text-align: center;
 		}
 	}
+	
 	.orderItem {
 		padding: .2rem;
 		border-bottom: 1px solid #ccc;

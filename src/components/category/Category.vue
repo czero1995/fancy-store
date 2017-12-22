@@ -1,7 +1,6 @@
 <template>
-	<transition name="slide-back" >
 	<div class="page">
-		<headers></headers>
+		<headers tabname="分类"></headers>
 		<div class="container flex" id="container" v-cloak>
 			<div class="leftbar">
 				<div class="barItem" v-for="(menuItem,menuIndex) in menuList">
@@ -33,7 +32,6 @@
 		</div>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
-</transition>
 </template>
 
 <script>

@@ -1,6 +1,7 @@
 <template>
+	<transition name="slide-back" >
 	<div class="page">
-		<headersec></headersec>
+		<headersec tabname="添加地址"></headersec>
 		<div class="container">
 			<input type="text" placeholder="选择地区" :value="addressText" readonly="" @click="addressModel = true" />
 
@@ -36,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-
+</transition>
 </template>
 
 <script>
@@ -62,11 +63,11 @@
 		mounted() {
 			const that = this;
 			that.addressList = init_city_picker;
-			console.log('data',init_city_picker)
 		},
 		components: {
 			Headersec
 		},
+
 		methods: {
 			/*选择省份*/
 			onProvinceSelect: function(index, item) {
@@ -95,10 +96,10 @@
 			},
 			onSave() {
 				this.$router.back();
-				this.Setaddress(this.addressText)
+				this.setAddress(this.addressText);
 			},
 			...mapMutations({
-				Setaddress: 'SET_ADDRESS'
+				setAddress: 'SET_ADDRESS',
 			})
 		},
 	}
@@ -128,8 +129,10 @@
 	.addressBox li {
 		font-size: .26rem;
 		height: 0.62rem;
+		line-height: 0.62rem;
 		color: @base_textColor;
-		text-align: center;
+		text-align: left;
+		padding-left: .5rem;
 	}
 	
 	.cityBox {
@@ -202,6 +205,7 @@
 	
 	.addressBox .active {
 		background: @theme_background;
+		color:@base_color;
 	}
 	
 	.addressBox .active .cityBox {

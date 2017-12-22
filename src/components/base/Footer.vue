@@ -21,6 +21,9 @@
 						<i class="icon footerIcon footerCartIcon"></i>
 						<p class="footer-title">购物车</p>
 					</router-link>
+					<transition name="bullet" >
+						<div class="cart-num" v-show="showNum">{{cartnum}}</div>
+					</transition>
 				</div>
 				<div class="footer-item" :class="{active:urlRouter == '/member'}">
 					<router-link to='./member'>
@@ -34,9 +37,10 @@
 <script>
 	
 export default {
-  props:['urlRouter'],
+  props:['urlRouter','cartnum'],
   data () {
     return {
+    	showNum:false
     }
   },
   mounted(){
@@ -54,10 +58,25 @@ footer{
 	width: 100%;
 	height: .88rem;
 	background: @base_color;
+	box-shadow:0 -2px 9px rgba(0,0,0,.1);
 }
 .footer-item{
 	width: 25%;
 	text-align: center;
+	position: relative;
+}
+.cart-num{
+	position: absolute;
+	background: @theme_background;
+	color: @base_color;
+	text-align: center;
+	top: -.2rem;
+	right: .3rem;
+	width: .5rem;
+	height: .4rem;
+	line-height: .4rem;
+	border-radius: 0.8rem;
+	margin: auto;
 }
 	.icon{
     width: .4rem;

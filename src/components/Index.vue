@@ -1,7 +1,6 @@
 <template>
-<transition name="slide-back" >
 	<div class="page">
-		<headers></headers>
+		<headers tabname="零食商店"></headers>
 		<tip ref="tip" :goodsname="goodsName"></tip>
 		<div class="container">
 			<!-- Swiper -->
@@ -18,9 +17,9 @@
 			<div class="content" v-cloak>
 				<div v-for="(productItem,productIndex) in productList" class="floorItem">
 
-					<div class="productTop flex-between">
+					<div class="productTop flex-between ">
 						<p class="productTop-text">{{productItem.Category.TopText}}</p>
-						<div class="flex flex-aligin-center">
+						<div class="flex-align-center">
 							<p class="productTop-text">{{productIndex+1}}F</p>
 							<img src="../common/img/icon/arrowRight.png" class="arrowImg" />
 						</div>
@@ -51,10 +50,10 @@
 
 		</div>
 
-		<footers :urlRouter="$route.path"></footers>
+		<footers :urlRouter="$route.path" :cartnum='cartLength' ref="footer"></footers>
 
 	</div>
-</transition>
+
 </template>
 
 <script>
@@ -63,6 +62,7 @@
 	import Tip from './base/Tip.vue';
 	import '../../src/common/css/swiper.min.css';
 	import Swiper from '../../src/common/js/swiper.min';
+	import { mapGetters } from 'vuex';
 	import { mapMutations } from 'vuex';
 	
 	export default {
@@ -72,12 +72,18 @@
 				bannerList: [],
 				productList: [],
 				goodsName: '',
+				cartLength:0
 			}
 		},
 		components: {
 			Headers,
 			Footers,
 			Tip
+		},
+		computed: {
+			...mapGetters([
+				'this.$store.state.carts'
+			])
 		},
 		mounted() {
 			setTimeout(() => {
@@ -121,10 +127,11 @@
 			onAddCart(item, name) {
 				this.goodsName = name;
 				this.setCarts(item);
-				this.$refs.tip.showTip = true;
+				this.cartLength = this.$store.state.carts.length;
+				this.$refs.footer.showNum = true;
 				setTimeout(()=>{
-					this.$refs.tip.showTip = false;
-				},800)
+					this.$refs.footer.showNum = false;
+				},2000)
 			},
 			...mapMutations({
 				setGoods: 'SET_GOODS',
@@ -136,22 +143,15 @@
 	}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-	.index{
-		padding-top: .8rem;
-		padding-bottom: .88rem;
-		display: flex;
-		 flex-direction: column;
+
+	.productTop{
+		padding: 0 .2rem;
+		height: .6rem;
+		line-height: .6rem;
+		border-bottom: 1px solid #ccc;
+		margin-bottom: .2rem;
 	}
-	.container{
-		flex:1;
-	}
-	.content {
-		padding-left: .2rem;
-		padding-right: .2rem;
-	}
-	
 	.productTop-text {
 		font-size: .28rem;
 	}

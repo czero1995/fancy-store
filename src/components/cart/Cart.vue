@@ -1,12 +1,12 @@
 <template>
-	<transition name="slide-back" >
 	<div class="page">
-		<headers></headers>
+		<headers tabname="购物车"></headers>
+		
 		<div class="container">
-		<div v-show="!showCart">
-			<img src="../../common/img/icon/404.png" alt="" />
+		<div v-show="!havePage">
+			<nopage></nopage>
 		</div>
-		<div v-show="showCart">
+		<div v-show="havePage">
 			<div class="cart-item flex-align-center" v-for="cartItem in $store.state.carts" v-cloak>
 				<div class="goods-radio" @click="onGoodsRadio(cartItem)">
 					<img src="../../common/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
@@ -30,7 +30,7 @@
 			
 		</div>
 		</div>
-		<div class="cartBottom-detail flex-between" v-cloak>
+		<div class="cartBottom-detail flex-between" v-show="carts" v-cloak >
 				<div class="flex">
 					<div class="shopRadio" @click="onSelectAll()">
 						<img src="../../common/img/icon/radio.png" v-show="!goodsRadioAll" />
@@ -47,13 +47,14 @@
 			</div>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
-	</transition>
+
 </template>
 
 <script>
 	import Headers from '../base/Header.vue';
 	import Footers from '../base/Footer.vue';
 	import Tip from '../base/Tip.vue';
+	import Nopage from '../base/NoPage.vue';
 	import { mapGetters } from 'vuex';
 	import { mapMutations } from 'vuex';
 	export default {
@@ -62,14 +63,15 @@
 				goodsRadioAll: false,
 				allCoach: 0,
 				radioArr: [],
-				showCart:false
+				havePage:false
 			}
 
 		},
 		components: {
 			Headers,
 			Footers,
-			Tip
+			Tip,
+			Nopage
 		},
 		computed: {
 			...mapGetters([
@@ -82,10 +84,10 @@
 		mounted() {
 			const that = this;
 			if(that.carts === undefined){
-				that.showCart = false;
+				that.havePage = false;
 				
 			}else{
-				that.showCart = true;
+				that.havePage = true;
 				that.carts.forEach(function(item) {
 					
 					if(typeof item.goodsRadio == 'undefined') {
@@ -166,7 +168,7 @@
 <style lang="less" scoped>
 	@import '../../common/less/variable.less';
 	.container{
-		padding-bottom: .4rem;
+		padding-bottom: 1.6rem;
 	}
 	.cart-item {
 		border-bottom: 1px solid #CCCCCC;
@@ -185,9 +187,6 @@
 	
 	.goods-name {
 		font-size: .28rem;
-		/*overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap*/
 	}
 	
 	.goods-coach {
@@ -211,8 +210,8 @@
 	}
 	
 	.cartBottom-detail {
-		height: .6rem;
-		line-height: .6rem;
+		height: .8rem;
+		line-height: .8rem;
 		font-size: .28rem;
 		width: 100%;
 		position: fixed;

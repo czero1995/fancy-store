@@ -1,12 +1,12 @@
 <template>
 		<header>
-			<p>零食商店</p>
+			<p>{{tabname}}</p>
 		</header>
 </template>
 
 <script>
 export default {
-
+props:['tabname'],
   data () {
     return {
 

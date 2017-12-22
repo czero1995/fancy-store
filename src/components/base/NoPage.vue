@@ -1,27 +1,27 @@
 <template>
-	<div>
+	<div class="flex">
 		<img src="../../common/img/icon/404.png" alt="" />
+		<p>暂无数据，请到处浏览看看。</p>
 	</div>
- </transition>
 </template>
 
-<script>
-	
-export default {
-  data () {
-    return {
-      showNoPage:false,
-    }
-  },
-}
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-
+div{
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: .28rem;
+}
 	img{
 		text-align: center;
+		margin: .3rem 0;
+		width: 2rem;
+		height: 2rem;
 	}
+	p{
+		text-align: center;
+	}
+	
 	
 </style>
 

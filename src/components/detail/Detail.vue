@@ -1,9 +1,14 @@
 <template>
 	<transition name="slide-back" >
 	<div class="page">
-		<headersec></headersec>
-		<div class="container">
-			<img :src="goods.GoodsImage" class="goodsImg" />
+		<headersec tabname="商品详情"></headersec>
+		
+		<div class="container" >
+			<div v-show="!havePage">
+				<nopage></nopage>
+			</div>
+			<div v-show="havePage">
+				<img :src="$store.state.goods.GoodsImage" class="goodsImg" />
 			<div class="detail-content">
 				<p class="goods-name">{{$store.state.goods.GoodsName}}</p>
 				<p class="goods-price">¥{{$store.state.goods.GoodsPrice}}</p>
@@ -11,8 +16,13 @@
 		</div>
 
 		<div class="detail-bottom flex-align-center flex-around">
-
-			<img src="../../common/img/icon/shop_addCart.png" @click="toCart" />
+			<div class="toCart">
+				<img src="../../common/img/icon/cart_white.png" @click="toCart" />
+				<transition name="bullet" >
+					<p v-show="cartNum">{{cartLength}}</p>
+				</transition>
+			</div>
+			
 			<div class="addCart" @click="onCartModel()">
 				<span class="tabbar-label">加入购物车</span>
 			</div>
@@ -20,13 +30,15 @@
 				<span class="tabbar-label">立即购买</span>
 			</div>
 		</div>
+			</div>
+			
 
 		<transition name="slide-up" >
 			<div class="model" v-show="addCartModel" v-cloak>
 				<div class="model-content addCart-content" @click.stop="addCartModel=true">
 					<div class="cartModel-box flex">
 						<div class="cartModel-img">
-							<img :src="goods.GoodsImage" />
+							<img :src="$store.state.goods.GoodsImage" />
 						</div>
 						<div class="cartModel-text">
 							<div class="flex-between">
@@ -46,11 +58,13 @@
 							<img src="../../common/img/icon/shop_add.png" @click="onAddCart()" />
 						</div>
 					</div>
-					<div class="cartModel-addCart" v-show="!isBuy">
+					<div @click.stop="onBuy">
+					<p class="cartModel-addCart"  v-show="!isBuy">
 						加入购物车
-					</div>
-					<div class="cartModel-addCart" v-show="isBuy">
+					</p>
+					<p class="cartModel-addCart" v-show="isBuy">
 						立即购买
+					</p>
 					</div>
 				</div>
 
@@ -62,26 +76,45 @@
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
 	import Headersec from '../base/HeaderSec.vue';
+	import Nopage from '../base/NoPage.vue';
+	import { mapGetters } from 'vuex'
+	import { mapMutations } from 'vuex';
 	export default {
 		data(){
 			return{
 				goodsNum:1,
 				addCartModel:false,
 				isBuy:true,
+				havePage:false,
+				cartLength:'',
+				cartNum:false
 			}
 		},
 		computed: {
 			...mapGetters([
-				'goods'
+				'this.$store.state.goods',
+				'this.$store.state.carts'
 			])
 		},
 		created() {
-			console.log(1, this.goods)
+			console.log(1, this.$store.state.carts)
+		},
+		mounted(){
+			if(this.$store.state.goods === undefined){
+				this.havePage = false;
+				
+			}else{
+				this.havePage = true;
+			}
+			if(this.$store.state.carts != undefined ){
+				this.cartLength = this.$store.state.carts.length;
+			}
+			
 		},
 		components: {
-			Headersec
+			Headersec,
+			Nopage
 		},
 		methods: {
 			toCart() {
@@ -104,6 +137,28 @@
 				}
 
 			},
+			onBuy(){
+				const that = this;
+				if(this.isBuy){
+					this.setOrders(this.$store.state.goods);
+					this.$router.push('./orderwait')
+				}else{
+					
+					this.setCarts(this.$store.state.goods);
+					this.addCartModel=false;
+					this.cartNum=true;
+					this.cartLength = this.cartLength+1;
+					setTimeout(()=>{
+						this.cartNum=false;
+					},2000)
+					
+				}
+				
+			},
+			...mapMutations({
+				setOrders: 'SET_ORDERS',
+				setCarts: 'SET_CARTS',
+			})
 		}
 	}
 </script>
@@ -137,6 +192,21 @@
 			height: .4rem;
 		}
 	}
+	.toCart{
+		position: relative;
+		p{
+			position: absolute;
+			text-align: center;
+			top: -.2rem;
+			right: -.2rem;
+			background: @base_color;
+			color:@theme_background;
+			width: .4rem;
+			height: .4rem;
+			line-height: .4rem;
+			border-radius: .8rem;
+		}
+	}
 	.addCart-content{
 		top: auto;
 		height: auto;
@@ -148,6 +218,10 @@
 	.cartModel-text{
 		width: 100%;
 		padding: .2rem;
+	}
+	.cartClose{
+		width: .4rem;
+		height: .4rem;
 	}
 	.goodsOp{
 		input{
