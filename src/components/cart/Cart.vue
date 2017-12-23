@@ -1,50 +1,53 @@
 <template>
 	<div class="page">
 		<headers tabname="购物车"></headers>
-		
 		<div class="container">
-		<div v-show="!havePage">
-			<nopage></nopage>
-		</div>
-		<div v-show="havePage">
-			<div class="cart-item flex-align-center" v-for="cartItem in $store.state.carts" v-cloak>
-				<div class="goods-radio" @click="onGoodsRadio(cartItem)">
-					<img src="../../common/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
-					<img src="../../common/img/icon/radio_select.png" v-show="cartItem.goodsRadio" />
-				</div>
-				<div class="flex">
-					<div class="goods-img">
-						<img :src="cartItem.GoodsImage" />
-					</div>
-					<div class="goods-textBox">
-						<p class="goods-name">{{cartItem.GoodsName}}</p>
-						<div class="goodsOp flex">
-							<img src="../../common/img/icon/shop_cut.png" @click.stop="onCutCart(cartItem)" />
-							<input type="text" :value="cartItem.GoodsNum" />
-							<img src="../../common/img/icon/shop_add.png" @click.stop="onAddCart(cartItem)" />
+			<div v-show="!havePage">
+				<nopage></nopage>
+			</div>
+			<div v-show="havePage">
+				<div class="cart-item" :class="{selected: itemIndex === cartIndex}" v-for="(cartItem,cartIndex) in $store.state.carts" @click="onDetail(cartItem)">
+					<v-touch @swipeleft="onSwipeLeft(cartIndex)" @swiperight="onSwipeRight(cartIndex)">
+						<div class="cart-content flex-align-center">
+							<div class="goods-radio" @click.stop="onGoodsRadio(cartItem)">
+								<img src="../../common/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
+								<img src="../../common/img/icon/radio_select.png" v-show="cartItem.goodsRadio" />
+							</div>
+							<div class="flex">
+								<div class="goods-img">
+									<img v-lazy="cartItem.GoodsImage" />
+								</div>
+								<div class="goods-textBox">
+									<p class="goods-name">{{cartItem.GoodsName}}</p>
+									<div class="goodsOp flex">
+										<img src="../../common/img/icon/shop_cut.png" @click.stop="onCutCart(cartItem)" />
+										<input type="text" :value="cartItem.GoodsNum" />
+										<img src="../../common/img/icon/shop_add.png" @click.stop="onAddCart(cartItem)" />
+									</div>
+									<p class="goods-coach">¥{{cartItem.GoodsPrice}}</p>
+								</div>
+							</div>
 						</div>
-						<p class="goods-coach">¥{{cartItem.GoodsPrice}}</p>
-					</div>
+						<div class="remove" @click.stop="onRemove(cartItem)"><img src="../../common/img/icon/remove.png" alt="" /></div>
+					</v-touch>
 				</div>
 			</div>
-			
 		</div>
-		</div>
-		<div class="cartBottom-detail flex-between" v-show="carts" v-cloak >
-				<div class="flex">
-					<div class="shopRadio" @click="onSelectAll()">
-						<img src="../../common/img/icon/radio.png" v-show="!goodsRadioAll" />
-						<img src="../../common/img/icon/radio_select.png" v-show="goodsRadioAll" />
-					</div>
-					<div class="bottom-left">
-						<p>合计: <span class="shopCoach">¥{{allCoach}}</span> </p>
-					</div>
+		<div class="cartBottom-detail flex-between" v-show="$store.state.carts" v-cloak>
+			<div class="flex">
+				<div class="shopRadio" @click="onSelectAll()">
+					<img src="../../common/img/icon/radio.png" class="goods-radio" v-show="!goodsRadioAll" />
+					<img src="../../common/img/icon/radio_select.png" class="goods-radio" v-show="goodsRadioAll" />
 				</div>
+				<div class="bottom-left">
+					<p>合计: <span class="shopCoach">¥{{allCoach}}</span> </p>
+				</div>
+			</div>
 
-				<div class="subminCart" @click="onOrder">
-					<p>提交订单</p>
-				</div>
+			<div class="subminCart" @click="onOrder">
+				<p>提交订单</p>
 			</div>
+		</div>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
 
@@ -53,56 +56,52 @@
 <script>
 	import Headers from '../base/Header.vue';
 	import Footers from '../base/Footer.vue';
-	import Tip from '../base/Tip.vue';
 	import Nopage from '../base/NoPage.vue';
-	import { mapGetters } from 'vuex';
-	import { mapMutations } from 'vuex';
+	import { mapGetters, mapMutations } from 'vuex';
 	export default {
 		data() {
 			return {
 				goodsRadioAll: false,
 				allCoach: 0,
 				radioArr: [],
-				havePage:false
+				havePage: false,
+				itemIndex: ''
 			}
 
 		},
 		components: {
 			Headers,
 			Footers,
-			Tip,
 			Nopage
 		},
 		computed: {
 			...mapGetters([
-				'carts'
+				'this.$store.state.carts',
 			])
 		},
-		created() {
-			console.log(1, this.carts)
-		},
 		mounted() {
+
 			const that = this;
-			if(that.carts === undefined){
+			if(that.$store.state.carts === undefined) {
 				that.havePage = false;
-				
-			}else{
+			} else {
 				that.havePage = true;
-				that.carts.forEach(function(item) {
-					
+				that.$store.state.carts.forEach(function(item) {
+
 					if(typeof item.goodsRadio == 'undefined') {
 						that.$set(item, "goodsRadio", false);
 					}
 				})
 			}
-			
+
 		},
 		methods: {
+			/*选择单个商品*/
 			onGoodsRadio(item) {
 				const that = this;
 				that.radioArr = [];
 				item.goodsRadio = !item.goodsRadio;
-				that.carts.forEach(function(itemGoods) {
+				that.$store.state.carts.forEach(function(itemGoods) {
 					that.radioArr.push(itemGoods.goodsRadio);
 				});
 				if(that.radioArr.indexOf(false) == -1) {
@@ -113,24 +112,27 @@
 				that.onCalAllCoach();
 
 			},
+			/*选择全部商品*/
 			onSelectAll() {
 				this.goodsRadioAll = !this.goodsRadioAll;
 				if(this.goodsRadioAll) {
-					this.carts.forEach(function(item) {
+					this.$store.state.carts.forEach(function(item) {
 						item.goodsRadio = true;
 
 					})
 				} else {
-					this.carts.forEach(function(item) {
+					this.$store.state.carts.forEach(function(item) {
 						item.goodsRadio = false;
 					})
 				}
 				this.onCalAllCoach();
 			},
+			/*添加商品数量*/
 			onAddCart(item) {
 				item.GoodsNum++;
 				this.onCalAllCoach();
 			},
+			/*减少商品数量*/
 			onCutCart(item) {
 				if(item.GoodsNum > 1) {
 					item.GoodsNum--;
@@ -138,27 +140,52 @@
 				}
 
 			},
+			/*计算价格*/
 			onCalAllCoach() {
 				const that = this;
 				that.allCoach = 0;
-				that.carts.forEach(function(item) {
+				that.$store.state.carts.forEach(function(item) {
 					if(item.goodsRadio) {
 						that.allCoach += item.GoodsNum * item.GoodsPrice;
 					}
 				})
 			},
-			onOrder(){
-				let orderArr=[];
-				this.carts.forEach(function(item) {
+			/*删除商品*/
+			onRemove(item){
+				let index = this.$store.state.carts.indexOf(item);
+				this.$store.state.carts.splice(index, 1);
+				this.itemIndex = '';
+			},
+			/*提交订单*/
+			onOrder() {
+				let orderArr = [];
+				this.$store.state.carts.forEach(function(item) {
 					if(item.goodsRadio) {
 						orderArr.push(item);
 					}
 				});
-				this.$router.push('orderwait')
-				this.setOrders(orderArr);
+				if(orderArr.length) {
+					this.$router.push('orderwait')
+					this.setOrders(orderArr);
+				}
+
+			},
+			/*向左滑出现删除*/
+			onSwipeLeft(index) {
+				this.itemIndex = index;
+			},
+			/*向右滑隐藏删除*/
+			onSwipeRight() {
+				this.itemIndex = '';
+			},
+			/*进入商品详情*/
+			onDetail(item) {
+				this.$router.push('/detail');
+				this.setGoods(item)
 			},
 			...mapMutations({
 				setOrders: 'SET_ORDERS',
+				setGoods: 'SET_GOODS',
 			})
 		}
 
@@ -167,22 +194,60 @@
 
 <style lang="less" scoped>
 	@import '../../common/less/variable.less';
-	.container{
+	.container {
 		padding-bottom: 1.6rem;
+		overflow-x: hidden;
 	}
+	
 	.cart-item {
 		border-bottom: 1px solid #CCCCCC;
-		margin-bottom: .2rem;
 		padding-top: .2rem;
-		padding-bottom: .2rem;
+		height: 2.4rem;
+		width: 122%;
+		-webkit-transition: all 0.3s linear;
+		-webkit-user-select: none;
+		position: relative;
+	}
+	
+	.remove {
+		background-color: @theme_background;
+		width: 18%;
+		height: 2.6rem;
+		line-height: 2.6rem;
+		text-align: center;
+		text-decoration: none;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	
+	.cart-content {
+		width: 100%;
+	}
+	
+	.selected {
+		-webkit-transform: translate(-18%, 0);
+		-webkit-transition: all 0.3s linear;
 	}
 	
 	.goods-radio {
 		margin: 0 .2rem;
+		width: .34rem;
+		height: .34rem;
+		img{
+			width: 100%;
+			height: 100%;
+		}
 	}
 	
 	.goods-img {
 		margin-right: .2rem;
+		width: 2rem;
+		height: 2rem;
+		img {
+			width: 100%;
+			height: 100%;
+		}
 	}
 	
 	.goods-name {

@@ -1,48 +1,48 @@
 <template>
-	<transition name="slide-back" >
-	<div class="page">
-		<headersec tabname="订单详情"></headersec>
-		<div class="container">
-			<div v-show="!havePage">
-				<nopage></nopage>
-			</div>
-			<div v-show="havePage">
-				<div class="chooseAddress">
-					<div class="flex-align-center chooseBox">
-						<img src="../../common/img/icon/item_address.png" />
-						<div class="flex-align-center flex-between">
-							<p>选择送货地址</p>
-							<img src="../../common/img/icon/arrowRight.png" alt="" />
+	<transition name="slide-back">
+		<div class="page">
+			<headersec tabname="订单详情"></headersec>
+			<div class="container">
+				<div v-show="!havePage">
+					<nopage></nopage>
+				</div>
+				<div v-show="havePage">
+					<div class="chooseAddress" @click="onAddress()">
+						<div class="flex-align-center chooseBox">
+							<img src="../../common/img/icon/item_address.png" />
+							<div class="flex-align-center flex-between">
+								<p v-show="!this.$store.state.chooseaddress">选择送货地址</p>
+								<p v-show="this.$store.state.chooseaddress">{{this.$store.state.chooseaddress}}</p>
+								<img src="../../common/img/icon/arrowRight.png" alt="" />
+							</div>
+
 						</div>
 
 					</div>
+					<div class="orderItem flex" v-for="orderItem in $store.state.orders">
+						<img :src="orderItem.GoodsImage" class="goodsImg" />
+						<div>
+							<p class="goods-name">{{orderItem.GoodsName}}</p>
+							<p class="goods-num">x{{orderItem.GoodsNum}}</p>
+							<p class="goods-price">¥{{orderItem.GoodsPrice}}</p>
+						</div>
 
-				</div>
-				<div class="orderItem flex" v-for="orderItem in $store.state.orders">
-					<img :src="orderItem.GoodsImage" class="goodsImg" />
-					<div>
-						<p class="goods-name">{{orderItem.GoodsName}}</p>
-						<p class="goods-num">x{{orderItem.GoodsNum}}</p>
-						<p class="goods-price">¥{{orderItem.GoodsPrice}}</p>
 					</div>
+					<div class="orderBottom flex-between">
+						<span>总金额:{{allCoach}}</span>
+						<span @click="onOrder">结算</span>
+					</div>
+				</div>
 
-				</div>
-				<div class="orderBottom flex-between">
-					<span>总金额:{{allCoach}}</span>
-					<span @click="onOrder">结算</span>
-				</div>
 			</div>
-
 		</div>
-	</div>
 	</transition>
 </template>
 
 <script>
 	import Headersec from '../base/HeaderSec.vue';
 	import Nopage from '../base/NoPage.vue';
-	import { mapMutations } from 'vuex';
-	import { mapGetters } from 'vuex'
+	import { mapGetters, mapMutations } from 'vuex';
 	export default {
 		data() {
 			return {
@@ -50,23 +50,26 @@
 				havePage: false
 			}
 		},
+		components: {
+			Headersec,
+			Nopage
+		},
 		computed: {
 			...mapGetters([
-				'orders'
+				'this.$store.state.orders',
+				'this.$store.state.chooseaddress'
 			])
-		},
-		created() {
-			console.log(1, this.orders)
 		},
 		mounted() {
 			const that = this;
 			let sums = [];
-			if(that.orders === undefined) {
+			console.log(11, this.$store.state.orders)
+			if(this.$store.state.orders === undefined) {
 				that.havePage = false;
 
 			} else {
 				that.havePage = true;
-				that.orders.forEach(function(item) {
+				this.$store.state.orders.forEach(function(item) {
 					sums.push(item.GoodsPrice);
 				});
 				for(var i = 0; i < sums.length; i++) {
@@ -75,31 +78,35 @@
 			}
 
 		},
-		components: {
-			Headersec,
-			Nopage
-		},
+
 		methods: {
+			/*我的订单*/
 			onOrder() {
 				this.$router.push('./order');
-				this.setPays(this.orders);
-				
+				this.setPays(this.$store.state.orders);
+
+			},
+			/*选择地址*/
+			onAddress() {
+				this.setIschoose(1);
+				this.$router.push('./address');
 			},
 			...mapMutations({
 				setPays: 'SET_PAYS',
+				setIschoose: 'SET_ISCHOOSE',
 			})
 		},
 	}
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/base.less';
+	@import '../../common/less/variable.less';
 	.chooseBox {
 		margin-top: .2rem;
 		margin-bottom: .2rem;
-		height: 1.6rem;
+		height: 1rem;
 		padding: 0 .2rem;
-		font-size:.28rem;
+		font-size: .28rem;
 		border: 1px dashed @theme_background;
 		img {
 			width: .4rem;

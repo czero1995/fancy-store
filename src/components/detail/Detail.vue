@@ -96,10 +96,7 @@
 				'this.$store.state.goods',
 				'this.$store.state.carts'
 			])
-		},
-		created() {
-			console.log(1, this.$store.state.carts)
-		},
+		},		
 		mounted(){
 			if(this.$store.state.goods === undefined){
 				this.havePage = false;
@@ -140,17 +137,21 @@
 			onBuy(){
 				const that = this;
 				if(this.isBuy){
-					this.setOrders(this.$store.state.goods);
+					let orderArr = [];
+					orderArr.push(this.$store.state.goods)
+					this.setOrders(orderArr);
 					this.$router.push('./orderwait')
 				}else{
+					if(!this.cartNum){
+						this.setCarts(this.$store.state.goods);
+						this.addCartModel=false;
+						this.cartNum=true;
+						this.cartLength = this.cartLength+1;
+						setTimeout(()=>{
+							this.cartNum=false;
+						},2000)
+					}
 					
-					this.setCarts(this.$store.state.goods);
-					this.addCartModel=false;
-					this.cartNum=true;
-					this.cartLength = this.cartLength+1;
-					setTimeout(()=>{
-						this.cartNum=false;
-					},2000)
 					
 				}
 				
@@ -208,8 +209,8 @@
 		}
 	}
 	.addCart-content{
-		top: auto;
-		height: auto;
+		position: absolute;
+		bottom: 0;
 		width: 100%;
 		box-sizing: border-box;
 		padding-top: .2rem;
@@ -239,6 +240,7 @@
 		padding: .2rem;
 		font-size: .24rem;
 		border-top: 1px solid #ccc;
+		text-align: center;
 	}
 	.cartModel-addCart{
 		background: @theme_background;
@@ -246,5 +248,6 @@
 		color:@base_color;
 		line-height: .8rem;
 		font-size: .28rem;
+		text-align: center;
 	}
 </style>

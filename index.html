@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <script src="src/common/rem.js"></script>
-    <title>fancy</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>fancy</title>
+		<style>
+			#ismobile {
+				display: none;
+				font-size: .8rem;
+				text-align: center;
+				padding-top: 4rem;
+			}
+			#ismobile img{
+				margin-bottom: .4rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app"></div>
+		<div id="ismobile"><img src="./src/common/img/icon/404.png" /><p>请在移动端打开，并刷新页面。</p></div>
+	</body>
+	
+	<script>
+
+		browserRedirect();
+		
+		/*判断是pc还是移动端打开*/
+		function browserRedirect() {
+			var sUserAgent = navigator.userAgent.toLowerCase();
+			var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+			var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+			var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+			var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+			var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+			var bIsAndroid = sUserAgent.match(/android/i) == "android";
+			var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+			var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+			if(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+				document.getElementById('ismobile').style.display = "none";
+				document.getElementById('app').style.display = "block";
+			} else {
+				document.getElementById('ismobile').style.display = "block";			
+				document.getElementById('app').style.display = "none";
+			}
+		};
+	
+
+	</script>
+
 </html>

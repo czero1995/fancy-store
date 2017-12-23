@@ -7,7 +7,7 @@
 </template>
 
 <script>
-		
+import './common/js/rem.js';
 export default {
   name: 'app',
   
@@ -17,8 +17,6 @@ export default {
 <style lang="less">
 @import './common/less/base.less';
 	#app{
-		/*padding-top: .8rem;
-		padding-bottom: .88rem;*/
 		height: 100%;
 	}
 </style>

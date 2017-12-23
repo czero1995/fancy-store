@@ -9,16 +9,18 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import axios from 'axios'
 import VueLazyLoad from 'vue-lazyload'
 import fastclick from 'fastclick'
+var VueTouch = require('vue-touch')
 require('./mock')
 fastclick.attach(document.body)
-Vue.use(Vuex)
 
+Vue.use(Vuex)
 Vue.use(VueLazyLoad)
 Vue.prototype.$http=axios;
+Vue.use(VueTouch, {name: 'v-touch'})
 Vue.config.productionTip = false
 Vue.use(VueLazyLoad,{
 //  error:'../img/1.png',
-//  loading:'../img/2.png'
+//  loading:'../build/logo.png'
 })
 /* eslint-disable no-new */
 new Vue({

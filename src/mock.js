@@ -1,48 +1,48 @@
 //引入mockjs
 const Mock = require('mockjs')
 //使用mockjs模拟数据
+/*首页轮播*/
 Mock.mock('/api/bannerdata', (req, res) => {
     return {
         data: [
         		{
 			"id": "1",
-			"img": "../src/common/img/goods.jpg"
+			"img": "../src/common/img/goods/swipe_3.jpg"
 		},
 		{
 			"id": "2",
-			"img": "../src/common/img/goods.jpg"
+			"img": "../src/common/img/goods/swipe_2.jpg"
 		},
 		{
 			"id": "3",
-			"img": "../src/common/img/goods.jpg"
+			"img": "../src/common/img/goods/swipe_1.jpg"
 		}
 			]}
 })
+/*首页楼层*/
 Mock.mock('/api/homedata', (req, res) => {
     return {
         data: [
         	{
             "Category": {
                 "Id": "1",
-                "TopText": "数码科技",
+                "TopText": "休闲零食",
                 "TopNum": "one"
             },
             "SalesProduct": [
                 {
                     "CategoryId": "1",
-                    "GoodsName": "Apple MacBook Pro",
-                    "GoodsInfo": "13.3英寸笔记本电脑 深空灰色Core i5处理器/8GB",
-                    "GoodsPrice": 18999,
+                    "GoodsName": "坚果夹心海苔",
+                    "GoodsPrice": 9,
                     "GoodsNum": 1,
-                    "GoodsImage": "../src/common/img/goods.jpg"
+                    "GoodsImage": "../src/common/img/goods/home_floor_one_1.jpg"
                 },
                {
                     "CategoryId": "2",
-                    "GoodsName": "APPLE 苹果(Apple) iPhone8/X Plus ",
-                    "GoodsInfo": "4G智能手机 移动联通 iPhone8 深空",
-                    "GoodsPrice": 9000,
+                    "GoodsName": "卤汁牛肉",
+                    "GoodsPrice": 32,
                     "GoodsNum": 1,
-                    "GoodsImage": "../src/common/img/goods.jpg"
+                    "GoodsImage": "../src/common/img/goods/home_floor_one_2.jpg"
                }
             ]
        },
@@ -50,310 +50,350 @@ Mock.mock('/api/homedata', (req, res) => {
         {
             "Category": {
                 "Id": "2",
-                "TopText": "营养产品",
+                "TopText": "糖果·巧克力",
                 "TopNum": "two"
             },
             "SalesProduct": [
                 {
                     "CategoryId": "1",
-                    "GoodsName": "善存Centrum 佳维礼盒 ",
-                    "GoodsInfo": "1.33g*150片装（新老包装随机发放） ",
-                    "GoodsPrice": 207,
+                    "GoodsName": "乐奈牛奶燕麦巧克力 ",
+                    "GoodsPrice": 78,
                     "GoodsNum": 1,
-                     "GoodsImage": "../src/common/img/goods.jpg"
+                     "GoodsImage": "../src/common/img/goods/home_floor_two_1.jpg"
                 },
                {
                     "CategoryId": "2",
-                    "GoodsName": "汤臣倍健 维生素C片橘子味+天然维生素E软胶囊",
-                    "GoodsInfo": "软胶囊(72g/瓶×1瓶+30g/瓶×1瓶)优惠装",
+                    "GoodsName": "牛轧糖",
                     "GoodsPrice": 59,
                     "GoodsNum": 1,
-                   "GoodsImage": "../src/common/img/goods.jpg"
+                   "GoodsImage": "../src/common/img/goods/home_floor_two_2.jpg"
                }
             ]
         },
         {
             "Category": {
                 "Id": "3",
-                "TopText": "生鲜水果",
+                "TopText": "饼干·糕点",
                 "TopNum": "three"
             },
             "SalesProduct": [
                 {
                     "CategoryId": "1",
-                    "GoodsName": "澳大利亚 进口橙 ",
-                    "GoodsInfo": "单果重约150g-180g 新鲜水果",
-                    "GoodsPrice": 39,
+                    "GoodsName": "苏打饼干 ",
+                    "GoodsPrice": 61,
                     "GoodsNum": 1,
-                   "GoodsImage": "../src/common/img/goods.jpg"
+                   "GoodsImage": "../src/common/img/goods/home_floor_three_1.jpg"
                 },
                {
                     "CategoryId": "2",
-                    "GoodsName": "宏辉果蔬 苹果 烟台红富士",
-                    "GoodsInfo": "12个 约80mm 总重约2.6kg 新鲜水果 ",
+                    "GoodsName": "可可威化饼干",
                     "GoodsPrice": "22",
                     "GoodsNum": 1,
-                   "GoodsImage": "../src/common/img/goods.jpg"
+                   "GoodsImage": "../src/common/img/goods/home_floor_three_2.jpg"
                }
             ]
         },
         {
             "Category": {
                 "Id": "4",
-                "TopText": "休闲零食",
+                "TopText": "果冻·布丁",
                 "TopNum": "four"
             },
             "SalesProduct": [
                 {
                     "CategoryId": "1",
-                    "GoodsName": "盐津铺子 零食大礼包 ",
-                    "GoodsInfo": "一整箱送女友礼盒 74包休闲麻辣零食礼包美味小吃 粉girl1320g",
+                    "GoodsName": "粒粒鲜果冻 ",
                     "GoodsPrice": 59,
                     "GoodsNum": 1,
-                    "GoodsImage": "../src/common/img/goods.jpg"
+                    "GoodsImage": "../src/common/img/goods/home_floor_four_1.jpg"
                 },
                {
                     "CategoryId": "2",
-                    "GoodsName": "三只松鼠休闲麻辣零食",
-                    "GoodsInfo": "特产约辣辣条200g/盒 ",
+                    "GoodsName": "葡萄果汁软糖",
                     "GoodsPrice": 9,
                     "GoodsNum": 1,
-                    "GoodsImage": "../src/common/img/goods.jpg"
+                    "GoodsImage": "../src/common/img/goods/home_floor_four_2.jpg"
                }
             ]
         },
         {
             "Category": {
                 "Id": "5",
-                "TopText": "家用电器",
+                "TopText": "坚果·炒货",
                 "TopNum": "five"
             },
             "SalesProduct": [
                 {
                     "CategoryId": "1",
-                    "GoodsName": "美的（Midea）电饭煲 ",
-                    "GoodsInfo": "微压蒸汽阀 24小时智能预约 黄晶内胆3L电饭锅MB-WFS3018Q 11.11好货提前抢",
+                    "GoodsName": "夏威夷果",
                     "GoodsPrice": 189,
                     "GoodsNum": 1,
-                  "GoodsImage": "../src/common/img/goods.jpg"
+                  "GoodsImage": "../src/common/img/goods/home_floor_five_1.jpg"
                 },
                {
                     "CategoryId": "2",
-                    "GoodsName": "九阳（Joyoung）电烤箱",
-                    "GoodsInfo": "30L 家用多功能 专业烘焙 KX-30J601 11.11好货提前抢！",
+                    "GoodsName": "坚果混合",
                     "GoodsPrice": 9,
                     "GoodsNum": 1,
-                    "GoodsImage": "../src/common/img/goods.jpg"
+                    "GoodsImage": "../src/common/img/goods/home_floor_five_2.jpg"
                }
             ]
         },
         {
             "Category": {
                 "Id": "6",
-                "TopText": "护肤产品",
+                "TopText": "膨化·薯片",
                 "TopNum": "six"
             },
             "SalesProduct": [
                 {
                     "CategoryId": "1",
-                    "GoodsName": "韩束红石榴鲜活水盈七件套 ",
-                    "GoodsInfo": "爽肤水乳液眼霜面霜 (补水保湿鲜活水嫩 护肤化妆品女护肤套装） ",
+                    "GoodsName": "风味虾片 ",
                     "GoodsPrice": 199,
                     "GoodsNum": 1,
-                    "GoodsImage": "../src/common/img/goods.jpg"
+                    "GoodsImage": "../src/common/img/goods/home_floor_six_1.jpg"
                 },
                {
                     "CategoryId": "2",
-                    "GoodsName": "欧诗漫OSM营养美肤组合套装",
-                    "GoodsInfo": "美肤透白护肤化妆品面部护理套装女 营养",
+                    "GoodsName": "大胡子烧烤味薯片",
                     "GoodsPrice": 28,
                     "GoodsNum": 1,
-                   "GoodsImage": "../src/common/img/goods.jpg"
+                   "GoodsImage": "../src/common/img/goods/home_floor_six_2.jpg"
                }
             ]
         }
         ]
     }
 })
+/*分类菜单*/
 Mock.mock('/api/menudata', (req, res) => {
     return {
         data: [
         		 {
-                "id": 7,
-                "cat_name": "无农药水果"
-            },
-            {
-                "id": 6,
-                "cat_name": "无农药蔬菜"
-            },
-            {
-                "id": 4,
-                "cat_name": "进口蔬菜"
-            },
-            {
-                "id": 3,
-                "cat_name": "进口水果"
-            },
-            {
-                "id": 2,
-                "cat_name": "蔬菜"
-            },
-            {
-                "id": 1,
-                "cat_name": "水果"
-            }
-			]}
+                "cat_name": "休闲零食"
+	            },
+	            {
+	                "cat_name": "糖果·巧克力"
+	            },
+	            {
+	                "cat_name": "饼干·糕点"
+	            },
+	            {
+	                "cat_name": "果冻·布丁"
+	            },
+	            {
+	                "cat_name": "坚果·炒货"
+	            },
+	            {
+	                "cat_name": "膨化·薯片"
+	            }
+				]}
 })
+/*分类详情*/
 Mock.mock('/api/categorydata', (req, res) => {
      return {
         data: [
         		  {
         "busines": {
             "business_id": 1,
-            "business_name": "淘美藕片美容院"
+            "business_name": "休闲零食"
         },
         "cart": [
-            {
-                "CategoryId": "2",
-                    "GoodsName": "1",
-                    "GoodsInfo": "1",
+             {
+                    "CategoryId": "1",
+                    "GoodsName": "坚果夹心海苔",
+                    "GoodsPrice": 66,
+                    "GoodsNum": 1,
+                    "GoodsImage": "../src/common/img/goods/home_floor_one_1.jpg"
+                },
+               {
+                    "CategoryId": "2",
+                    "GoodsName": "卤汁牛肉",
+                    "GoodsPrice": 88,
+                    "GoodsNum": 1,
+                    "GoodsImage": "../src/common/img/goods/home_floor_one_2.jpg"
+               },
+               {
+                    "CategoryId": "3",
+                    "GoodsName": "青豌豆",
                     "GoodsPrice": 8,
                     "GoodsNum": 1,
-                   "GoodsImage": "../src/common/img/goods.jpg"
-            },
-            {
-               "CategoryId": "2",
-                    "GoodsName": "1",
-                    "GoodsInfo": "1",
-                    "GoodsPrice": 28,
+                    "GoodsImage": "../src/common/img/goods/home_floor_one_3.jpg"
+               },
+               {
+                    "CategoryId": "4",
+                    "GoodsName": "薯条脆",
+                    "GoodsPrice": 12,
                     "GoodsNum": 1,
-                   "GoodsImage": "../src/common/img/goods.jpg"
-            }
+                    "GoodsImage": "../src/common/img/goods/home_floor_one_4.jpg"
+               },
+               {
+                    "CategoryId": "5",
+                    "GoodsName": "小米锅巴",
+                    "GoodsPrice": 50,
+                    "GoodsNum": 1,
+                    "GoodsImage": "../src/common/img/goods/home_floor_one_5.jpg"
+               },
+               {
+                    "CategoryId": "6",
+                    "GoodsName": "碳烤牛肉",
+                    "GoodsPrice": 80,
+                    "GoodsNum": 1,
+                    "GoodsImage": "../src/common/img/goods/home_floor_one_6.jpg"
+               },
+        ],
+        
+    },
+     {
+        "busines": {
+            "business_id": 2,
+            "business_name": "糖果巧克力"
+        },
+        "cart": [
+             {
+                    "CategoryId": "1",
+                    "GoodsName": "乐奈牛奶燕麦巧克力 ",
+                    "GoodsPrice": 78,
+                    "GoodsNum": 1,
+                     "GoodsImage": "../src/common/img/goods/home_floor_two_1.jpg"
+                },
+               {
+                    "CategoryId": "2",
+                    "GoodsName": "牛轧糖",
+                    "GoodsPrice": 59,
+                    "GoodsNum": 1,
+                   "GoodsImage": "../src/common/img/goods/home_floor_two_2.jpg"
+               },
+               {
+                    "CategoryId": "3",
+                    "GoodsName": "冲绳黑糖",
+                    "GoodsPrice": 18,
+                    "GoodsNum": 1,
+                   "GoodsImage": "../src/common/img/goods/home_floor_two_3.jpg"
+               },
+               {
+                    "CategoryId": "4",
+                    "GoodsName": "牛奶抹茶糖",
+                    "GoodsPrice": 22,
+                    "GoodsNum": 1,
+                   "GoodsImage": "../src/common/img/goods/home_floor_two_4.jpg"
+               },
+               {
+                    "CategoryId": "5",
+                    "GoodsName": "苹果味糖果",
+                    "GoodsPrice": 59,
+                    "GoodsNum": 1,
+                   "GoodsImage": "../src/common/img/goods/home_floor_two_5.jpg"
+               },
+               {
+                    "CategoryId": "6",
+                    "GoodsName": "松露巧克力",
+                    "GoodsPrice": 59,
+                    "GoodsNum": 1,
+                   "GoodsImage": "../src/common/img/goods/home_floor_two_6.jpg"
+               },
+              
         ],
         
     },
      {
         "busines": {
             "business_id": 1,
-            "business_name": "淘美藕片美容院"
+            "business_name": "饼干糕点"
         },
         "cart": [
             {
-                "CategoryId": "2",
-                    "GoodsName": "2",
-                    "GoodsInfo": "2",
-                    "GoodsPrice": 28,
+                    "CategoryId": "1",
+                    "GoodsName": "苏打饼干 ",
+                    "GoodsInfo": "单果重约150g-180g 新鲜水果",
+                    "GoodsPrice": 61,
                     "GoodsNum": 1,
-                   "GoodsImage": "2"
-            },
-            {
-               "CategoryId": "2",
-                    "GoodsName": "欧诗漫OSM营养美肤组合套装",
-                    "GoodsInfo": "美肤透白护肤化妆品面部护理套装女 营养",
-                    "GoodsPrice": 28,
+                   "GoodsImage": "../src/common/img/goods/home_floor_three_1.jpg"
+                },
+               {
+                    "CategoryId": "2",
+                    "GoodsName": "可可威化饼干",
+                    "GoodsInfo": "12个 约80mm 总重约2.6kg 新鲜水果 ",
+                    "GoodsPrice": "22",
                     "GoodsNum": 1,
-                   "GoodsImage": "2"
-            }
+                   "GoodsImage": "../src/common/img/goods/home_floor_three_2.jpg"
+               }
         ],
         
     },
      {
         "busines": {
             "business_id": 1,
-            "business_name": "淘美藕片美容院"
+            "business_name": "果冻布丁"
         },
         "cart": [
-            {
-                "CategoryId": "2",
-                    "GoodsName": "3",
-                    "GoodsInfo": "3",
-                    "GoodsPrice": 28,
+           {
+                    "CategoryId": "1",
+                    "GoodsName": "粒粒鲜果冻 ",
+                    "GoodsInfo": "一整箱送女友礼盒 74包休闲麻辣零食礼包美味小吃 粉girl1320g",
+                    "GoodsPrice": 59,
                     "GoodsNum": 1,
-                   "GoodsImage": "3"
-            },
-            {
-               "CategoryId": "2",
-                    "GoodsName": "3",
-                    "GoodsInfo": "3 营养",
-                    "GoodsPrice": 28,
+                    "GoodsImage": "../src/common/img/goods/home_floor_four_1.jpg"
+                },
+               {
+                    "CategoryId": "2",
+                    "GoodsName": "葡萄果汁软糖",
+                    "GoodsInfo": "特产约辣辣条200g/盒 ",
+                    "GoodsPrice": 9,
                     "GoodsNum": 1,
-                   "GoodsImage": "2"
-            }
+                    "GoodsImage": "../src/common/img/goods/home_floor_four_2.jpg"
+               }
         ],
         
     },
      {
         "busines": {
             "business_id": 1,
-            "business_name": "淘美藕片美容院"
+            "business_name": "坚果炒货"
         },
         "cart": [
             {
-                "CategoryId": "4",
-                    "GoodsName": "4",
-                    "GoodsInfo": "4",
-                    "GoodsPrice": 28,
+                    "CategoryId": "1",
+                    "GoodsName": "夏威夷果",
+                    "GoodsInfo": "微压蒸汽阀 24小时智能预约 黄晶内胆3L电饭锅MB-WFS3018Q 11.11好货提前抢",
+                    "GoodsPrice": 189,
                     "GoodsNum": 1,
-                   "GoodsImage": "2"
-            },
-            {
-               "CategoryId": "2",
-                    "GoodsName": "4",
-                    "GoodsInfo": "4肤透白护肤化妆品面部护理套装女 营养",
-                    "GoodsPrice": 8,
+                  "GoodsImage": "../src/common/img/goods/home_floor_five_1.jpg"
+                },
+               {
+                    "CategoryId": "2",
+                    "GoodsName": "坚果混合",
+                    "GoodsInfo": "坚果混合",
+                    "GoodsPrice": 9,
                     "GoodsNum": 1,
-                   "GoodsImage": "2"
-            }
+                    "GoodsImage": "../src/common/img/goods/home_floor_five_2.jpg"
+               }
         ],
         
     },
      {
         "busines": {
             "business_id": 1,
-            "business_name": "淘美藕片美容院"
+            "business_name": "膨化薯片"
         },
         "cart": [
-            {
-                "CategoryId": "5",
-                    "GoodsName": "5",
-                    "GoodsInfo": "5",
-                    "GoodsPrice": 25,
+           {
+                    "CategoryId": "1",
+                    "GoodsName": "风味虾片 ",
+                    "GoodsInfo": "爽肤水乳液眼霜面霜 (补水保湿鲜活水嫩 护肤化妆品女护肤套装） ",
+                    "GoodsPrice": 199,
                     "GoodsNum": 1,
-                   "GoodsImage": "2"
-            },
-            {
-               "CategoryId": "2",
-                    "GoodsName": "5",
-                    "GoodsInfo": "5 营养",
+                    "GoodsImage": "../src/common/img/goods/home_floor_six_1.jpg"
+                },
+               {
+                    "CategoryId": "2",
+                    "GoodsName": "大胡子烧烤味薯片",
+                    "GoodsInfo": "大胡子烧烤味薯片",
                     "GoodsPrice": 28,
                     "GoodsNum": 1,
-                   "GoodsImage": "2"
-            }
-        ],
-        
-    },
-     {
-        "busines": {
-            "business_id": 1,
-            "business_name": "淘美藕片美容院"
-        },
-        "cart": [
-            {
-                "CategoryId": "6",
-                    "GoodsName": "2",
-                    "GoodsInfo": "2",
-                    "GoodsPrice": 28,
-                    "GoodsNum": 1,
-                   "GoodsImage": "2"
-            },
-            {
-               "CategoryId": "2",
-                    "GoodsName": "6",
-                    "GoodsInfo": "美肤透白护肤化妆品面部护理套装女 营养",
-                    "GoodsPrice": 8,
-                    "GoodsNum": 1,
-                   "GoodsImage": "2"
-            }
+                   "GoodsImage": "../src/common/img/goods/home_floor_six_2.jpg"
+               }
+            
         ],
         
     }

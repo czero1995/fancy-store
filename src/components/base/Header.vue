@@ -1,5 +1,5 @@
 <template>
-		<header>
+		<header id="headerTab">
 			<p>{{tabname}}</p>
 		</header>
 </template>
@@ -15,8 +15,7 @@ props:['tabname'],
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" rel="stylesheet/less">
+<style lang="less" scoped>
 @import '../../common/less/variable.less';
 	header{
 		height: .8rem;
@@ -29,6 +28,5 @@ props:['tabname'],
 		z-index: 10;
 		position: fixed;
 		top: 0;
-		
 	}
 </style>

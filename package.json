@@ -51,6 +51,7 @@
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
+    "vue-touch": "^2.0.0-beta.4",
     "vuex": "^3.0.1",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",

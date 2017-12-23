@@ -1,4 +1,3 @@
-console.log('执行rem布局');
 	! function(e) {
 		function t(a) {
 			if(i[a]) return i[a].exports;

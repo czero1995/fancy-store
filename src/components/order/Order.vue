@@ -1,19 +1,19 @@
 <template>
-	<transition name="slide-back" >
-	<div class="page">
-		<headersec tabname="我的订单"></headersec>
-		<div class="container">
-			<div v-show="!havePage">
-				<nopage></nopage>
-			</div>
-			<div class="order-item" v-show="havePage" v-cloak>
+	<transition name="slide-back">
+		<div class="page">
+			<headersec tabname="我的订单" ref="noback"></headersec>
+			<div class="container">
+				<div v-show="!havePage">
+					<nopage></nopage>
+				</div>
+				<div class="order-item" v-show="havePage" v-cloak>
 					<div v-for="itemPay in $store.state.pays">
 						<div class="order-top flex-between">
 							<p>订单号xxxxx</p>
 							<p>已支付</p>
 						</div>
 						<div class="order-content">
-							<div  class="flex">
+							<div class="flex">
 								<div class="order-img">
 									<img :src="itemPay.GoodsImage" />
 								</div>
@@ -26,12 +26,12 @@
 							</div>
 
 						</div>
-					</div>					
+					</div>
 
 				</div>
-		</div>		
-	</div>
-</transition>
+			</div>
+		</div>
+	</transition>
 </template>
 
 <script>
@@ -41,50 +41,49 @@
 	export default {
 		data() {
 			return {
-				havePage:false,
-			}
-		},
-		computed: {
-			...mapGetters([
-				'pays'
-			])
-		},
-		created() {
-			console.log(1, this.pays)
-		},
-		mounted() {
-			if(this.pays === undefined){
-				this.havePage = false;
-				
-			}else{	
-				this.havePage = true;
+				havePage: false,
 			}
 		},
 		components: {
 			Headersec,
 			Nopage
 		},
-		methods: {
-			
+		computed: {
+			...mapGetters([
+				'this.$store.state.pays'
+			])
 		},
+		mounted() {
+
+			if(this.$store.state.pays === undefined) {
+				this.havePage = false;
+
+			} else {
+				this.havePage = true;
+			}
+			this.$refs.noback.isBack = false;
+		},
+
 	}
 </script>
 
 <style lang="less" scoped>
 	@import '../../common/less/variable.less';
-	.order-item{
+	.order-item {
 		padding-bottom: .2rem;
 		border-bottom: 1px solid #ccc;
 		margin-bottom: .2rem;
 	}
-	.order-top{
+	
+	.order-top {
 		height: .8rem;
 		font-size: .28rem;
 		line-height: .8rem;
 		padding: 0 .2rem;
 		border-bottom: 1px solid #ccc;
 	}
-	.order-content{
+	
+	.order-content {
 		padding-top: .2rem;
 	}
 </style>

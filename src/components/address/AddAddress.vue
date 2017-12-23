@@ -1,71 +1,69 @@
 <template>
-	<transition name="slide-back" >
-	<div class="page">
-		<headersec tabname="添加地址"></headersec>
-		<div class="container">
-			<input type="text" placeholder="选择地区" :value="addressText" readonly="" @click="addressModel = true" />
+	<transition name="slide-back">
+		<div class="page">
+			<headersec tabname="添加地址"></headersec>
+			<div class="container">
+				<input type="text" placeholder="选择地区" :value="addressText" readonly="" @click="addressModel = true" />
 
-			<div class="model" v-show="addressModel" @click="addressModel = false">
-				<div class="model-content" @click.stop="addressModel = true">
-					<div class="addressBox">
-						<ul>
-							<li v-for="(provinceItem,provinceIndex) in addressList" @click.stop="onProvinceSelect(provinceIndex,provinceItem.text)" :class="{active: provinceIndex === activeProvince}">
-								<span>{{provinceItem.text}}</span>
-								<div class="cityBox">
-									<ul>
-										<li v-for="(cityItem,cityIndex) in provinceItem.children" @click.stop="onCitySelect(cityIndex,cityItem.text)" :class="{active: cityIndex === activeCity}">
-											<span>{{cityItem.text}}</span>
-											<div class="areaBox">
-												<ul>
-													<li v-for="(areaItem,areaIndex) in cityItem.children" @click.stop="onAreaSelect(areaIndex,areaItem.text)" :class="{active: areaIndex == activeArea}">
-														<span>{{areaItem.text}}</span>
-													</li>
-												</ul>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</li>
-						</ul>
+				<div class="model" v-show="addressModel" @click="addressModel = false">
+					<div class="model-content" @click.stop="addressModel = true">
+						<div class="addressBox">
+							<ul>
+								<li v-for="(provinceItem,provinceIndex) in addressList" @click.stop="onProvinceSelect(provinceIndex,provinceItem.text)" :class="{active: provinceIndex === activeProvince}">
+									<span>{{provinceItem.text}}</span>
+									<div class="cityBox">
+										<ul>
+											<li v-for="(cityItem,cityIndex) in provinceItem.children" @click.stop="onCitySelect(cityIndex,cityItem.text)" :class="{active: cityIndex === activeCity}">
+												<span>{{cityItem.text}}</span>
+												<div class="areaBox">
+													<ul>
+														<li v-for="(areaItem,areaIndex) in cityItem.children" @click.stop="onAreaSelect(areaIndex,areaItem.text)" :class="{active: areaIndex == activeArea}">
+															<span>{{areaItem.text}}</span>
+														</li>
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</ul>
 
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="pageBottom" @click="onSave">
-				<span class="tabbar-label">保存</span>
+				<div class="pageBottom" @click="onSave">
+					<span class="tabbar-label">保存</span>
+				</div>
 			</div>
 		</div>
-	</div>
-</transition>
+	</transition>
 </template>
 
 <script>
 	import Headersec from '../base/HeaderSec.vue';
-	import  init_city_picker from '../../common/js/data.city.js';
+	import init_city_picker from '../../common/js/data.city.js';
 	import { mapMutations } from 'vuex'
 	export default {
 		data() {
 			return {
 				addressModel: false,
-				/*选择地址选择模态框*/
-				addressList: [], //城市列表
-				province: '', //选中的省份 
-				city: '', //选中的城市
-				area: '', //选择的区域
-				addressText: '请选择', //选中的完整地址
+				addressList: [],
+				province: '',
+				city: '',
+				area: '',
+				addressText: '请选择',
 				activeProvince: 0,
 				activeCity: 0,
 				activeArea: 0
 			}
 		},
-
+		components: {
+			Headersec
+		},
 		mounted() {
 			const that = this;
 			that.addressList = init_city_picker;
-		},
-		components: {
-			Headersec
 		},
 
 		methods: {
@@ -94,9 +92,11 @@
 				that.addressModel = false;
 				console.log(index, that.activeArea, that.area, that.addressText);
 			},
+			/*保存地址*/
 			onSave() {
-				this.$router.back();
 				this.setAddress(this.addressText);
+				this.$router.back();
+
 			},
 			...mapMutations({
 				setAddress: 'SET_ADDRESS',
@@ -170,18 +170,6 @@
 		z-index: 9999;
 		-webkit-overflow-scrolling: touch;
 	}
-	/*模态框*/
-	
-	.model {
-		position: absolute;
-		top: 0%;
-		left: 0%;
-		background: rgba(0, 0, 0, 0.3);
-		width: 100%;
-		height: 100%;
-		position: fixed;
-		z-index: 9999;
-	}
 	
 	.model-content {
 		position: absolute;
@@ -205,7 +193,7 @@
 	
 	.addressBox .active {
 		background: @theme_background;
-		color:@base_color;
+		color: @base_color;
 	}
 	
 	.addressBox .active .cityBox {
@@ -220,14 +208,15 @@
 	.cityBox .active .areaBox {
 		display: block;
 	}
-	.pageBottom{
+	
+	.pageBottom {
 		position: fixed;
 		bottom: 0;
 		background: @theme_background;
 		width: 100%;
 		height: .8rem;
-		line-height:.8rem;
-		color:@base_color;
+		line-height: .8rem;
+		color: @base_color;
 		font-size: .28rem;
 		text-align: center;
 	}
