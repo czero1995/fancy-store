@@ -27,6 +27,7 @@ npm run build --report
 ### 项目主架构
 ![](http://www.z4a.net/images/2017/12/24/fancy_main.md.jpg)
 
+
 ### 使用的库
 
 * vue-cli (vue+webpack脚手架)
