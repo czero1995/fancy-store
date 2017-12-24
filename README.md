@@ -20,8 +20,6 @@ npm run build --report
 
 预览地址:[github.czero.cn/fancy](github.czero.cn/fancy)
 
-源码地址:[https://github.com/czero1995/fancy-store](https://github.com/czero1995/fancy-store)
-
 欢迎Star和Fork，欢迎交流和分享。
 
 ### 项目主架构
