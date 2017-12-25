@@ -59,10 +59,14 @@
 			])
 		},
 		mounted() {
+			if(this.$store.state.tabindex == undefined){
+				this.setTabindex(0);
+			}
 			this.getMenuList();
 			this.getCategoryList();
 		},
 		methods: {
+			
 			/*获取分类栏目*/
 			getMenuList: function() {
 				const that = this;
