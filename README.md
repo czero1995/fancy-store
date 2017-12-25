@@ -18,7 +18,7 @@ npm run build
 npm run build --report
 ```
 
-预览地址:[github.czero.cn/fancy](github.czero.cn/fancy)
+预览地址:[github.czero.cn/fancy](http://github.czero.cn/fancy)
 
 源码地址:[https://github.com/czero1995/fancy-store](https://github.com/czero1995/fancy-store)
 
