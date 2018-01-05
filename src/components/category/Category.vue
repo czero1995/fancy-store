@@ -1,7 +1,9 @@
 <template>
+	
 	<div class="page">
 		<headers tabname="分类"></headers>
-		<div class="container flex" id="container" v-cloak>
+		<transition :name="slidename" >
+		<div class="container flex" id="container" v-show="mainarea" v-cloak>
 			<div class="leftbar">
 				<div class="barItem" v-for="(menuItem,menuIndex) in menuList">
 					<p :class="{active:menuIndex === $store.state.tabindex}" class="menu-text" @click="onBar(menuIndex)">
@@ -30,8 +32,10 @@
 				</div>
 			</div>
 		</div>
+		</transition>
 		<footers :urlRouter="$route.path" :cartnum='cartLength' ref="footer"></footers>
 	</div>
+	
 </template>
 
 <script>
@@ -44,7 +48,9 @@
 				menuList: [],
 				categoryList: [],
 				categoryContent: [],
-				cartLength: 0
+				cartLength: 0,
+				slidename:'slide-back',
+				mainarea:false
 			}
 
 		},
@@ -64,6 +70,20 @@
 			}
 			this.getMenuList();
 			this.getCategoryList();
+			const currentTab = 2;
+			const sessionTab = sessionStorage.getItem('tabindex');
+			console.log(sessionTab);
+			if(currentTab<sessionTab){
+				this.slidename='slide-back'
+				console.log('小于',this.slidename)
+			}else{
+				this.slidename='slide-go'
+				console.log('大于',this.slidename)
+			}
+			sessionStorage.setItem('tabindex',2);
+			setTimeout(()=>{
+				this.mainarea=true
+			},10)
 		},
 		methods: {
 			
@@ -127,7 +147,7 @@
 	}
 	
 	.leftbar {
-		position: fixed;
+		position: absolute;
 		left: 0;
 		width: 1.8rem;
 		font-size: .28rem;

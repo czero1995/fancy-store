@@ -55,8 +55,8 @@
 <style lang="less" scoped>
 	@import '../../common/less/variable.less';
 	footer {
-		position: fixed;
 		bottom: 0;
+		position:absolute;
 		width: 100%;
 		height: .88rem;
 		background: @base_color;

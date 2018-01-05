@@ -1,5 +1,5 @@
 <template>
-	<transition name="slide-back">
+	<transition name="slide-go">
 		<div class="page">
 			<headersec tabname="我的订单" ref="noback"></headersec>
 			<div class="container">

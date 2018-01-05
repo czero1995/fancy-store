@@ -1,7 +1,9 @@
 <template>
+	
 	<div class="page">
 		<headers tabname="零食商店"></headers>
-		<div class="container">
+		<transition :name="slidename" >
+		<div class="container" v-show="mainarea">
 			<!-- Swiper -->
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
@@ -20,26 +22,29 @@
 						<div class="flex-align-center">
 							<p class="productTop-text">{{productIndex+1}}F</p>
 							<img src="../common/img/icon/arrowRight.png" class="arrowImg" />
+							
 						</div>
 					</div>
-					<div class="productBox flex flex-wrap" v-cloak>
-						<div class="productItem" v-for="goodsItem in productItem.SalesProduct">
-							<div class="itemBox">
-								<div @click="onGoodsDetail(goodsItem)">
-									<img v-lazy="goodsItem.GoodsImage" class="itemImg" />
-									<div>
-										<p class="goods-name text-ellipsis">{{goodsItem.GoodsName}}</p>
+					<div class="productContent">
+						<div class="productBox flex" ref='div'>
+							<div class="productItem" v-for="goodsItem in productItem.SalesProduct" >
+								<div class="itemBox">
+									<div @click="onGoodsDetail(goodsItem,goodsItem.CategoryId)">
+										<img v-lazy="goodsItem.GoodsImage" class="itemImg" />									
+										<div>
+											<p class="goods-name text-ellipsis">{{goodsItem.GoodsName}}</p>
+										</div>
 									</div>
+	
+									<div class="addCartBox flex-between">
+										<p><span class="goods-price">¥ {{goodsItem.GoodsPrice}}</span></p>
+										<img src="../common/img/icon/shop_addCart.png" @click="onAddCart(goodsItem,goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart" />
+										<img src="../common/img/icon/shop_addCart_select.png" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart" />
+									</div>
+	
 								</div>
-
-								<div class="addCartBox flex-between">
-									<p><span class="goods-price">¥ {{goodsItem.GoodsPrice}}</span></p>
-									<img src="../common/img/icon/shop_addCart.png" @click="onAddCart(goodsItem,goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart" />
-									<img src="../common/img/icon/shop_addCart_select.png" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart" />
-								</div>
-
+	
 							</div>
-
 						</div>
 					</div>
 				</div>
@@ -47,11 +52,11 @@
 			</div>
 
 		</div>
-
+		</transition>
 		<footers :urlRouter="$route.path" :cartnum='cartLength' ref="footer"></footers>
 
 	</div>
-
+	
 </template>
 
 <script>
@@ -68,7 +73,9 @@
 			return {
 				bannerList: [],
 				productList: [],
-				cartLength: 0
+				cartLength: 0,
+				slidename:'slide-back',
+				mainarea:false,
 			}
 		},
 		components: {
@@ -87,9 +94,24 @@
 					paginationClickable: true,
 					spaceBetween: 30,
 				});
-			}, 200)
+				
+			}, 100);
+			setTimeout(()=>{
+				this.mainarea=true;
+			},10);
 			this.getGoodsList();
 			this.getBannerList();
+			const currentTab = 1;
+			const sessionTab = sessionStorage.getItem('tabindex');
+			console.log(sessionTab);
+			if(currentTab<sessionTab){
+				this.slidename='slide-back'
+				console.log('小于',this.slidename)
+			}else{
+				this.slidename='slide-go'
+				console.log('大于',this.slidename)
+			}
+			sessionStorage.setItem('tabindex',1);
 		},
 		methods: {
 			/*获取商品列表*/
@@ -113,8 +135,8 @@
 					});
 			},
 			/*进入商品详情*/
-			onGoodsDetail(item) {
-				this.$router.push('/detail');
+			onGoodsDetail(item,id) {
+				this.$router.push({path:'/detail',query:{id:id}});
 				this.setGoods(item)
 			},
 			/*添加到购物车*/
@@ -145,9 +167,18 @@
 
 <style lang="less" scoped>
 	@import '../../src/common/less/variable.less';
+	.container{
+		overflow-x: hidden;
+	}
+	/*.productContent{
+		overflow-x: scroll;
+	}
+	.productBox{
+		width: 100rem;
+	}
 	.swiper-container {
 		height: 3rem;
-	}
+	}*/
 	
 	.swiper-slide img {
 		width: 100%;
@@ -173,7 +204,7 @@
 	}
 	
 	.productItem {
-		width: 48%;
+		width: 3.8rem;
 		box-sizing: border-box;
 		margin-bottom: .2rem;
 		padding: 0 .2rem;

@@ -1,7 +1,8 @@
 <template>
 	<div class="page">
 		<headers tabname="我的"></headers>
-		<div class="container">
+		<transition :name="slidename" >
+		<div class="container" v-show="mainarea">
 			<div class="floor floor_one">
 				<img src="../../../build/logo.png" alt="" />
 			</div>
@@ -18,6 +19,7 @@
 				<img src="../../common/img/icon/arrowRight.png" alt="" />
 			</div>
 		</div>
+		</transition>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
 </template>
@@ -26,9 +28,25 @@
 	import Headers from '../base/Header.vue';
 	import Footers from '../base/Footer.vue';
 	export default {
+		data(){
+			return{
+				slidename:'slide-go',
+				mainarea:false
+			}
+		},
 		components: {
 			Headers,
 			Footers,
+		},
+		mounted(){
+			const currentTab = 4;
+			const sessionTab = sessionStorage.getItem('tabindex');
+			console.log(sessionTab);
+			
+			sessionStorage.setItem('tabindex',4);
+			setTimeout(()=>{
+				this.mainarea=true;
+			},10)
 		},
 		methods: {
 			/*个人信息*/

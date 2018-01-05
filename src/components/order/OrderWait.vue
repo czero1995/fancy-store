@@ -1,5 +1,5 @@
 <template>
-	<transition name="slide-back">
+	<transition name="slide-go">
 		<div class="page">
 			<headersec tabname="订单详情"></headersec>
 			<div class="container">

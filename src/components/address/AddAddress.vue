@@ -1,5 +1,5 @@
 <template>
-	<transition name="slide-back">
+	<transition name="slide-go">
 		<div class="page">
 			<headersec tabname="添加地址"></headersec>
 			<div class="container">

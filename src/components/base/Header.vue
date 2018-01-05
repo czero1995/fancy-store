@@ -26,7 +26,7 @@ props:['tabname'],
 		line-height: .8rem;
 		width: 100%;
 		z-index: 10;
-		position: fixed;
+		position: absolute;
 		top: 0;
 	}
 </style>

@@ -1,9 +1,9 @@
 <template>
-	<transition name="slide-back" >
+	
 	<div class="page">
 		<headersec tabname="商品详情"></headersec>
-		
-		<div class="container" >
+		<transition name="slide-go" >
+		<div class="container" v-show="mainarea">
 			<div v-show="!havePage">
 				<nopage></nopage>
 			</div>
@@ -15,7 +15,9 @@
 			</div>
 		</div>
 
-		<div class="detail-bottom flex-align-center flex-around">
+	</div>
+		</transition>	
+	<div class="detail-bottom flex-align-center flex-around">
 			<div class="toCart">
 				<img src="../../common/img/icon/cart_white.png" @click="toCart" />
 				<transition name="bullet" >
@@ -30,9 +32,7 @@
 				<span class="tabbar-label">立即购买</span>
 			</div>
 		</div>
-			</div>
 			
-
 		<transition name="slide-up" >
 			<div class="model" v-show="addCartModel" v-cloak>
 				<div class="model-content addCart-content" @click.stop="addCartModel=true">
@@ -72,7 +72,7 @@
 		</transition>
 
 	</div>
-</transition>
+
 </template>
 
 <script>
@@ -88,7 +88,8 @@
 				isBuy:true,
 				havePage:false,
 				cartLength:'',
-				cartNum:false
+				cartNum:false,
+				mainarea:false
 			}
 		},
 		computed: {
@@ -107,7 +108,22 @@
 			if(this.$store.state.carts != undefined ){
 				this.cartLength = this.$store.state.carts.length;
 			}
-			
+			/*拿到路由跳转的id*/
+			 const id = this.$route.query.id;
+			 const currentTab = 0;
+			const sessionTab = sessionStorage.getItem('tabindex');
+			console.log(sessionTab);
+			if(currentTab<sessionTab){
+				this.slidename='slide-back'
+				console.log('小于',this.slidename)
+			}else{
+				this.slidename='slide-go'
+				console.log('大于',this.slidename)
+			}
+			sessionStorage.setItem('tabindex',0);
+			 setTimeout(()=>{
+			 	this.mainarea=true;
+			 },10)
 		},
 		components: {
 			Headersec,

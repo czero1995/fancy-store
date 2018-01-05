@@ -1,7 +1,9 @@
 <template>
+	
 	<div class="page">
 		<headers tabname="购物车"></headers>
-		<div class="container">
+		<transition :name="slidename" >
+		<div class="container" v-show="mainarea">
 			<div v-show="!havePage">
 				<nopage></nopage>
 			</div>
@@ -32,8 +34,8 @@
 					</v-touch>
 				</div>
 			</div>
-		</div>
-		<div class="cartBottom-detail flex-between" v-show="$store.state.carts" v-cloak>
+		
+			<div class="cartBottom-detail flex-between" v-show="$store.state.carts" v-cloak>
 			<div class="flex">
 				<div class="shopRadio" @click="onSelectAll()">
 					<img src="../../common/img/icon/radio.png" class="goods-radio" v-show="!goodsRadioAll" />
@@ -48,9 +50,11 @@
 				<p>提交订单</p>
 			</div>
 		</div>
+		</div>
+		</transition>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
-
+	
 </template>
 
 <script>
@@ -65,7 +69,9 @@
 				allCoach: 0,
 				radioArr: [],
 				havePage: false,
-				itemIndex: ''
+				itemIndex: '',
+				slidename:'slide-go',
+				mainarea:false
 			}
 
 		},
@@ -93,7 +99,20 @@
 					}
 				})
 			}
-
+			const currentTab = 3;
+			const sessionTab = sessionStorage.getItem('tabindex');
+			console.log(sessionTab);
+			if(currentTab<sessionTab){
+				this.slidename='slide-back'
+				console.log('小于',this.slidename)
+			}else{
+				this.slidename='slide-go'
+				console.log('大于',this.slidename)
+			}
+			sessionStorage.setItem('tabindex',3);
+			setTimeout(()=>{
+				this.mainarea=true;
+			},10)
 		},
 		methods: {
 			/*选择单个商品*/

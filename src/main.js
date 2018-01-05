@@ -14,13 +14,15 @@ require('./mock')
 fastclick.attach(document.body)
 
 Vue.use(Vuex)
-Vue.use(VueLazyLoad)
 Vue.prototype.$http=axios;
 Vue.use(VueTouch, {name: 'v-touch'})
 Vue.config.productionTip = false
-Vue.use(VueLazyLoad,{
-//  error:'../img/1.png',
-//  loading:'../build/logo.png'
+// or with options
+Vue.use(VueLazyLoad, {
+  preLoad: 1,
+  error: './dist/static/404.png',
+  loading: './dist/static/load.gif',
+  try:2
 })
 /* eslint-disable no-new */
 new Vue({
