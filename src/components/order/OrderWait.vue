@@ -10,11 +10,11 @@
 				<div v-show="havePage">
 					<div class="chooseAddress" @click="onAddress()">
 						<div class="flex-align-center chooseBox">
-							<img src="../../common/img/icon/item_address.png" />
+							<img src="../../../static/img/icon/item_address.png" />
 							<div class="flex-align-center flex-between">
 								<p v-show="!this.$store.state.chooseaddress">选择送货地址</p>
 								<p v-show="this.$store.state.chooseaddress">{{this.$store.state.chooseaddress}}</p>
-								<img src="../../common/img/icon/arrowRight.png" alt="" />
+								<img src="../../../static/img/icon/arrowRight.png" alt="" />
 							</div>
 
 						</div>
@@ -113,7 +113,7 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	.chooseBox {
 		margin-top: .2rem;
 		margin-bottom: .2rem;
@@ -133,17 +133,17 @@
 			text-align: center;
 		}
 	}
-	
+
 	.orderItem {
 		padding: .2rem;
 		border-bottom: 1px solid #ccc;
 	}
-	
+
 	.goodsImg {
 		width: 2rem;
 		height: 2rem;
 	}
-	
+
 	.orderBottom {
 		position: fixed;
 		bottom: 0;

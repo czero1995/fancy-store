@@ -98,17 +98,17 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	.container {
 		padding-top: 1.6rem;
 	}
-	
+
 	.order-item {
 		padding-bottom: .2rem;
 		border-bottom: 1px solid #ccc;
 		margin-bottom: .2rem;
 	}
-	
+
 	.order-top {
 		height: .8rem;
 		font-size: .28rem;
@@ -116,7 +116,7 @@
 		padding: 0 .2rem;
 		border-bottom: 1px solid #ccc;
 	}
-	
+
 	.order-content {
 		padding-top: .2rem;
 	}

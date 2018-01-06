@@ -12,8 +12,8 @@
 						<v-touch @swipeleft="onSwipeLeft(cartIndex)" @swiperight="onSwipeRight(cartIndex)">
 							<div class="cart-content flex-align-center">
 								<div class="goods-radio" @click.stop="onGoodsRadio(cartItem)">
-									<img src="../../common/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
-									<img src="../../common/img/icon/radio_select.png" v-show="cartItem.goodsRadio" />
+									<img src="../../../static/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
+									<img src="../../../static/img/icon/radio_select.png" v-show="cartItem.goodsRadio" />
 								</div>
 								<div class="flex">
 									<div class="goods-img">
@@ -22,15 +22,15 @@
 									<div class="goods-textBox">
 										<p class="goods-name">{{cartItem.GoodsName}}</p>
 										<div class="goodsOp flex">
-											<img src="../../common/img/icon/shop_cut.png" @click.stop="onCutCart(cartItem)" />
+											<img src="../../../static/img/icon/shop_cut.png" @click.stop="onCutCart(cartItem)" />
 											<input type="text" :value="cartItem.GoodsNum" />
-											<img src="../../common/img/icon/shop_add.png" @click.stop="onAddCart(cartItem)" />
+											<img src="../../../static/img/icon/shop_add.png" @click.stop="onAddCart(cartItem)" />
 										</div>
 										<p class="goods-coach">¥{{cartItem.GoodsPrice}}</p>
 									</div>
 								</div>
 							</div>
-							<div class="remove" @click.stop="onRemove(cartItem)"><img src="../../common/img/icon/remove.png" alt="" /></div>
+							<div class="remove" @click.stop="onRemove(cartItem)"><img src="../../../static/img/icon/remove.png" alt="" /></div>
 						</v-touch>
 					</div>
 				</div>
@@ -41,8 +41,8 @@
 		<div class="cartBottom-detail flex-between" v-show="$store.state.carts" v-cloak>
 			<div class="flex">
 				<div class="shopRadio" @click="onSelectAll()">
-					<img src="../../common/img/icon/radio.png" class="goods-radio" v-show="!goodsRadioAll" />
-					<img src="../../common/img/icon/radio_select.png" class="goods-radio" v-show="goodsRadioAll" />
+					<img src="../../../static/img/icon/radio.png" class="goods-radio" v-show="!goodsRadioAll" />
+					<img src="../../../static/img/icon/radio_select.png" class="goods-radio" v-show="goodsRadioAll" />
 				</div>
 				<div class="bottom-left">
 					<p>合计: <span class="shopCoach">¥{{allCoach}}</span> </p>
@@ -209,7 +209,7 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	.container {
 		padding-bottom: 1.6rem;
 		overflow-x: hidden;

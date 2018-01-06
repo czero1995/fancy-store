@@ -53,7 +53,7 @@
 	}
 </script>
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	footer {
 		bottom: 0;
 		position: absolute;
@@ -62,13 +62,13 @@
 		background: @base_color;
 		box-shadow: 0 -2px 9px rgba(0, 0, 0, .1);
 	}
-	
+
 	.footer-item {
 		width: 25%;
 		text-align: center;
 		position: relative;
 	}
-	
+
 	.cart-num {
 		position: absolute;
 		background: @theme_background;
@@ -82,7 +82,7 @@
 		border-radius: 0.8rem;
 		margin: auto;
 	}
-	
+
 	.icon {
 		width: .4rem;
 		height: .4rem;
@@ -91,48 +91,48 @@
 		margin-bottom: .1rem;
 		text-align: center;
 	}
-	
+
 	.footer-title {
 		color: @base_textColor;
 	}
-	
+
 	.footerIcon {
 		background-size: 100% 100%!important;
 	}
-	
+
 	.footerHomeIcon {
-		background: url('../../common/img/icon/tab_home.png');
+		background: url('../../../static/img/icon/tab_home.png');
 	}
-	
+
 	.footerCategoryIcon {
-		background: url('../../common/img/icon/tab_category.png');
+		background: url('../../../static/img/icon/tab_category.png');
 	}
-	
+
 	.footerCartIcon {
-		background: url('../../common/img/icon/tab_activity.png');
+		background: url('../../../static/img/icon/tab_activity.png');
 	}
-	
+
 	.footerMemberIcon {
-		background: url('../../common/img/icon/tab_member.png');
+		background: url('../../../static/img/icon/tab_member.png');
 	}
-	
+
 	.active .footer-title {
 		color: @theme_color;
 	}
-	
+
 	.active .footerHomeIcon {
-		background: url('../../common/img/icon/tab_home_select.png');
+		background: url('../../../static/img/icon/tab_home_select.png');
 	}
-	
+
 	.active .footerCategoryIcon {
-		background: url('../../common/img/icon/tab_category_select.png');
+		background: url('../../../static/img/icon/tab_category_select.png');
 	}
-	
+
 	.active .footerCartIcon {
-		background: url('../../common/img/icon/tab_activity_select.png');
+		background: url('../../../static/img/icon/tab_activity_select.png');
 	}
-	
+
 	.active .footerMemberIcon {
-		background: url('../../common/img/icon/tab_member_select.png');
+		background: url('../../../static/img/icon/tab_member_select.png');
 	}
 </style>

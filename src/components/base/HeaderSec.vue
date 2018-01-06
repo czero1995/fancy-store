@@ -1,6 +1,6 @@
 <template>
 	<header id="headerTab" class="flex flex-align-center">
-		<img src="../../common/img/icon/arrowBack.png" @click="onBack" />
+		<img src="../../../static/img/icon/arrowBack.png" @click="onBack" />
 		<p>{{tabname}}</p>
 	</header>
 
@@ -28,7 +28,7 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/base.less';
+	@import '../../../static/less/base.less';
 	header {
 		height: .8rem;
 		text-align: center;
@@ -41,13 +41,13 @@
 		position: fixed;
 		top: 0;
 	}
-	
+
 	img {
 		width: .4rem;
 		height: .4rem;
 		margin-left: .2rem;
 	}
-	
+
 	p {
 		text-align: center;
 		width: 100%;

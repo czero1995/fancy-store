@@ -10,15 +10,15 @@
 				</div>
 				<div class="floor floor_item floor_two  flex-align-center flex-between" @click="onInfo">
 					<p>个人信息</p>
-					<img src="../../common/img/icon/arrowRight.png" alt="" />
+					<img src="../../../static/img/icon/arrowBack.png" alt="" />
 				</div>
 				<div class="floor floor_item floor_two  flex-align-center flex-between" @click="onOrder">
 					<p>我的订单</p>
-					<img src="../../common/img/icon/arrowRight.png" alt="" />
+          <img src="../../../static/img/icon/arrowBack.png" alt="" />
 				</div>
 				<div class="floor floor_item floor_two  flex-align-center flex-between " @click="onAddress">
 					<p>我的地址</p>
-					<img src="../../common/img/icon/arrowRight.png" alt="" />
+          <img src="../../../static/img/icon/arrowBack.png" alt="" />
 				</div>
 			</div>
 		</transition>
@@ -78,11 +78,11 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	.page {
 		background: rgb(245, 245, 245);
 	}
-	
+
 	.floor_one {
 		width: 100%;
 		height: 4rem;
@@ -109,7 +109,7 @@
 		}
 		;
 	}
-	
+
 	.floor_item {
 		padding: 0 .2rem;
 		height: .8rem;

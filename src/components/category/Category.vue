@@ -24,7 +24,7 @@
 									<p class="goods-name">{{categoryItem.GoodsName}}</p>
 									<p class="goods-coach">¥{{categoryItem.GoodsPrice}}</p>
 									<div class="goods-cartBox">
-										<img src="../../common/img/icon/shop_addCart.png" @click.stop="onAddCart(categoryItem)" />
+										<img src="../../../static/img/icon/shop_addCart.png" @click.stop="onAddCart(categoryItem)" />
 									</div>
 								</div>
 							</div>
@@ -143,56 +143,55 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	.category {
 		padding-top: .8rem;
 		padding-bottom: .88rem;
 	}
-	
+
 	.leftbar {
 		position: absolute;
 		left: 0;
 		width: 1.8rem;
 		font-size: .28rem;
 		text-align: center;
+		height: 88%;
 		border-right: 1px solid #ccc;
-		height: 100%;
-		overflow: hidden;
 	}
-	
+
 	.barItem {
 		height: .8rem;
 		line-height: .8rem;
 		border-bottom: 1px solid #ccc;
 	}
-	
+
 	.rightContent {
 		flex: 1;
 		margin-left: 1.8rem;
 	}
-	
+
 	.rightItem:nth-last-child(1) {
 		padding-bottom: .9rem;
 	}
-	
+
 	.active.menu-text {
 		background: @theme_background;
 		color: @base_color;
 	}
-	
+
 	.category-item {
 		padding: .2rem 0;
 		border-bottom: 1px solid #ccc;
 	}
-	
+
 	.detail-item {
 		width: 100%;
 	}
-	
+
 	.goods-textBox {
 		width: 100%;
 	}
-	
+
 	.goods-img {
 		margin-right: .2rem;
 		width: 4rem;
@@ -202,17 +201,17 @@
 			height: 100%;
 		}
 	}
-	
+
 	.goods-name {
 		font-size: .28rem;
 	}
-	
+
 	.goods-coach {
 		font-size: .26rem;
 		color: red;
 		margin: .2rem 0;
 	}
-	
+
 	.goods-cartBox {
 		margin-right: .4rem;
 		width: .4rem;

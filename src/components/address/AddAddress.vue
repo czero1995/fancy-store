@@ -44,7 +44,7 @@
 
 <script>
 	import Headersec from '../base/HeaderSec.vue';
-	import init_city_picker from '../../common/js/data.city.js';
+	import init_city_picker from '../../../static/js/data.city.js';
 	import { mapGetters, mapMutations } from 'vuex'
 	export default {
 		data() {
@@ -118,7 +118,7 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	.addressBox {
 		position: fixed;
 		bottom: 0;
@@ -129,7 +129,7 @@
 		background: #f5f5f5;
 		display: block!important;
 	}
-	
+
 	.addressBox ul {
 		width: 33%;
 		height: 5.1rem;
@@ -137,7 +137,7 @@
 		overflow-y: scroll;
 		overflow-x: auto;
 	}
-	
+
 	.addressBox li {
 		font-size: .26rem;
 		height: 0.62rem;
@@ -146,7 +146,7 @@
 		text-align: left;
 		padding-left: .5rem;
 	}
-	
+
 	.cityBox {
 		position: absolute;
 		top: 0;
@@ -159,18 +159,18 @@
 		-webkit-overflow-scrolling: touch;
 		overflow-x: auto;
 	}
-	
+
 	.cityBox ul {
 		width: 100%;
 		height: 5.1rem;
 	}
-	
+
 	.cityBox li {
 		padding-left: 0.17rem;
 		text-align: left;
 		border-bottom: 0.01rem solid #e6e6e6;
 	}
-	
+
 	.areaBox {
 		position: absolute;
 		top: 0;
@@ -182,7 +182,7 @@
 		z-index: 9999;
 		-webkit-overflow-scrolling: touch;
 	}
-	
+
 	.model-content {
 		position: absolute;
 		left: 0;
@@ -193,7 +193,7 @@
 		background-color: #ffffff;
 		text-align: center;
 	}
-	
+
 	input {
 		font-size: 0.32rem;
 		width: 100%;
@@ -202,25 +202,25 @@
 		border: 1px solid #ccc;
 	}
 	/*点击省份，出现城市*/
-	
+
 	.addressBox .active {
 		background: @theme_background;
 		color: @base_color;
 	}
-	
+
 	.addressBox .active .cityBox {
 		display: block;
 	}
 	/*点击城市，出现区域*/
-	
+
 	.cityBox .active {
 		background: @theme_background;
 	}
-	
+
 	.cityBox .active .areaBox {
 		display: block;
 	}
-	
+
 	.pageBottom {
 		position: fixed;
 		bottom: 0;

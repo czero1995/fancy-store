@@ -1,5 +1,5 @@
 <template>
-	
+
 	<div class="page">
 		<headersec tabname="商品详情"></headersec>
 		<transition :name="slidename" >
@@ -16,15 +16,15 @@
 		</div>
 
 	</div>
-		</transition>	
+		</transition>
 	<div class="detail-bottom flex-align-center flex-around">
 			<div class="toCart">
-				<img src="../../common/img/icon/cart_white.png" @click="toCart" />
+				<img src="../../../static/img/icon/cart_white.png" @click="toCart" />
 				<transition name="bullet" >
 					<p v-show="cartNum">{{cartLength}}</p>
 				</transition>
 			</div>
-			
+
 			<div class="addCart" @click="onCartModel()">
 				<span class="tabbar-label">加入购物车</span>
 			</div>
@@ -32,7 +32,7 @@
 				<span class="tabbar-label">立即购买</span>
 			</div>
 		</div>
-			
+
 		<transition name="slide-up" >
 			<div class="model" v-show="addCartModel" v-cloak>
 				<div class="model-content addCart-content" @click.stop="addCartModel=true">
@@ -43,7 +43,7 @@
 						<div class="cartModel-text">
 							<div class="flex-between">
 								<p class="goods-name">{{$store.state.goods.GoodsName}}</p>
-								<img src="../../common/img/icon/close.png" class="cartClose" @click.stop="addCartModel=false" />
+								<img src="../../../static/img/icon/close.png" class="cartClose" @click.stop="addCartModel=false" />
 							</div>
 
 							<p class="goods-price">¥{{$store.state.goods.GoodsPrice}}</p>
@@ -53,9 +53,9 @@
 					<div class="cartModel-bottom flex-between">
 						<p>购买数量</p>
 						<div class="goodsOp flex">
-							<img src="../../common/img/icon/shop_cut.png" @click="onCutCart()" />
+							<img src="../../../static/img/icon/shop_cut.png" @click="onCutCart()" />
 							<input type="text" :value="goodsNum" readonly="" />
-							<img src="../../common/img/icon/shop_add.png" @click="onAddCart()" />
+							<img src="../../../static/img/icon/shop_add.png" @click="onAddCart()" />
 						</div>
 					</div>
 					<div @click.stop="onBuy">
@@ -98,12 +98,12 @@
 				'this.$store.state.carts',
 				'this.$store.state.comname'
 			])
-		},		
+		},
 		mounted(){
 			this.mainarea=true;
 			if(this.$store.state.goods === undefined){
 				this.havePage = false;
-				
+
 			}else{
 				this.havePage = true;
 			}
@@ -111,14 +111,14 @@
 				this.cartLength = this.$store.state.carts.length;
 			}
 			/*拿到路由跳转的id*/
-			 const id = this.$route.query.id;			
+			 const id = this.$route.query.id;
 			if(this.$store.state.comname === 'orderwait' || this.$store.state.comname === 'cart'){
 				this.slidename='slide-back';
 			}else{
 				this.slidename='slide-go'
 			}
 			this.setComname('goodsdetail');
-			 
+
 		},
 		components: {
 			Headersec,
@@ -162,10 +162,10 @@
 							this.cartNum=false;
 						},2000)
 					}
-					
-					
+
+
 				}
-				
+
 			},
 			...mapMutations({
 				setOrders: 'SET_ORDERS',
@@ -177,7 +177,7 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	.detial{
 		padding-top: .8rem;
 		padding-bottom: .88rem;
@@ -186,12 +186,12 @@
 		width: 100%;
 		height: 5rem;
 	}
-	
+
 	.detail-content {
 		padding-left: .2rem;
 		margin-top: .4rem;
 	}
-	
+
 	.detail-bottom {
 		position: fixed;
 		bottom: 0;

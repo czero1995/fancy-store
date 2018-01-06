@@ -40,7 +40,7 @@
 	}
 </script>
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	header {
 		top: .8rem;
 		position: absolute;

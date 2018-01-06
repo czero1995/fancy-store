@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    
+
     <router-view/>
-    
+
   </div>
 </template>
 
 <script>
-import './common/js/rem.js';
+import '../static/js/rem.js';
 export default {
   name: 'app',
-  
+
 }
 </script>
 
 <style lang="less">
-@import './common/less/base.less';
+@import '../static/less/base.less';
 	#app{
 		height: 100%;
 	}

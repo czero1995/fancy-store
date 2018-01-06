@@ -4,7 +4,7 @@
 		<headersec tabname="个人信息"></headersec>
 		<transition name="slide-go">
 			<div class="container" v-show="mainarea">
-				<img src="../../../build/github.png" alt="" />
+				<img src="../../../static/img/github.png" alt="" />
 				<p>wechat:374139613</p>
 			</div>
 		</transition>

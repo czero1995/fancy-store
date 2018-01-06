@@ -6,7 +6,7 @@
 			<ordertab :urlRouter="$route.path"></ordertab>
 			<transition :name="slidename">
 				<div class="ordercontainer" v-show="mainarea">
-					<img src="../../../build/github.png" alt="" />
+					<img src="../../../static/img/github.png" alt="" />
 					<p>待付款页面</p>
 				</div>
 			</transition>
@@ -63,7 +63,3 @@
 
 	}
 </script>
-
-<style lang="less" scoped>
-	@import '../../common/less/variable.less';
-</style>

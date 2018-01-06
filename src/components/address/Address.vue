@@ -88,7 +88,7 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../common/less/variable.less';
+	@import '../../../static/less/variable.less';
 	.pageBottom {
 		position: fixed;
 		bottom: 0;
@@ -100,7 +100,7 @@
 		font-size: .28rem;
 		text-align: center;
 	}
-	
+
 	.address-item {
 		height: 1.2rem;
 		line-height: 1.2rem;

@@ -22,7 +22,7 @@
 							<p class="productTop-text">{{productItem.Category.TopText}}</p>
 							<div class="flex-align-center">
 								<p class="productTop-text">{{productIndex+1}}F</p>
-								<img src="../common/img/icon/arrowRight.png" class="arrowImg" />
+								<img src="../../static/img/icon/arrowBack.png" class="arrowImg" />
 
 							</div>
 						</div>
@@ -39,8 +39,8 @@
 
 										<div class="addCartBox flex-between">
 											<p><span class="goods-price">¥ {{goodsItem.GoodsPrice}}</span></p>
-											<img src="../common/img/icon/shop_addCart.png" @click="onAddCart(goodsItem,goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart" />
-											<img src="../common/img/icon/shop_addCart_select.png" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart" />
+											<img src="../../static/img/icon/shop_addCart.png" @click="onAddCart(goodsItem,goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart" />
+											<img src="../../static/img/icon/shop_addCart_select.png" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart" />
 										</div>
 
 									</div>
@@ -63,8 +63,8 @@
 	import Headers from './base/Header.vue';
 	import Footers from './base/Footer.vue';
 	import Message from './base/Message.vue';
-	import '../../src/common/css/swiper.min.css';
-	import Swiper from '../../src/common/js/swiper.min';
+	import '../../static/css/swiper.min.css';
+	import Swiper from '../../static/js/swiper.min';
 	import { mapGetters, mapMutations } from 'vuex';
 
 	export default {
@@ -174,12 +174,12 @@
 </script>
 
 <style lang="less" scoped>
-	@import '../../src/common/less/variable.less';
+	@import '../../static/less/variable.less';
 	.swiper-slide img {
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.productTop {
 		padding: 0 .2rem;
 		height: .6rem;
@@ -188,16 +188,16 @@
 		border-top: @base_boder;
 		margin-bottom: .2rem;
 	}
-	
+
 	.productTop-text {
 		font-size: .28rem;
 	}
-	
+
 	.arrowImg {
 		width: .4rem;
 		height: .4rem;
 	}
-	
+
 	.productItem {
 		width: 3.8rem;
 		box-sizing: border-box;
@@ -208,12 +208,12 @@
 			border-right: 1px solid #ccc;
 		}
 	}
-	
+
 	.itemImg {
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.addCartBox {
 		img {
 			width: .4rem;
