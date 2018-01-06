@@ -157,6 +157,7 @@
 		text-align: center;
 		border-right: 1px solid #ccc;
 		height: 100%;
+		overflow: hidden;
 	}
 	
 	.barItem {
