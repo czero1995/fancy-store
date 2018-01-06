@@ -72,7 +72,7 @@
 		},
 		mounted() {
 			const that = this;
-			that.mainarea = true
+			that.mainarea = true;
 			that.addressList = init_city_picker;
 			this.setComname('addressadd');
 		},
