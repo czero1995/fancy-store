@@ -28,6 +28,15 @@ const matutaions = {
 	[types.SET_TABINDEX](state,tabindex){
 		state.tabindex = tabindex;
 	},
+	[types.SET_COMNAME](state,comname){
+		state.comname = comname;
+	},
+	[types.SET_ORDERCUR](state,ordercur){
+		state.ordercur = ordercur;
+	},
+	[types.SET_ORDERTAB](state,ordertab){
+		state.ordertab = ordertab;
+	}
 
 }
  export default matutaions

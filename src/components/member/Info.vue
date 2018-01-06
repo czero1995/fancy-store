@@ -1,21 +1,44 @@
 <template>
-	<transition name="slide-back">		
-		<div class="page">
-			<headersec tabname="个人信息"></headersec>
-			<div class="container">
-					<nopage></nopage>			
+
+	<div class="page">
+		<headersec tabname="个人信息"></headersec>
+		<transition name="slide-go">
+			<div class="container" v-show="mainarea">
+				<img src="../../../build/github.png" alt="" />
+				<p>wechat:374139613</p>
 			</div>
-		</div>
-	</transition>
+		</transition>
+	</div>
+
 </template>
 
 <script>
 	import Headersec from '../base/HeaderSec.vue';
-	import Nopage from '../base/NoPage.vue';
-	export default {				
+	export default {
+		data() {
+			return {
+				mainarea: false,
+			}
+		},
 		components: {
 			Headersec,
-			Nopage
-		},		
+		},
+		mounted() {
+			this.mainarea = true;
+		},
+
 	}
 </script>
+
+<style lang="less" scoped>
+	.container {
+		text-align: center;
+		img {
+			margin-top: .3rem;
+		}
+		p {
+			margin-top: .3rem;
+			font-size: .28rem;
+		}
+	}
+</style>

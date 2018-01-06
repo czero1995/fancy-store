@@ -6,3 +6,6 @@ export const address = state =>state.address
 export const chooseaddress = state =>state.chooseaddress
 export const ischoose = state =>state.ischoose
 export const tabindex = state =>state.tabindex
+export const comname = state =>state.comname
+export const ordercur = state =>state.ordercur
+export const ordertab = state =>state.ordertab

@@ -1,41 +1,44 @@
 <template>
-	
+
 	<div class="page">
 		<headers tabname="购物车"></headers>
-		<transition :name="slidename" >
-		<div class="container" v-show="mainarea">
-			<div v-show="!havePage">
-				<nopage></nopage>
-			</div>
-			<div v-show="havePage">
-				<div class="cart-item" :class="{selected: itemIndex === cartIndex}" v-for="(cartItem,cartIndex) in $store.state.carts" @click="onDetail(cartItem)">
-					<v-touch @swipeleft="onSwipeLeft(cartIndex)" @swiperight="onSwipeRight(cartIndex)">
-						<div class="cart-content flex-align-center">
-							<div class="goods-radio" @click.stop="onGoodsRadio(cartItem)">
-								<img src="../../common/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
-								<img src="../../common/img/icon/radio_select.png" v-show="cartItem.goodsRadio" />
-							</div>
-							<div class="flex">
-								<div class="goods-img">
-									<img v-lazy="cartItem.GoodsImage" />
-								</div>
-								<div class="goods-textBox">
-									<p class="goods-name">{{cartItem.GoodsName}}</p>
-									<div class="goodsOp flex">
-										<img src="../../common/img/icon/shop_cut.png" @click.stop="onCutCart(cartItem)" />
-										<input type="text" :value="cartItem.GoodsNum" />
-										<img src="../../common/img/icon/shop_add.png" @click.stop="onAddCart(cartItem)" />
-									</div>
-									<p class="goods-coach">¥{{cartItem.GoodsPrice}}</p>
-								</div>
-							</div>
-						</div>
-						<div class="remove" @click.stop="onRemove(cartItem)"><img src="../../common/img/icon/remove.png" alt="" /></div>
-					</v-touch>
+		<transition :name="slidename">
+			<div class="container" v-show="mainarea">
+				<div v-show="!havePage">
+					<nopage></nopage>
 				</div>
+				<div v-show="havePage">
+					<div class="cart-item" :class="{selected: itemIndex === cartIndex}" v-for="(cartItem,cartIndex) in $store.state.carts" @click="onDetail(cartItem)">
+						<v-touch @swipeleft="onSwipeLeft(cartIndex)" @swiperight="onSwipeRight(cartIndex)">
+							<div class="cart-content flex-align-center">
+								<div class="goods-radio" @click.stop="onGoodsRadio(cartItem)">
+									<img src="../../common/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
+									<img src="../../common/img/icon/radio_select.png" v-show="cartItem.goodsRadio" />
+								</div>
+								<div class="flex">
+									<div class="goods-img">
+										<img v-lazy="cartItem.GoodsImage" />
+									</div>
+									<div class="goods-textBox">
+										<p class="goods-name">{{cartItem.GoodsName}}</p>
+										<div class="goodsOp flex">
+											<img src="../../common/img/icon/shop_cut.png" @click.stop="onCutCart(cartItem)" />
+											<input type="text" :value="cartItem.GoodsNum" />
+											<img src="../../common/img/icon/shop_add.png" @click.stop="onAddCart(cartItem)" />
+										</div>
+										<p class="goods-coach">¥{{cartItem.GoodsPrice}}</p>
+									</div>
+								</div>
+							</div>
+							<div class="remove" @click.stop="onRemove(cartItem)"><img src="../../common/img/icon/remove.png" alt="" /></div>
+						</v-touch>
+					</div>
+				</div>
+
 			</div>
-		
-			<div class="cartBottom-detail flex-between" v-show="$store.state.carts" v-cloak>
+		</transition>
+
+		<div class="cartBottom-detail flex-between" v-show="$store.state.carts" v-cloak>
 			<div class="flex">
 				<div class="shopRadio" @click="onSelectAll()">
 					<img src="../../common/img/icon/radio.png" class="goods-radio" v-show="!goodsRadioAll" />
@@ -50,11 +53,9 @@
 				<p>提交订单</p>
 			</div>
 		</div>
-		</div>
-		</transition>
 		<footers :urlRouter="$route.path"></footers>
 	</div>
-	
+
 </template>
 
 <script>
@@ -70,8 +71,9 @@
 				radioArr: [],
 				havePage: false,
 				itemIndex: '',
-				slidename:'slide-go',
-				mainarea:false
+				slidename: 'slide-go',
+				mainarea: false,
+
 			}
 
 		},
@@ -83,38 +85,32 @@
 		computed: {
 			...mapGetters([
 				'this.$store.state.carts',
+				'this.$store.state.comname'
 			])
 		},
 		mounted() {
 
 			const that = this;
-			if(that.$store.state.carts === undefined) {
+			that.mainarea = true;
+			if(that.$store.state.carts.length == 0) {
 				that.havePage = false;
 			} else {
 				that.havePage = true;
 				that.$store.state.carts.forEach(function(item) {
-
 					if(typeof item.goodsRadio == 'undefined') {
 						that.$set(item, "goodsRadio", false);
 					}
 				})
 			}
-			const currentTab = 3;
-			const sessionTab = sessionStorage.getItem('tabindex');
-			console.log(sessionTab);
-			if(currentTab<sessionTab){
-				this.slidename='slide-back'
-				console.log('小于',this.slidename)
-			}else{
-				this.slidename='slide-go'
-				console.log('大于',this.slidename)
+			if(this.$store.state.comname === 'index' || this.$store.state.comname === 'category' || this.$store.state.comname === 'goodsdetail') {
+				this.slidename = 'slide-go';
+			} else {
+				this.slidename = 'slide-back'
 			}
-			sessionStorage.setItem('tabindex',3);
-			setTimeout(()=>{
-				this.mainarea=true;
-			},10)
+			this.setComname('cart');
 		},
 		methods: {
+
 			/*选择单个商品*/
 			onGoodsRadio(item) {
 				const that = this;
@@ -170,7 +166,7 @@
 				})
 			},
 			/*删除商品*/
-			onRemove(item){
+			onRemove(item) {
 				let index = this.$store.state.carts.indexOf(item);
 				this.$store.state.carts.splice(index, 1);
 				this.itemIndex = '';
@@ -205,6 +201,7 @@
 			...mapMutations({
 				setOrders: 'SET_ORDERS',
 				setGoods: 'SET_GOODS',
+				setComname: 'SET_COMNAME'
 			})
 		}
 
@@ -253,7 +250,7 @@
 		margin: 0 .2rem;
 		width: .34rem;
 		height: .34rem;
-		img{
+		img {
 			width: 100%;
 			height: 100%;
 		}

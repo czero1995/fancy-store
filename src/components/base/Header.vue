@@ -1,27 +1,27 @@
 <template>
-		<header id="headerTab">
-			<p>{{tabname}}</p>
-		</header>
+	<header id="headerTab">
+		<p>{{tabname}}</p>
+	</header>
 </template>
 
 <script>
-export default {
-props:['tabname'],
-  data () {
-    return {
+	export default {
+		props: ['tabname'],
+		data() {
+			return {
 
-    }
-  }
-}
+			}
+		}
+	}
 </script>
 
 <style lang="less" scoped>
-@import '../../common/less/variable.less';
-	header{
+	@import '../../common/less/variable.less';
+	header {
 		height: .8rem;
 		text-align: center;
 		background: @theme_background;
-		color:@base_color;
+		color: @base_color;
 		font-size: .26rem;
 		line-height: .8rem;
 		width: 100%;

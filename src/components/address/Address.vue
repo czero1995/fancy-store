@@ -1,8 +1,9 @@
 <template>
-	<transition name="slide-go">
-		<div class="page">
-			<headersec tabname="我的地址"></headersec>
-			<div class="container">
+
+	<div class="page">
+		<headersec tabname="我的地址"></headersec>
+		<transition :name="slidename">
+			<div class="container" v-show="mainarea">
 				<div v-show="!havePage">
 					<nopage></nopage>
 				</div>
@@ -11,14 +12,14 @@
 						<p>{{addressItem}}</p>
 					</div>
 				</div>
-				<div class="pageBottom" @click="onAddAddress">
-					<span class="tabbar-label">新增地址</span>
-				</div>
 
 			</div>
+		</transition>
+		<div class="pageBottom" @click="onAddAddress">
+			<span class="tabbar-label">新增地址</span>
 		</div>
-		</div>
-	</transition>
+	</div>
+
 </template>
 
 <script>
@@ -28,7 +29,9 @@
 	export default {
 		data() {
 			return {
-				havePage: false
+				havePage: false,
+				mainarea: false,
+				slidename: 'slide-go'
 			}
 		},
 		components: {
@@ -40,17 +43,25 @@
 				'this.$store.state.address',
 				'this.$store.state.chooseaddress',
 				'this.$store.state.ischoose',
+				'this.$store.state.comname'
 			])
 		},
 
 		mounted() {
 			const that = this;
-			if(this.$store.state.address === undefined) {
+			that.mainarea = true;
+			if(this.$store.state.address.length === 0) {
 				this.havePage = false;
 
 			} else {
 				this.havePage = true;
 			}
+			if(this.$store.state.comname === 'addressadd') {
+				this.slidename = 'slide-back';
+			} else {
+				this.slidename = 'slide-go'
+			}
+			this.setComname('address');
 		},
 
 		methods: {
@@ -69,7 +80,8 @@
 			},
 			...mapMutations({
 				setChooseaddress: 'SET_CHOOSEADDRESS',
-				setIschoose: 'SET_ISCHOOSE'
+				setIschoose: 'SET_ISCHOOSE',
+				setComname: 'SET_COMNAME'
 			})
 		},
 	}

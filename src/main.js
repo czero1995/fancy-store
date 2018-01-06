@@ -20,9 +20,8 @@ Vue.config.productionTip = false
 // or with options
 Vue.use(VueLazyLoad, {
   preLoad: 1,
-  error: './dist/static/404.png',
-  loading: './dist/static/load.gif',
-  try:2
+  error: '../build/github.png',
+  loading: '../build/github.png',
 })
 /* eslint-disable no-new */
 new Vue({

@@ -41,12 +41,12 @@
 				showNum: false
 			}
 		},
-		watch:{
-			showNum(){
-				if(this.showNum){
-					setTimeout(()=>{
-						this.showNum=false;
-					},800)
+		watch: {
+			showNum() {
+				if(this.showNum) {
+					setTimeout(() => {
+						this.showNum = false;
+					}, 800)
 				}
 			}
 		}
@@ -56,7 +56,7 @@
 	@import '../../common/less/variable.less';
 	footer {
 		bottom: 0;
-		position:absolute;
+		position: absolute;
 		width: 100%;
 		height: .88rem;
 		background: @base_color;

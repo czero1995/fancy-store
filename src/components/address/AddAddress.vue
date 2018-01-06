@@ -1,8 +1,9 @@
 <template>
-	<transition name="slide-go">
-		<div class="page">
-			<headersec tabname="添加地址"></headersec>
-			<div class="container">
+
+	<div class="page">
+		<headersec tabname="添加地址"></headersec>
+		<transition :name="slidename">
+			<div class="container" v-show="mainarea">
 				<input type="text" placeholder="选择地区" :value="addressText" readonly="" @click="addressModel = true" />
 
 				<div class="model" v-show="addressModel" @click="addressModel = false">
@@ -32,18 +33,19 @@
 					</div>
 				</div>
 
-				<div class="pageBottom" @click="onSave">
-					<span class="tabbar-label">保存</span>
-				</div>
 			</div>
+		</transition>
+		<div class="pageBottom" @click="onSave">
+			<span class="tabbar-label">保存</span>
 		</div>
-	</transition>
+	</div>
+
 </template>
 
 <script>
 	import Headersec from '../base/HeaderSec.vue';
 	import init_city_picker from '../../common/js/data.city.js';
-	import { mapMutations } from 'vuex'
+	import { mapGetters, mapMutations } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -55,15 +57,24 @@
 				addressText: '请选择',
 				activeProvince: 0,
 				activeCity: 0,
-				activeArea: 0
+				activeArea: 0,
+				mainarea: false,
+				slidename: 'slide-go'
 			}
 		},
 		components: {
 			Headersec
 		},
+		computed: {
+			...mapGetters([
+				'this.$store.state.comname'
+			])
+		},
 		mounted() {
 			const that = this;
+			that.mainarea = true
 			that.addressList = init_city_picker;
+			this.setComname('addressadd');
 		},
 
 		methods: {
@@ -100,6 +111,7 @@
 			},
 			...mapMutations({
 				setAddress: 'SET_ADDRESS',
+				setComname: 'SET_COMNAME'
 			})
 		},
 	}

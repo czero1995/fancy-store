@@ -2,7 +2,7 @@
 	
 	<div class="page">
 		<headersec tabname="商品详情"></headersec>
-		<transition name="slide-go" >
+		<transition :name="slidename" >
 		<div class="container" v-show="mainarea">
 			<div v-show="!havePage">
 				<nopage></nopage>
@@ -78,8 +78,7 @@
 <script>
 	import Headersec from '../base/HeaderSec.vue';
 	import Nopage from '../base/NoPage.vue';
-	import { mapGetters } from 'vuex'
-	import { mapMutations } from 'vuex';
+	import { mapGetters,mapMutations } from 'vuex';
 	export default {
 		data(){
 			return{
@@ -89,16 +88,19 @@
 				havePage:false,
 				cartLength:'',
 				cartNum:false,
-				mainarea:false
+				mainarea:false,
+				slidename:'slide-go'
 			}
 		},
 		computed: {
 			...mapGetters([
 				'this.$store.state.goods',
-				'this.$store.state.carts'
+				'this.$store.state.carts',
+				'this.$store.state.comname'
 			])
 		},		
 		mounted(){
+			this.mainarea=true;
 			if(this.$store.state.goods === undefined){
 				this.havePage = false;
 				
@@ -109,21 +111,14 @@
 				this.cartLength = this.$store.state.carts.length;
 			}
 			/*拿到路由跳转的id*/
-			 const id = this.$route.query.id;
-			 const currentTab = 0;
-			const sessionTab = sessionStorage.getItem('tabindex');
-			console.log(sessionTab);
-			if(currentTab<sessionTab){
-				this.slidename='slide-back'
-				console.log('小于',this.slidename)
+			 const id = this.$route.query.id;			
+			if(this.$store.state.comname === 'orderwait' || this.$store.state.comname === 'cart'){
+				this.slidename='slide-back';
 			}else{
 				this.slidename='slide-go'
-				console.log('大于',this.slidename)
 			}
-			sessionStorage.setItem('tabindex',0);
-			 setTimeout(()=>{
-			 	this.mainarea=true;
-			 },10)
+			this.setComname('goodsdetail');
+			 
 		},
 		components: {
 			Headersec,
@@ -175,6 +170,7 @@
 			...mapMutations({
 				setOrders: 'SET_ORDERS',
 				setCarts: 'SET_CARTS',
+				setComname: 'SET_COMNAME'
 			})
 		}
 	}

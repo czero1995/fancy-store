@@ -1,8 +1,9 @@
 <template>
-	<transition name="slide-go">
-		<div class="page">
-			<headersec tabname="订单详情"></headersec>
-			<div class="container">
+
+	<div class="page">
+		<headersec tabname="订单详情"></headersec>
+		<transition :name="slidename">
+			<div class="container" v-show="mainarea">
 				<div v-show="!havePage">
 					<nopage></nopage>
 				</div>
@@ -35,8 +36,9 @@
 				</div>
 
 			</div>
-		</div>
-	</transition>
+		</transition>
+	</div>
+
 </template>
 
 <script>
@@ -47,7 +49,9 @@
 		data() {
 			return {
 				allCoach: 0,
-				havePage: false
+				havePage: false,
+				mainarea: false,
+				slidename: 'slide-go'
 			}
 		},
 		components: {
@@ -57,13 +61,14 @@
 		computed: {
 			...mapGetters([
 				'this.$store.state.orders',
-				'this.$store.state.chooseaddress'
+				'this.$store.state.chooseaddress',
+				'this.$store.state.comname'
 			])
 		},
 		mounted() {
 			const that = this;
 			let sums = [];
-			console.log(11, this.$store.state.orders)
+			this.mainarea = true;
 			if(this.$store.state.orders === undefined) {
 				that.havePage = false;
 
@@ -76,6 +81,13 @@
 					that.allCoach += parseInt(sums[i]);
 				}
 			}
+
+			if(this.$store.state.comname === 'goodsdetail' || this.$store.state.comname === 'cart') {
+				this.slidename = 'slide-go';
+			} else {
+				this.slidename = 'slide-back'
+			}
+			this.setComname('orderwait');
 
 		},
 
@@ -94,6 +106,7 @@
 			...mapMutations({
 				setPays: 'SET_PAYS',
 				setIschoose: 'SET_ISCHOOSE',
+				setComname: 'SET_COMNAME'
 			})
 		},
 	}

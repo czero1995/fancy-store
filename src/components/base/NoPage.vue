@@ -1,6 +1,6 @@
 <template>
 	<div class="flex">
-		<img src="../../common/img/icon/404.png"/>
+		<img src="../../../build/github.png" />
 		<p>暂无数据，请前往添加。</p>
 	</div>
 </template>

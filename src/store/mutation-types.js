@@ -6,3 +6,6 @@ export const SET_ADDRESS = 'SET_ADDRESS' //我的地址
 export const SET_CHOOSEADDRESS = 'SET_CHOOSEADDRESS' //选择地址
 export const SET_ISCHOOSE = 'SET_ISCHOOSE' //判断是否选择地址
 export const SET_TABINDEX = 'SET_TABINDEX' //分类下标
+export const SET_COMNAME = 'SET_COMNAME' //组件名字
+export const SET_ORDERCUR = 'SET_ORDERCUR' //当前订单下标
+export const SET_ORDERTAB = 'SET_ORDERTAB' //订单下标

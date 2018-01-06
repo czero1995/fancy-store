@@ -1,46 +1,50 @@
 <template>
-	
+
 	<div class="page">
+		<message ref="message"></message>
 		<headers tabname="分类"></headers>
-		<transition :name="slidename" >
-		<div class="container flex" id="container" v-show="mainarea" v-cloak>
-			<div class="leftbar">
-				<div class="barItem" v-for="(menuItem,menuIndex) in menuList">
-					<p :class="{active:menuIndex === $store.state.tabindex}" class="menu-text" @click="onBar(menuIndex)">
-						{{menuItem.cat_name}}
-					</p>
+		<transition :name="slidename">
+
+			<div class="container flex" id="container" v-show="mainarea" v-cloak>
+				<div class="leftbar">
+					<div class="barItem" v-for="(menuItem,menuIndex) in menuList">
+						<p :class="{active:menuIndex === $store.state.tabindex}" class="menu-text" @click="onBar(menuIndex)">
+							{{menuItem.cat_name}}
+						</p>
+					</div>
 				</div>
-			</div>
-			<div class="rightContent">
-				<div class="rightItem" v-for="categoryItem in categoryContent.cart" @click="onDetail(categoryItem )">
-					<div class="category-item flex">
-						<div class="item flex detail-item">
-							<div class="goods-img">
-								<img v-lazy="categoryItem.GoodsImage" />
-							</div>
-							<div class="goods-textBox">
-								<p class="goods-name">{{categoryItem.GoodsName}}</p>
-								<p class="goods-coach">¥{{categoryItem.GoodsPrice}}</p>
-								<div class="goods-cartBox">
-									<img src="../../common/img/icon/shop_addCart.png" @click.stop="onAddCart(categoryItem)" />
+				<div class="rightContent">
+					<div class="rightItem" v-for="categoryItem in categoryContent.cart" @click="onDetail(categoryItem )">
+						<div class="category-item flex">
+							<div class="item flex detail-item">
+								<div class="goods-img">
+									<img v-lazy="categoryItem.GoodsImage" />
+								</div>
+								<div class="goods-textBox">
+									<p class="goods-name">{{categoryItem.GoodsName}}</p>
+									<p class="goods-coach">¥{{categoryItem.GoodsPrice}}</p>
+									<div class="goods-cartBox">
+										<img src="../../common/img/icon/shop_addCart.png" @click.stop="onAddCart(categoryItem)" />
+									</div>
 								</div>
 							</div>
+
 						</div>
 
 					</div>
-
 				</div>
 			</div>
-		</div>
+
 		</transition>
 		<footers :urlRouter="$route.path" :cartnum='cartLength' ref="footer"></footers>
 	</div>
-	
+
 </template>
 
 <script>
 	import Headers from '../base/Header.vue';
 	import Footers from '../base/Footer.vue';
+	import Message from '../base/Message.vue';
 	import { mapGetters, mapMutations } from 'vuex';
 	export default {
 		data() {
@@ -49,44 +53,38 @@
 				categoryList: [],
 				categoryContent: [],
 				cartLength: 0,
-				slidename:'slide-back',
-				mainarea:false
+				slidename: 'slide-back',
+				mainarea: false
 			}
 
 		},
 		components: {
 			Headers,
 			Footers,
+			Message
 		},
 		computed: {
 			...mapGetters([
 				'carts',
-				'this.$store.state.tabindex'
+				'this.$store.state.tabindex',
+				'this.$store.state.comname'
 			])
 		},
 		mounted() {
-			if(this.$store.state.tabindex == undefined){
+			this.mainarea = true
+			if(this.$store.state.tabindex == undefined) {
 				this.setTabindex(0);
 			}
 			this.getMenuList();
 			this.getCategoryList();
-			const currentTab = 2;
-			const sessionTab = sessionStorage.getItem('tabindex');
-			console.log(sessionTab);
-			if(currentTab<sessionTab){
-				this.slidename='slide-back'
-				console.log('小于',this.slidename)
-			}else{
-				this.slidename='slide-go'
-				console.log('大于',this.slidename)
+			if(this.$store.state.comname == 'index') {
+				this.slidename = 'slide-go';
+			} else {
+				this.slidename = 'slide-back'
 			}
-			sessionStorage.setItem('tabindex',2);
-			setTimeout(()=>{
-				this.mainarea=true
-			},10)
+			this.setComname('category');
 		},
 		methods: {
-			
 			/*获取分类栏目*/
 			getMenuList: function() {
 				const that = this;
@@ -117,10 +115,14 @@
 			},
 			/*添加购物车*/
 			onAddCart(item) {
-				if(!this.$refs.footer.showNum) {
-					this.setCarts(item);
-					this.cartLength = this.$store.state.carts.length;
-					this.$refs.footer.showNum = true;
+				if(!this.$store.state.carts.includes(item)) {
+					if(!this.$refs.footer.showNum) {
+						this.setCarts(item);
+						this.cartLength = this.$store.state.carts.length;
+						this.$refs.footer.showNum = true;
+					}
+				} else {
+					this.$refs.message.messageShow = true;
 				}
 
 			},
@@ -132,7 +134,8 @@
 			...mapMutations({
 				setGoods: 'SET_GOODS',
 				setCarts: 'SET_CARTS',
-				setTabindex: 'SET_TABINDEX'
+				setTabindex: 'SET_TABINDEX',
+				setComname: 'SET_COMNAME'
 			})
 		}
 
@@ -213,7 +216,7 @@
 		margin-right: .4rem;
 		width: .4rem;
 		height: .4rem;
-		img{
+		img {
 			width: 100%;
 			height: 100%;
 		}

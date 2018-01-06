@@ -62,6 +62,26 @@ const OrderWait = (resolve) =>{
 		resolve(module)
 	})
 }
+const WaitPay = (resolve) =>{
+	import('@/components/Order/WaitPay').then((module) =>{
+		resolve(module)
+	})
+}
+const WaitDeliver = (resolve) =>{
+	import('@/components/Order/WaitDeliver').then((module) =>{
+		resolve(module)
+	})
+}
+const WaitReceive = (resolve) =>{
+	import('@/components/Order/WaitReceive').then((module) =>{
+		resolve(module)
+	})
+}
+const OrderDown = (resolve) =>{
+	import('@/components/Order/OrderDown').then((module) =>{
+		resolve(module)
+	})
+}
 export default new Router({
 //	 mode: 'history',
 routes: [
@@ -108,6 +128,22 @@ routes: [
     {
       path: '/orderwait',
       component: OrderWait
+    },
+    {
+      path: '/waitpay',
+      component: WaitPay
+    },
+    {
+      path: '/waitdeliver',
+      component: WaitDeliver
+    },
+    {
+      path: '/waitreceive',
+      component: WaitReceive
+    },
+     {
+      path: '/orderdown',
+      component: OrderDown
     },
 ]
 })	
