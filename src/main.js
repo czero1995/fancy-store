@@ -10,7 +10,7 @@ import axios from 'axios'
 import VueLazyLoad from 'vue-lazyload'
 import fastclick from 'fastclick'
 var VueTouch = require('vue-touch')
-require('./mock')
+require('../mock')
 fastclick.attach(document.body)
 
 Vue.use(Vuex)
@@ -20,8 +20,8 @@ Vue.config.productionTip = false
 // or with options
 Vue.use(VueLazyLoad, {
   preLoad: 1,
-  error: '../static/img/github.png',
-  loading: '../static/img/github.png',
+  error: './static/img/github.png',
+  loading: './static/img/github.png',
 })
 /* eslint-disable no-new */
 new Vue({
