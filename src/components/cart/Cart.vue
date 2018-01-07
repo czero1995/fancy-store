@@ -9,7 +9,7 @@
 				</div>
 				<div v-show="havePage">
 					<div class="cart-item" :class="{selected: itemIndex === cartIndex}" v-for="(cartItem,cartIndex) in $store.state.carts" @click="onDetail(cartItem)">
-						<!--<v-touch @swipeleft="onSwipeLeft(cartIndex,$event)" @swiperight="onSwipeRight(cartIndex)">-->
+						<v-touch @swipeleft="onSwipeLeft(cartIndex)" @swiperight="onSwipeRight(cartIndex)">
 							<div class="cart-content flex-align-center">
 								<div class="goods-radio" @click.stop="onGoodsRadio(cartItem)">
 									<img src="../../../static/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
@@ -31,7 +31,7 @@
 								</div>
 							</div>
 							<div class="remove" @click.stop="onRemove(cartItem)" v-show="itemIndex === cartIndex"><img src="../../../static/img/icon/remove.png"  /></div>
-						<!--</v-touch>-->
+						</v-touch>
 					</div>
 				</div>
 
@@ -186,9 +186,9 @@
 
 			},
 			/*向左滑出现删除*/
-			onSwipeLeft(index,event) {
+			onSwipeLeft(index) {
 				this.itemIndex = index;
-				console.log(event.target);
+
 			},
 			/*向右滑隐藏删除*/
 			onSwipeRight() {
