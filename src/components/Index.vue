@@ -9,7 +9,7 @@
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide" v-for="bannerItem in bannerList">
-							<img v-lazy="bannerItem.img" />
+							<img :src="bannerItem.img" />
 						</div>
 					</div>
 					<div class="swiper-pagination"></div>
@@ -143,7 +143,7 @@
 			},
 			/*添加到购物车*/
 			onAddCart(item, name) {
-				console.log('include', this.$store.state.carts.includes(item));
+				
 				if(!this.$store.state.carts.includes(item)) {
 					if(!this.$refs.footer.showNum) {
 						this.cartLength = this.$store.state.carts.length + 1;

@@ -9,7 +9,7 @@
 				</div>
 				<div v-show="havePage">
 					<div class="cart-item" :class="{selected: itemIndex === cartIndex}" v-for="(cartItem,cartIndex) in $store.state.carts" @click="onDetail(cartItem)">
-						<v-touch @swipeleft="onSwipeLeft(cartIndex)" @swiperight="onSwipeRight(cartIndex)">
+						<!--<v-touch @swipeleft="onSwipeLeft(cartIndex,$event)" @swiperight="onSwipeRight(cartIndex)">-->
 							<div class="cart-content flex-align-center">
 								<div class="goods-radio" @click.stop="onGoodsRadio(cartItem)">
 									<img src="../../../static/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
@@ -30,8 +30,8 @@
 									</div>
 								</div>
 							</div>
-							<div class="remove" @click.stop="onRemove(cartItem)"><img src="../../../static/img/icon/remove.png" alt="" /></div>
-						</v-touch>
+							<div class="remove" @click.stop="onRemove(cartItem)" v-show="itemIndex === cartIndex"><img src="../../../static/img/icon/remove.png"  /></div>
+						<!--</v-touch>-->
 					</div>
 				</div>
 
@@ -186,8 +186,9 @@
 
 			},
 			/*向左滑出现删除*/
-			onSwipeLeft(index) {
+			onSwipeLeft(index,event) {
 				this.itemIndex = index;
+				console.log(event.target);
 			},
 			/*向右滑隐藏删除*/
 			onSwipeRight() {
@@ -214,15 +215,15 @@
 		padding-bottom: 1.6rem;
 		overflow-x: hidden;
 	}
-	
 	.cart-item {
 		border-bottom: 1px solid #CCCCCC;
 		padding-top: .2rem;
 		height: 2.4rem;
-		width: 122%;
+		/*width: 122%;*/
 		-webkit-transition: all 0.3s linear;
 		-webkit-user-select: none;
 		position: relative;
+		
 	}
 	
 	.remove {
@@ -233,8 +234,9 @@
 		text-align: center;
 		text-decoration: none;
 		position: absolute;
-		right: 0;
+		right: -12%;
 		top: 0;
+
 	}
 	
 	.cart-content {
@@ -242,7 +244,7 @@
 	}
 	
 	.selected {
-		-webkit-transform: translate(-18%, 0);
+		-webkit-transform: translate(-12%, 0);
 		-webkit-transition: all 0.3s linear;
 	}
 	
@@ -295,10 +297,11 @@
 		line-height: .8rem;
 		font-size: .28rem;
 		width: 100%;
-		position: fixed;
+		position: absolute;
 		bottom: .8rem;
 		color: @base_color;
 		background: @theme_background;
+		/*background:red;*/
 		img {
 			vertical-align: middle;
 			margin: 0 .2rem;

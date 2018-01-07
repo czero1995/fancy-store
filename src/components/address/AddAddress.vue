@@ -84,7 +84,7 @@
 				that.activeProvince = index;
 				that.province = item;
 				that.addressText = that.province;
-				console.log(index, that.activeProvince, that.province)
+
 			},
 			/*选择城市*/
 			onCitySelect: function(index, item) {
@@ -92,7 +92,7 @@
 				that.activeCity = index;
 				that.city = item
 				that.addressText = that.province + " " + that.city;
-				console.log(index, that.activeCity, that.city, that.addressText);
+
 			},
 			/*选择区域*/
 			onAreaSelect: function(index, item) {
@@ -101,7 +101,6 @@
 				that.area = item
 				that.addressText = that.province + " " + that.city + " " + that.area;
 				that.addressModel = false;
-				console.log(index, that.activeArea, that.area, that.addressText);
 			},
 			/*保存地址*/
 			onSave() {
