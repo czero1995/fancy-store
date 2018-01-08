@@ -1,33 +1,18 @@
-# fancy
+## 基于Vue2.0、Vuex、Vue-router、Axios实现的零食商城
 
-> a little store
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d562748a2671c?w=363&h=667&f=gif&s=4444655)
 在线地址:[github.czero.cn/fancy](http://github.czero.cn/fancy)
 
-手机扫描二维码:
+手机扫描二维码查看:
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d55bfb67d4f92?w=280&h=280&f=png&s=1562)
  
-安卓apk安装包:
+[点击下载安卓apk安装包](http://github.czero.cn/fancyapp.apk)
 
-源码地址:[https://github.com/czero1995/fancy-store](https://github.com/czero1995/fancy-store)
 
 
 ### 项目主架构
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d562efa48d77c?w=515&h=751&f=png&s=93340)
 
 ### 使用的库
 
@@ -41,64 +26,13 @@ npm run build --report
 * vue-lazyload(图片懒加载)
 * swiper(轮播)
 
+## 设计布局: 
 
-### 实现细节
-媲美原生的页面前进和后退的动画实现:
-下一页动画
-.slide-go-enter-active,
-.slide-go-leave-active {
-    transition: all .5s;
-    opacity: .8;
-}
+将页面的固定布局**position:fixed**(比如Header,Footer)全部改为绝对布**局position:absolute**;
 
-.slide-go-enter,
-.slide-go-leave-to {
-    transition: all .5s;
-    transform: translate3d(100%, 0, 0);
-    opacity: .8;
-}
-返回上一页动画
-.slide-back-enter-active,
-.slide-back-leave-active {
-    transition: all .5s;
-}
+因为fixed会出现莫名其妙的兼容性问题，比如在ios11或ios8下会失效，输入框软键盘激活之后会把底部的固定定位弹出去，导致布局错乱。
 
-.slide-back-enter,
-.slide-back-leave-to {
-    transition: all .5s;
-    transform: translate3d(-100%, 0, 0);
-}
-指定transition:name,
-在data中声明默认的进出动画
-在mounted()数据渲染初始化完成之后进行判断
-首先拿到vuex的状态值
-然后进行判断
-最后将当前的组件名字传给后台
-实现不同的组件进去就有不同的切换动画。
-
-#购物车左滑删除
-使用v-touch
-在css中设置好删除按钮的偏移量
- 左右滑方法
- 滑动的时候触发select样式，进行绑定
- 让当前的列表项==购物车的列表，样式会被激活，出现左滑删除
-
-注意
-页面的盒子使用盒子之后会和原生页面出现冲突，导致滑动不流畅
-因此，需要在main.js指定默认的滑动方式为横向滑动触发
-
-
-#订单页面，点击顶部导航和左右滑动进行组件的切换以及动画样式的判断
-也是使用的v-touch组件，实现方式和组件切换类似
-我给每个订单状态的组件一个不同的数字，根据这个数字，判断组件是左滑动的动画还是又滑动的动画
-
-#打包安卓apk
-测试布局和交互打包成混合应用是否会出现兼容问题。
-用的是Hbuild，还没有调用到Dclode的API(上传图片，扫一扫，后续会添加这些功能，作出一个完成的混合应用.)
-#### 设计布局: 
-	将页面的固定布局position:fixed(比如Header,Footer)全部改为绝对布局position:absolute;
-	因为fixed会出现莫名其妙的兼容性问题，比如在ios11或ios8下会失效，输入框软键盘激活之后会把底部的固定定位弹出去，导致布局错乱。
-	用absolute实现fixed细节可以参考这篇
+用absolute实现fixed细节可以参考[这篇](https://juejin.im/post/5a4eec9df265da3e4e256d2e)
 
 	HTML5 
 	CSS3 
@@ -108,26 +42,122 @@ npm run build --report
 	vue-touch(用于实现购物车左滑删除功能)
 	动画（vue原生transition实现原生app的效果）
 	
-#### 数据请求：
+## 数据请求：
 
 	Mock(模拟后台数据)
 	Axios(请求数据)
 
-#### 逻辑交互：
+## 逻辑交互：
 
 	vue(数据渲染,各个组件间的数值传递)
 	vue-router(组件间的路由跳转)
 	vuex(全局状态的管理)
-#### 优化方案: 
+## 优化方案: 
 
 	腾讯智图(压缩图片，减少图片的体积) 
 	vue-lazyload(图片懒加载，缓解加载数据,提高网页性能)
 	fastclick(解决移动端300ms延迟，提高页面交互流畅度)
 	vur-rouer(路由懒加载,分离app的js为多个js文件，到对应的页面再执行对应的js)
 	webpack(config/index.js文件内的 productionSourceMap改为false,这样打包出来的文件可以没有.map结尾的js文件，且文件体积减少至少一半)
+## 待更新
+    Node.js+Koa2+MogoDB写后台(目前已经实现增删改查的接口)
+    对接DCloud实现完整的混合应用(调用摄像头，扫一扫等原生App功能)
+    
+## 实现细节
+
+### 媲美原生的页面前进和后退的动画实现:
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d563c011aa615?w=363&h=667&f=gif&s=2186583)
+
+* 指定transition:name
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d5651095fe0fb?w=954&h=272&f=png&s=23216)
+
+* 在data中声明默认的进出动画
+ 
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d5654c843026e?w=494&h=241&f=png&s=10764)
+
+* 在mounted()数据渲染初始化完成之后进行判断
+ 
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d5659218ecb69?w=1091&h=499&f=png&s=39885)
+
+* 拿到vuex的状态值
+ 
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d56747251259a?w=818&h=146&f=png&s=7276)
 
 
-具体的实现可以看源码，关键部分，都做好了注释。
-最近也在学习Node,
-目前正在用Node.js、Koa2、和MongoDB写后台接口，增删改除的接口已经写好，可以参考这里
-现在这在写后台前端添加商品的一些逻辑结构，用的是iview的后台UI框架。图片是用的七牛云存储。还有很多需要学习，还请多多交流和分享
+* 然后进行判断
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d565df58b615b?w=818&h=146&f=png&s=7276) 
+
+* 最后将当前的组件名字传给vuex,实现不同的组件进去就有不同的切换动画。
+
+
+#### 下一页动画
+
+    .slide-go-enter-active,
+    .slide-go-leave-active {
+        transition: all .5s;
+        opacity: .8;
+    }
+
+    .slide-go-enter,
+    .slide-go-leave-to {
+        transition: all .5s;
+        transform: translate3d(100%, 0, 0);
+        opacity: .8;
+    }
+    
+### 返回上一页动画
+    .slide-back-enter-active,
+    .slide-back-leave-active {
+        transition: all .5s;
+    }
+    
+    .slide-back-enter,
+    .slide-back-leave-to {
+        transition: all .5s;
+        transform: translate3d(-100%, 0, 0);
+    }
+
+
+## 购物车左滑删除
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d56a518a48853?w=363&h=667&f=gif&s=610309)
+
+### v-touch
+在css中设置好删除按钮的偏移量
+
+    -webkit-transform: translate(-12%, 0);
+	-webkit-transition: all 0.3s linear;
+	
+## 左右滑方法
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d569747db9f86?w=352&h=206&f=png&s=9226)
+
+滑动的时候触发select样式，进行绑定
+
+让当前的列表项==购物车的列表，样式会被激活，出现左滑删除
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d56a1ab7109f1?w=694&h=29&f=png&s=3335)
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d5668cda86f5e?w=1082&h=64&f=png&s=10268)
+
+    注意页面的盒子使用盒子之后会和原生页面出现冲突，导致滑动不流畅
+    因此，需要在main.js指定默认的滑动方式为横向滑动触发
+
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d576c6d2c1bf8?w=713&h=86&f=png&s=6668)
+## 订单页面，点击顶部导航和左右滑动进行组件的切换以及动画样式的判断
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d56aac5ce5fca?w=363&h=667&f=gif&s=543096)
+
+也是使用的v-touch组件，实现方式和组件切换类似。
+我给每个订单状态的组件一个不同的数字，根据这个数字，判断组件是左滑动的动画还是又滑动的动画
+
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d56b4c0d25103?w=657&h=160&f=png&s=11547)
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d56b3e31093b2?w=389&h=145&f=png&s=9858)
+
+
