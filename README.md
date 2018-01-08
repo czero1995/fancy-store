@@ -1,13 +1,12 @@
 ## 基于Vue2.0、Vuex、Vue-router、Axios实现的零食商城
 
-![](https://user-gold-cdn.xitu.io/2018/1/8/160d562748a2671c?w=363&h=667&f=gif&s=4444655)
+![](http://www.z4a.net/images/2018/01/08/1.gif)
 在线地址:[github.czero.cn/fancy](http://github.czero.cn/fancy)
 
 手机扫描二维码查看:
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d55bfb67d4f92?w=280&h=280&f=png&s=1562)
  
 [点击下载安卓apk安装包](http://github.czero.cn/fancyapp.apk)
-
 
 
 ### 项目主架构
@@ -67,7 +66,7 @@
 
 ### 媲美原生的页面前进和后退的动画实现:
 
-![](https://user-gold-cdn.xitu.io/2018/1/8/160d563c011aa615?w=363&h=667&f=gif&s=2186583)
+![](http://www.z4a.net/images/2018/01/08/2.gif)
 
 * 指定transition:name
 
@@ -126,7 +125,7 @@
 
 ## 购物车左滑删除
 
-![](https://user-gold-cdn.xitu.io/2018/1/8/160d56a518a48853?w=363&h=667&f=gif&s=610309)
+![](http://www.z4a.net/images/2018/01/08/3.gif)
 
 ### v-touch
 在css中设置好删除按钮的偏移量
@@ -152,7 +151,7 @@
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d576c6d2c1bf8?w=713&h=86&f=png&s=6668)
 ## 订单页面，点击顶部导航和左右滑动进行组件的切换以及动画样式的判断
 
-![](https://user-gold-cdn.xitu.io/2018/1/8/160d56aac5ce5fca?w=363&h=667&f=gif&s=543096)
+![](http://www.z4a.net/images/2018/01/08/5.gif)
 
 也是使用的v-touch组件，实现方式和组件切换类似。
 我给每个订单状态的组件一个不同的数字，根据这个数字，判断组件是左滑动的动画还是又滑动的动画
