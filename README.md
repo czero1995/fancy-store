@@ -11,7 +11,7 @@
 
 ### 项目主架构
 
-![](https://user-gold-cdn.xitu.io/2018/1/8/160d5877d1923662?w=370&h=661&f=gif&s=2564480)
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d562efa48d77c?w=515&h=751&f=png&s=93340)
 
 ### 使用的库
 
