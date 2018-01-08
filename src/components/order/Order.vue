@@ -74,6 +74,7 @@
 				this.havePage = true;
 			}
 			this.$refs.noback.isBack = false;
+			/*判断动画是进还是出*/
 			if(this.$store.state.ordercur < this.$store.state.ordertab) {
 				this.slidename = 'slide-back'
 			} else {

@@ -56,6 +56,7 @@
 			} else {
 				this.havePage = true;
 			}
+			/*判断动画是进还是出*/
 			if(this.$store.state.comname === 'addressadd') {
 				this.slidename = 'slide-back';
 			} else {

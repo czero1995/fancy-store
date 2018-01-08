@@ -30,7 +30,8 @@
 									</div>
 								</div>
 							</div>
-							<div class="remove" @click.stop="onRemove(cartItem)" v-show="itemIndex === cartIndex"><img src="../../../static/img/icon/remove.png"  /></div>
+							<!--v-show="itemIndex === cartIndex"-->
+							<div class="remove" @click.stop="onRemove(cartItem)"><img src="../../../static/img/icon/remove.png" /></div>
 						</v-touch>
 					</div>
 				</div>
@@ -102,6 +103,7 @@
 					}
 				})
 			}
+			/*判断动画是进还是出*/
 			if(this.$store.state.comname === 'index' || this.$store.state.comname === 'category' || this.$store.state.comname === 'goodsdetail') {
 				this.slidename = 'slide-go';
 			} else {
@@ -215,28 +217,35 @@
 		padding-bottom: 1.6rem;
 		overflow-x: hidden;
 	}
+	
 	.cart-item {
 		border-bottom: 1px solid #CCCCCC;
 		padding-top: .2rem;
 		height: 2.4rem;
-		/*width: 122%;*/
 		-webkit-transition: all 0.3s linear;
 		-webkit-user-select: none;
 		position: relative;
-		
 	}
 	
 	.remove {
-		background-color: @theme_background;
+		background: linear-gradient(90deg, #9bbeff 0%, #6495ED 100%);
 		width: 18%;
 		height: 2.6rem;
 		line-height: 2.6rem;
 		text-align: center;
 		text-decoration: none;
 		position: absolute;
-		right: -12%;
+		right: -18%;
 		top: 0;
-
+		img {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			left: 20%;
+			width: .4rem;
+			height: .4rem;
+		}
 	}
 	
 	.cart-content {

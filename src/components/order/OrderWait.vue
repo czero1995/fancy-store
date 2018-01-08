@@ -81,7 +81,7 @@
 					that.allCoach += parseInt(sums[i]);
 				}
 			}
-
+			/*判断动画是进还是出*/
 			if(this.$store.state.comname === 'goodsdetail' || this.$store.state.comname === 'cart') {
 				this.slidename = 'slide-go';
 			} else {

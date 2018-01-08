@@ -77,6 +77,7 @@
 			}
 			this.getMenuList();
 			this.getCategoryList();
+			/*判断动画是进还是出*/
 			if(this.$store.state.comname == 'index') {
 				this.slidename = 'slide-go';
 			} else {

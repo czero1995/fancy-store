@@ -103,6 +103,7 @@
 			}, 200);
 			this.getGoodsList();
 			this.getBannerList();
+			/*判断动画是进还是出*/
 			if(this.$store.state.comname == 'category' || 'cart' || 'member') {
 				this.slidename = 'slide-back';
 			} else {
@@ -179,7 +180,9 @@
 		width: 100%;
 		height: 100%;
 	}
-
+	.container{
+		padding-bottom: 0;
+	}
 	.productTop {
 		padding: 0 .2rem;
 		height: .6rem;
@@ -197,7 +200,9 @@
 		width: .4rem;
 		height: .4rem;
 	}
-
+	.floorItem:nth-last-child(1){
+		margin-bottom: .88rem;
+	}
 	.productItem {
 		width: 3.8rem;
 		box-sizing: border-box;

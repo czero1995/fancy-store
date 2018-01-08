@@ -112,6 +112,7 @@
 			}
 			/*拿到路由跳转的id*/
 			 const id = this.$route.query.id;
+			 /*判断动画是进还是出*/
 			if(this.$store.state.comname === 'orderwait' || this.$store.state.comname === 'cart'){
 				this.slidename='slide-back';
 			}else{

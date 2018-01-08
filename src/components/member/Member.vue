@@ -49,6 +49,7 @@
 		},
 		mounted() {
 			this.mainarea = true;
+			/*判断动画是进还是出*/
 			if(this.$store.state.comname == 'index' || this.$store.state.comname == 'category' || this.$store.state.comname == 'cart') {
 				this.slidename = 'slide-go';
 			} else {
