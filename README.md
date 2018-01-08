@@ -1,9 +1,11 @@
 ## 基于Vue2.0、Vuex、Vue-router、Axios实现的零食商城
 
 ![](http://www.z4a.net/images/2018/01/08/1.gif)
-在线地址:[github.czero.cn/fancy](http://github.czero.cn/fancy)
+
+在线访问:[github.czero.cn/fancy](http://github.czero.cn/fancy)
 
 手机扫描二维码查看:
+
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d55bfb67d4f92?w=280&h=280&f=png&s=1562)
  
 [点击下载安卓apk安装包](http://github.czero.cn/fancyapp.apk)
@@ -33,35 +35,37 @@
 
 用absolute实现fixed细节可以参考[这篇](https://juejin.im/post/5a4eec9df265da3e4e256d2e)
 
-	HTML5 
-	CSS3 
-	Less
-	rem(阿里用的那套rem算法)
-	Flex(弹性布局)
-	vue-touch(用于实现购物车左滑删除功能)
-	动画（vue原生transition实现原生app的效果）
+* HTML5 
+* CSS3 
+* Less
+* rem(阿里用的那套rem算法)
+* Flex(弹性布局)
+* vue-touch(用于实现购物车左滑删除功能)
+* 动画（vue原生transition实现原生app的效果）
 	
 ## 数据请求：
 
-	Mock(模拟后台数据)
-	Axios(请求数据)
+* Mock(模拟后台数据)
+* Axios(请求数据)
 
 ## 逻辑交互：
 
-	vue(数据渲染,各个组件间的数值传递)
-	vue-router(组件间的路由跳转)
-	vuex(全局状态的管理)
+* vue(数据渲染,各个组件间的数值传递)
+* vue-router(组件间的路由跳转)
+* vuex(全局状态的管理)
 ## 优化方案: 
 
-	腾讯智图(压缩图片，减少图片的体积) 
-	vue-lazyload(图片懒加载，缓解加载数据,提高网页性能)
-	fastclick(解决移动端300ms延迟，提高页面交互流畅度)
-	vur-rouer(路由懒加载,分离app的js为多个js文件，到对应的页面再执行对应的js)
-	webpack(config/index.js文件内的 productionSourceMap改为false,这样打包出来的文件可以没有.map结尾的js文件，且文件体积减少至少一半)
+* 腾讯智图(压缩图片，减少图片的体积) 
+* vue-lazyload(图片懒加载，缓解加载数据,提高网页性能)
+* fastclick(解决移动端300ms延迟，提高页面交互流畅度)
+* vue-rouer(路由懒加载,分离app的js为多个js文件，到对应的页面再执行对应的js)
+* webpack(config/index.js文件内的 productionSourceMap改为false,这样打包出来的文件可以没有.map结尾的js文件，且文件体积减少至少一半)
 ## 待更新
-    Node.js+Koa2+MogoDB写后台(目前已经实现增删改查的接口)
-    对接DCloud实现完整的混合应用(调用摄像头，扫一扫等原生App功能)
-    
+*  Node.js+Koa2+MogoDB写后台(目前已经实现增删改查的接口)
+*  对接DCloud实API现完整的混合应用(调用摄像头，扫一扫等原生App功能)
+*  服务器渲染SSR
+
+   
 ## 实现细节
 
 ### 媲美原生的页面前进和后退的动画实现:
