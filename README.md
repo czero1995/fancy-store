@@ -61,7 +61,7 @@
 * vue-rouer(路由懒加载,分离app的js为多个js文件，到对应的页面再执行对应的js)
 * webpack(config/index.js文件内的 productionSourceMap改为false,这样打包出来的文件可以没有.map结尾的js文件，且文件体积减少至少一半)
 ## 待更新
-*  Node.js+Koa2+MogoDB写后台(目前已经实现增删改查的接口)
+*  Node.js+Koa2+MogoDB写后台(目前已经实现增删改查的接口[进入](https://github.com/czero1995/Node-Koa2-RESTful))
 *  对接DCloud实API现完整的混合应用(调用摄像头，扫一扫等原生App功能)
 *  服务器渲染SSR
 
@@ -163,4 +163,16 @@
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d56b4c0d25103?w=657&h=160&f=png&s=11547)
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d56b3e31093b2?w=389&h=145&f=png&s=9858)
 
+# 使用说明
 
+	#克隆项目
+	git clone git@github.com:tgxhx/vue-reader.git
+	
+	# 安装依赖
+	npm install
+	
+	# 本地开发环境 访问http://localhost:8080
+	npm run dev
+	
+	# 构建生产
+	npm run build
