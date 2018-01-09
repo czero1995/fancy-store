@@ -208,7 +208,7 @@
 		box-sizing: border-box;
 		margin-bottom: .2rem;
 		padding: 0 .2rem;
-		width: 100%;
+		flex:1;
 		&:nth-child(odd) {
 			margin-right: 2%;
 			border-right: 1px solid #ccc;
