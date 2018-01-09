@@ -61,6 +61,10 @@
 * vue-rouer(路由懒加载,分离app的js为多个js文件，到对应的页面再执行对应的js)
 * webpack(config/index.js文件内的 productionSourceMap改为false,这样打包出来的文件可以没有.map结尾的js文件，且文件体积减少至少一半)
 
+## bug(不影响)
+    
+    因为是用Mock模拟后台的数据，点击添加同个商品多次的时候，不是只增加数量，没像真实调用后台的数据那样。
+    因为是用的vuex做的数据存储，没有添加多的逻辑判断。
    
 ## 实现细节
 
