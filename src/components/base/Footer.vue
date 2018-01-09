@@ -56,13 +56,12 @@
 	@import '../../../static/less/variable.less';
 	footer {
 		bottom: 0;
-		position: absolute;
+		position:fixed;
 		width: 100%;
 		height: .88rem;
 		background: @base_color;
 		box-shadow: 0 -2px 9px rgba(0, 0, 0, .1);
-	}
-
+	}	
 	.footer-item {
 		width: 25%;
 		text-align: center;

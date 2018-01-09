@@ -151,7 +151,7 @@
 	}
 
 	.leftbar {
-		position: absolute;
+		position: fixed;
 		left: 0;
 		width: 1.8rem;
 		font-size: .28rem;

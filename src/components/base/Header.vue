@@ -26,7 +26,7 @@
 		line-height: .8rem;
 		width: 100%;
 		z-index: 10;
-		position: absolute;
+		position: fixed;
 		top: 0;
 	}
 </style>

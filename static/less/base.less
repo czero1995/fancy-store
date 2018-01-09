@@ -141,17 +141,23 @@ body {
 body,
 html {
     height: 100%;
-    overflow: hidden;
+//  overflow: hidden;
+//  position: relative;
 }
 
 a {
     text-decoration: none;
 }
-
+a:active{
+    display: none;
+}
 [v-cloak] {
     display: none;
 }
-
+//#app{
+//  
+//  position: relative;
+//}
 .model {
     position: absolute;
     top: 0%;
@@ -278,8 +284,8 @@ a {
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
+//  overflow-y: scroll;
+//  -webkit-overflow-scrolling: touch;
 }
 
 .container {
