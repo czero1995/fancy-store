@@ -29,12 +29,6 @@
 
 ## 设计布局: 
 
-将页面的固定布局**position:fixed**(比如Header,Footer)全部改为绝对布**局position:absolute**;
-
-因为fixed会出现莫名其妙的兼容性问题，比如在ios11或ios8下会失效，输入框软键盘激活之后会把底部的固定定位弹出去，导致布局错乱。
-
-用absolute实现fixed细节可以参考[这篇](https://juejin.im/post/5a4eec9df265da3e4e256d2e)
-
 * HTML5 
 * CSS3 
 * Less
