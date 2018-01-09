@@ -34,7 +34,7 @@
 		margin: 0 auto;
 		padding: 0 .2rem;
 		border-radius: 0.15rem;
-		position: absolute;
+		position: fixed;
 		z-index: 999;
 		bottom: 1.4rem;
 		left: 0;
