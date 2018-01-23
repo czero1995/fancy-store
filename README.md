@@ -10,6 +10,9 @@
  
 [点击下载安卓apk安装包](http://github.czero.cn/fancyapp.apk)
 
+### 小程序版购物商城
+	
+	[https://github.com/czero1995/fancy_applet](https://github.com/czero1995/fancy_applet)
 
 ### 项目主架构
 
