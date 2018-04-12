@@ -1,18 +1,16 @@
-## 基于Vue2.0、Vuex、Vue-router、Axios实现的零食商城
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d5877d1923662?w=370&h=661&f=gif&s=2564480)
 
-![](http://www.z4a.net/images/2018/01/08/1.gif)
-
-在线访问:[github.czero.cn/fancy](http://github.czero.cn/fancy)
+在线地址:[github.czero.cn/fancy](http://github.czero.cn/fancy)
 
 手机扫描二维码查看:
 
-![](https://user-gold-cdn.xitu.io/2018/1/8/160d55bfb67d4f92?w=280&h=280&f=png&s=1562)
+
+![](https://user-gold-cdn.xitu.io/2018/4/12/162b9f31fddfb367?w=280&h=280&f=png&s=1548)
  
 [点击下载安卓apk安装包](http://github.czero.cn/fancyapp.apk)
 
-### 小程序版购物商城
-	
-	[https://github.com/czero1995/fancy_applet](https://github.com/czero1995/fancy_applet)
+源码地址:[https://github.com/czero1995/fancy-store](https://github.com/czero1995/fancy-store)
+
 
 ### 项目主架构
 
@@ -38,7 +36,7 @@
 * rem(阿里用的那套rem算法)
 * Flex(弹性布局)
 * vue-touch(用于实现购物车左滑删除功能)
-* 动画（vue原生transition实现原生app的效果）
+*动画（vue原生transition实现原生app的效果）
 	
 ## 数据请求：
 
@@ -50,24 +48,35 @@
 * vue(数据渲染,各个组件间的数值传递)
 * vue-router(组件间的路由跳转)
 * vuex(全局状态的管理)
+
+
 ## 优化方案: 
 
 * 腾讯智图(压缩图片，减少图片的体积) 
 * vue-lazyload(图片懒加载，缓解加载数据,提高网页性能)
 * fastclick(解决移动端300ms延迟，提高页面交互流畅度)
 * vue-rouer(路由懒加载,分离app的js为多个js文件，到对应的页面再执行对应的js)
-* webpack(config/index.js文件内的 productionSourceMap改为false,这样打包出来的文件可以没有.map结尾的js文件，且文件体积减少至少一半)
+* webpack(config/index.js文件内的productionSourceMap改为false,这样打包出来的文件可以没有.map结尾的js文件，且文件体积减少至少一半)
+## Vuex刷新保存状态
 
-## bug(不影响)
-    
-    因为是用Mock模拟后台的数据，点击添加同个商品多次的时候，不是只增加数量，没像真实调用后台的数据那样。
-    因为是用的vuex做的数据存储，没有添加多的逻辑判断。
-   
+使用Vuex做状态管理的时候，当用户刷新页面，Vuex里面的状态会全部丢失，从而引起程序的一场。解决思路是在creared()钩子函数里面添加以下方法:
+	
+	created(){
+	   console.log('页面执行刷新时，保存Vuex的状态到LocalStorage')
+	    //在页面加载时读取localStorage里的状态信息
+	    localStorage.getItem("userMsg") && this.$store.replaceState(Object.assign(this.$store.state,JSON.parse(localStorage.getItem("userMsg"))));
+	    
+	    //在页面刷新时将vuex里的信息保存到localStorage里
+	    window.addEventListener("beforeunload",()=>{
+	        localStorage.setItem("userMsg",JSON.stringify(this.$store.state))
+	    })
+	  }  
+上面代码的原理是，当页面刷新时，会将当前Vuex的状态存储到LocalStorage里面，刷新成功，再从LocalStorage赋值到Vuex里面.      
 ## 实现细节
 
 ### 媲美原生的页面前进和后退的动画实现:
 
-![](http://www.z4a.net/images/2018/01/08/2.gif)
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d563c011aa615?w=363&h=667&f=gif&s=2186583)
 
 * 指定transition:name
 
@@ -126,7 +135,7 @@
 
 ## 购物车左滑删除
 
-![](http://www.z4a.net/images/2018/01/08/3.gif)
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d56a518a48853?w=363&h=667&f=gif&s=610309)
 
 ### v-touch
 在css中设置好删除按钮的偏移量
@@ -152,13 +161,18 @@
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d576c6d2c1bf8?w=713&h=86&f=png&s=6668)
 ## 订单页面，点击顶部导航和左右滑动进行组件的切换以及动画样式的判断
 
-![](http://www.z4a.net/images/2018/01/08/5.gif)
+![](https://user-gold-cdn.xitu.io/2018/1/8/160d56aac5ce5fca?w=363&h=667&f=gif&s=543096)
 
 也是使用的v-touch组件，实现方式和组件切换类似。
 我给每个订单状态的组件一个不同的数字，根据这个数字，判断组件是左滑动的动画还是又滑动的动画
 
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d56b4c0d25103?w=657&h=160&f=png&s=11547)
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d56b3e31093b2?w=389&h=145&f=png&s=9858)
+
+
+
+### 项目代码已经都做好注释，可以直接查看源码，[点击这里](https://github.com/czero1995/fancy-store)
+
 
 # 使用说明
 
@@ -173,3 +187,4 @@
 	
 	# 构建生产
 	npm run build
+
