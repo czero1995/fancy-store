@@ -4,7 +4,7 @@
 
 手机扫描二维码查看:
 
-
+  
 ![](https://user-gold-cdn.xitu.io/2018/4/12/162b9f31fddfb367?w=280&h=280&f=png&s=1548)
  
 [点击下载安卓apk安装包](http://github.czero.cn/fancyapp.apk)
