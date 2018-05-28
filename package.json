@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "vconsole": "^3.2.0",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.0.6",
     "vue-router": "^3.0.1"
