@@ -1,6 +1,6 @@
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d5877d1923662?w=370&h=661&f=gif&s=2564480)
 
-在线地址:[github.czero.cn/fancy](http://github.czero.cn/fancy)
+在线地址:[http://czero.cn/fancy-store/dist](http://czero.cn/fancy-store/dist)
 
 手机扫描二维码查看:
 
