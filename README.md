@@ -4,8 +4,9 @@
 
 手机扫描二维码查看:
 
-  
-![](https://user-gold-cdn.xitu.io/2018/4/12/162b9f31fddfb367?w=280&h=280&f=png&s=1548)
+
+
+![](https://user-gold-cdn.xitu.io/2018/6/3/163c60fc6011d5f1?w=280&h=280&f=png&s=1823)
  
 [点击下载安卓apk安装包](http://github.czero.cn/fancyapp.apk)
 
@@ -48,6 +49,7 @@
 * vue(数据渲染,各个组件间的数值传递)
 * vue-router(组件间的路由跳转)
 * vuex(全局状态的管理)
+
 
 ## 调试
 * vConsole(在移动端查看调试器)
@@ -173,7 +175,6 @@
 
 
 
-### 项目代码已经都做好注释，可以直接查看源码，[点击这里](https://github.com/czero1995/fancy-store)
 
 
 # 使用说明
