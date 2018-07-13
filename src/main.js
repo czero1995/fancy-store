@@ -24,6 +24,11 @@ VueTouch.config.swipe = { //配置滑动区域为左滑动，解决和滚动事�
   threshold: 200
 }
 Vue.config.productionTip = false //vuex开启开发环境日志
+const isDebug_mode = process.env.NODE_ENV !== 'production'
+Vue.config.debug = isDebug_mode
+Vue.config.devtools = isDebug_mode
+Vue.config.productionTip = isDebug_mode
+
 // or with options
 Vue.use(VueLazyLoad, { //懒加载声明错误图和占位图
   preLoad: 1.3,

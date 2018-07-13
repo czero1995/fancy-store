@@ -1,47 +1,50 @@
-
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0">
-		<link rel="shortcut icon" href="./static/img/favicon.png">
-		<title>fancy</title>
-		<style>
-			#ismobile {
-				display: none;
-				font-size: .6rem;
-				text-align: center;
-				padding-top: 4rem;
-			}
-		</style>
-	</head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="shortcut icon" href="./static/img/favicon.png">
+  <title>fancy</title>
 
-	<body>
-		<div id="app"></div>
-    <div id="ismobile"><img src="./static/img/github.png" alt="" /><p>请在移动端打开，并刷新页面。</p></div>
-    <script>
+  <style>
+    #ismobile {
+      display: none;
+      font-size: .6rem;
+      text-align: center;
+      padding-top: 4rem;
+    }
+  </style>
+</head>
 
-        var sUserAgent = navigator.userAgent.toLowerCase();
-        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-        var bIsAndroid = sUserAgent.match(/android/i) == "android";
-        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-        if(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-          document.getElementById('ismobile').style.display = "none";
-          document.getElementById('app').style.display = "block";
-        } else {
-          document.getElementById('ismobile').style.display = "block";			
-          document.getElementById('app').style.display = "none";
-        }
-    
-    </script>
-	</body>
-	
-	
+<body>
+  <div id="app"></div>
+  <div id="ismobile">
+    <img src="./static/img/github.png" alt="" />
+    <p>请在移动端打开，并刷新页面。</p>
+  </div>
+  <script src="./static/js/vendor.dll.js"></script>
+  <script>
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+      document.getElementById('ismobile').style.display = "none";
+      document.getElementById('app').style.display = "block";
+    } else {
+      document.getElementById('ismobile').style.display = "block";
+      document.getElementById('app').style.display = "none";
+    }
+  </script>
+
+</body>
+
+
 
 </html>
