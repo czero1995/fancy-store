@@ -61,6 +61,7 @@
 * fastclick(解决移动端300ms延迟，提高页面交互流畅度)
 * vue-rouer(路由懒加载,分离app的js为多个js文件，到对应的页面再执行对应的js)
 * webpack(config/index.js文件内的productionSourceMap改为false,这样打包出来的文件可以没有.map结尾的js文件，且文件体积减少至少一半)
+
 ## Vuex刷新保存状态
 
 使用Vuex做状态管理的时候，当用户刷新页面，Vuex里面的状态会全部丢失，从而引起程序的一场。解决思路是在creared()钩子函数里面添加以下方法:
@@ -173,6 +174,91 @@
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d56b4c0d25103?w=657&h=160&f=png&s=11547)
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d56b3e31093b2?w=389&h=145&f=png&s=9858)
 
+### Vue-CLI Webpack构建优化
+#### 只黏贴关键部分的代码
+* 使用Happypack多线程打包构建
+
+在**build/webpack.base.cong.js**下添加如下代码
+
+		const HappyPack = require('happypack')
+		const os = require('os')
+		const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+
+		 plugins: [
+		    new HappyPack({
+		      id: 'happy-babel-js',
+		      loaders: ['babel-loader?cacheDirectory=true'],
+		      threadPool: happyThreadPool,
+		    })
+		  ],
+		  
+		{
+	        test: /\.js$/,
+	        // loader: 'babel-loader',
+	        loader: 'happypack/loader?id=happy-babel-js', // 增加新的HappyPack构建loader
+	        exclude: /node_modules/,
+	        include: [resolve('src')]
+	      },
+
+* babrl-loader开启缓存
+
+* 启用DllPlugin和DllReferencePlugin预编译库文件
+
+
+第三方库文件单独打包一次，以后的编译都不需要在编译打包第三方库
+
+在**build/**文件夹下新建**webpack.dll.config.js**文件,复制一下代码:
+
+		const path = require("path")
+		const webpack = require("webpack")
+		
+		module.exports = {
+		    // 你想要打包的模块的数组
+		    entry: {
+		        vendor: ['vue/dist/vue.esm.js', 'axios', 'vue-router', 'vuex']
+		    },
+		    output: {
+		        path: path.join(__dirname, '../static/js'), // 打包后文件输出的位置
+		        filename: '[name].dll.js',
+		        library: '[name]_library'
+		    },
+		    plugins: [
+		        new webpack.DllPlugin({
+		            path: path.join(__dirname, '.', '[name]-manifest.json'),
+		            name: '[name]_library',
+		            context: __dirname
+		        }),
+		        // 压缩打包的文件
+		        new webpack.optimize.UglifyJsPlugin({
+		            compress: {
+		                warnings: false
+		            }
+		        })
+		    ]
+		}
+在**build/webpack.dev.config.js**和**build/webpack.prod.config.js**中添加plugins
+
+		new webpack.DllReferencePlugin({
+		      context: __dirname,
+		      manifest: require('./vendor-manifest.json')
+		}),
+		
+在**根目录下的index.html**下引入预编译的库
+
+	 	<script src="./static/js/vendor.dll.js"></script>
+
+在**package.json/scripts**下中添加dll命令
+
+    "dll": "webpack --config ./build/webpack.dll.config.js"
+    
+运行:
+
+	npm run dll
+	
+然后再
+
+	npm run dev或npm run build
+	
 
 
 
@@ -185,6 +271,9 @@
 	# 安装依赖
 	npm install
 	
+	# DLL构建库(提高打包和编译的速度)
+	npm run dll
+
 	# 本地开发环境 访问http://localhost:8080
 	npm run dev
 	
