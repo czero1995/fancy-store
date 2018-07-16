@@ -1,12 +1,12 @@
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d5877d1923662?w=370&h=661&f=gif&s=2564480)
 
-在线地址:[http://czero.cn/fancy-store/dist](http://czero.cn/fancy-store/dist)
+在线地址:[http://fancy.czero.cn/fancy-store/dist](http://fancy.czero.cn/fancy-store/dist)
 
 手机扫描二维码查看:
 
 
 
-![](https://user-gold-cdn.xitu.io/2018/6/3/163c60fc6011d5f1?w=280&h=280&f=png&s=1823)
+![](https://user-gold-cdn.xitu.io/2018/7/16/164a3baca13c5bd9?w=280&h=280&f=png&s=1820)
  
 [点击下载安卓apk安装包](http://github.czero.cn/fancyapp.apk)
 
