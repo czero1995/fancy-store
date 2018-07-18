@@ -12,6 +12,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const env = require('../config/prod.env')
+const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -120,6 +121,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require('./vendor-manifest.json')
+    }),
+    new SkeletonWebpackPlugin({
+      webpackConfig: require('./webpack.skeleton.conf')
     })
 
   ]

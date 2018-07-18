@@ -7,7 +7,7 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-
+const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -54,6 +54,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require('./vendor-manifest.json')
+    }),
+    new SkeletonWebpackPlugin({
+      webpackConfig: require('./webpack.skeleton.conf')
     })
 
   ]

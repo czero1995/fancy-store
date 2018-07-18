@@ -39,7 +39,7 @@ module.exports = {
       id: 'happy-babel-js',
       loaders: ['babel-loader?cacheDirectory=true'],
       threadPool: happyThreadPool,
-    })
+    }),
   ],
   module: {
     rules: [

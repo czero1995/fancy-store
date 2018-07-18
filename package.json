@@ -11,10 +11,15 @@
     "dll": "webpack --config ./build/webpack.dll.config.js"
   },
   "dependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "better-scroll": "^1.11.1",
+    "compression-webpack-plugin": "^1.1.11",
+    "happypack": "^5.0.0",
     "vconsole": "^3.2.0",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.0.6",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-skeleton-webpack-plugin": "^1.1.18"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
