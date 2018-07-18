@@ -13,7 +13,9 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const env = require('../config/prod.env')
 const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
-
+// webpack.dev.conf.js、webpack.prod.conf.js webpack配置文件添加插件配置
+const WorkBoxPlugin = require('workbox-webpack-plugin')
+const SwRegisterWebpackPlugin = require('sw-register-webpack-plugin')
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
@@ -124,7 +126,15 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     new SkeletonWebpackPlugin({
       webpackConfig: require('./webpack.skeleton.conf')
-    })
+    }),
+    // 以service-worker.js文件为模板，注入生成service-worker.js
+    new WorkBoxPlugin.InjectManifest({
+      swSrc: path.resolve(__dirname, '../src/service-worker.js')
+    }),
+    // 通过插件注入生成sw注册脚本
+    new SwRegisterWebpackPlugin({
+      version: +new Date()
+    }),
 
   ]
 })

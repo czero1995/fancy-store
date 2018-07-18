@@ -15,11 +15,14 @@
     "better-scroll": "^1.11.1",
     "compression-webpack-plugin": "^1.1.11",
     "happypack": "^5.0.0",
+    "prettier": "^1.12.0",
+    "sw-register-webpack-plugin": "^1.0.21",
     "vconsole": "^3.2.0",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.0.6",
     "vue-router": "^3.0.1",
-    "vue-skeleton-webpack-plugin": "^1.1.18"
+    "vue-skeleton-webpack-plugin": "^1.1.18",
+    "workbox-webpack-plugin": "^3.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -53,6 +56,7 @@
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
+    "sw-register-webpack-plugin": "^1.0.21",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-lazyload": "^1.1.4",
@@ -64,7 +68,8 @@
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-server": "^2.9.1",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "workbox-webpack-plugin": "^3.4.1"
   },
   "engines": {
     "node": ">= 4.0.0",

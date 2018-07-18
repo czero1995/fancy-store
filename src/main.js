@@ -8,7 +8,6 @@ import axios from 'axios'
 import VueLazyLoad from 'vue-lazyload'
 import fastclick from 'fastclick'
 import Vconsole from 'vconsole'
-import Skeleton from './components/Skeleton'
 let vConsole = new Vconsole()
 export default vConsole
 var VueTouch = require('vue-touch')
@@ -44,6 +43,5 @@ new Vue({
   template: '<App/>',
   components: {
     App,
-    Skeleton
   }
 })

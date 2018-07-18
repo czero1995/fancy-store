@@ -1,4 +1,5 @@
 'use strict'
+const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')
 const config = require('../config')
@@ -10,6 +11,9 @@ const portfinder = require('portfinder')
 const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
+// webpack.dev.conf.js、webpack.prod.conf.js webpack配置文件添加插件配置
+const WorkBoxPlugin = require('workbox-webpack-plugin')
+const SwRegisterWebpackPlugin = require('sw-register-webpack-plugin')
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -38,10 +42,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
-    new webpack.DllReferencePlugin({
-      context: __dirname,
-      manifest: require('./vendor-manifest.json')
-    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
@@ -57,7 +57,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new SkeletonWebpackPlugin({
       webpackConfig: require('./webpack.skeleton.conf')
-    })
+    }),
+    // 以service-worker.js文件为模板，注入生成service-worker.js
+    new WorkBoxPlugin.InjectManifest({
+      swSrc: path.resolve(__dirname, '../src/service-worker.js')
+    }),
+    // 通过插件注入生成sw注册脚本
+    new SwRegisterWebpackPlugin({
+      version: +new Date()
+    }),
 
   ]
 })
