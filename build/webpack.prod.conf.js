@@ -135,7 +135,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     new SwRegisterWebpackPlugin({
       version: +new Date()
     }),
-
   ]
 })
 

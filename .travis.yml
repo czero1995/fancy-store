@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - '7'
+  - '8'
+  - '9'
+script:
+  - npm install
+  - npm run build
+  - scp -r dist/* root@47.98.240.154:/var/www

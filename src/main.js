@@ -11,6 +11,16 @@ import Vconsole from 'vconsole'
 let vConsole = new Vconsole()
 export default vConsole
 var VueTouch = require('vue-touch')
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
+Raven
+  .config('https://ce431a99e0884612a053541eef0f2810@sentry.io/1245961', {
+    release: process.env.RELEASE_VERSION,
+    debug: true
+  })
+  .addPlugin(RavenVue, Vue)
+  .install();
+
 require('../mock')
 fastclick.attach(document.body) //解决移动端点击事件200ms延迟
 
