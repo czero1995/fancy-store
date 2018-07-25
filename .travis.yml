@@ -1,17 +1,17 @@
-  language: node_js
-  addons:
-    apt:
-      packages:
-      - sshpass
-  node_js:
-    - 8
-  branchs:
-    only:
-    - master  #指定只有检测到master分支有变动时才执行任务
-  script:
-    - export SSHPASS=$DEPLOY_PASS
-    - sshpass -e scp  -o stricthostkeychecking=no -r config root@47.98.240.154:/var/www/html/fancy
-  env:
-    global:
-    - secure: ahLPsKXMu2cv1g2Xsk61i+iFR1K7sFznH2+yoCYs66sJAxIQgHmkCvuWboKAVcaoh+pj1+EiFYy6CMLC3rgtOYnYS2A9sHLQta6MZU+y6En1+f4gIp3H04QgYluIcBRgSM8n2QV+t1FAwFbQUm5Ya6n9JKLTm3h+hJuspwUS91vcaK6e5QgeqIOMIExmBNjJvQspravjlagBhKsr3MZN6t3o6DuWam8+obEaKZU/5phEnO/7LWlbbycR5bjJSLbS9tfd1j0Cj+wqzFpwje1PHXgclvY6xURa5qFrOWEWXpfqE16jQhSVighOu1R3GgSU3QE/vtl3SYJ7H7LynRZ87SdlMEAQchYLnpNyWesAU0YZcbHfCovCth/c4NujRbkYaj+xVwR+ZUroMe27tPJAwebCQWSSqUYlV0VHZlHw4tbzl/kxRqNB8alvUUqkSDuYlCYazsu8mqPxTPyvDhw4MhCm1IudOtp/MyRrIQ3/DRgH1oJQqmsfIACYg3Ngj+hiIs5n7nBCEIiiNtMgwNJE7mlmOxY5odBtwb2TnxshJuwHwtodmHdY7xI19/+YZv7QihEqfaqiSr3a16KXlmuFJlN1jHcCbWk+emhgslI1bpBsV/WoGn3b/Uqiy0CRt+Q3OrSRRxTPiAZUxfcBBIf+h4rnOJ2dbC8oqyWVm2wcq9s=
-    - secure: T91ci4s07QaGOMTwgu1ZVu8Q8W2keg1j6UB6DNVQBlF5dlRknAdpGcX5nPAfgKeZ2pvrGfHG2regIx/X7v8Xpj7YzO5rfee7penFkryz07KDkJ0Qy5n+Fjq3kNL4ykhlfVZBIbMhCaIFo3S6Oaxql3TwtT0QNaJiA0FHH/1AJJ4qdLhpxAnabW6kegkegkGvtxIWynEGKfCONKJK510KAeuY1PPZ1UCz07nNii7iCDl+Ia6QornKKQTr79h0PwFDy1ZsVqt0VE91Xutn7Qw2HfIuiKRFC0WEDRDJXUuUf40Weczl9FRDlSFVJ5dopfo8lO2zfVf69uaoO2902c0UBL+kOAGOWWuTgKuH9xNR0n8TkaWAQf+IyFfVQkJGam/SCE48lVEili3PgqzGPRCM6M3k5vM3AJrcup0bjO0Oyw0R3JjxDvs14F8ngBGd9jjbAyr47LOqRP/+kDcuOXkm7Tg+8gL3HmH5cU/n+0Zk+qqMYjOVz5lrMACDn2x5Z5ZDIFTJhLf78wWSHZqp5SeouivtKd2VlHPwt+Xk5rSdlsjK78pgWXNbtEcmbYdGWpp/FmauoYEn3XuT2bLEJM/cuqi4nI/t7SzS2ctLBu/6xPHw9ivX6jQ14ccmYgdxxqrQDQc96gQUOvhSi0W1jzpRp/bzcEn5oM19HDb4tdTKZts=
+language: node_js
+addons:
+  apt:
+    packages:
+    - sshpass
+node_js:
+- 8
+branchs:
+  only:
+  - master
+script:
+- export SSHPASS=$DEPLOY_PASS
+- sshpass -e scp  -o stricthostkeychecking=no -r config root@47.98.240.154:/var/www/html/fancy
+env:
+  global:
+  - secure: oKeDZNtfOj0nrCguMeaJWy8RvvJWbzOPAIoHPjg/SPyIpHlRyreTxj+FyfuTsIeP5Uzz+JAV/VpvC1U0JhxYA2lLbjBIHjKZgLddvlZEPR3NCNU93BB9xLOj6NhPmPKGlGnMQiS9eYXu65mfqCVg5HXR9P6PtODtC8zm3fr8yuxgVNi5lVyt1u13QvDgFZrZTsBVVzx35i5TaVBRBTr/HvPc261dMr9ZBZypmgaZdu03nPP74PqO68u+3oHqMkwaKz0wieKk3H2fas5YH2OERRvS3R4Dqasoj7KojWGAQkmgOKBggweMqQRHOaIFwQZTX+VJwGAquyxVJfiR7K4QKPhW0wgl47g6qP6E7QQruacV4hjqmeVhgHAw6xxt6boIHcFO6Yq2pP66dzmAM3zY0TPx4G0h46cBl1aAP+pH5K1qfzo3sddbVNhX8i/vO2eM6h4mmFw+tR9gQKSSpwJIJnX5imJXGZpKrGupFlX0mc6unghc0e3i8cssWXkf4Hj0mr4AdpTvfYW5aBiaFmqOCCkWH2/qf5NrzJSS29f2TO90oTChsyoYSU4vrnH2UedWsI6ZFydebksEyrBX3olkySexfp1FMrCxAxgh/21d+COA7Y1vvU8SL84Vm81+mN6jF9Pr6hNmaVq1BrDvyXumWuv2j91BLT0PW3M5DqxTrxw=
+  - secure: eKrYl+wWXjA+QiSHYvVfNa9n0bw45EgtOXwB79HrfGYMKhQjJrfB4C+xHcMds8OkBDDEDGH0LjgbWDxruwFQ4+tauDX/eJ1QWea/lvsIlAoP6P7gPUjiibQkmInZd7YY2jqPib42gNc+j4UZ3scxAPxAK0QwRqkBj+a8zGWv7vH+SBKm2jnIi2I05sxDZRgU0C1rDZdl1RC6FDebb/PqcywxuMN6TwOUeIkxAinXkwRGbCWSx7Ww7DMSMNPOPYEQwlbFL3u1NP5kLiCKtTn0j2Qx9iyPHV5W8gILFSu35GAL837e8Iixz2TOKH5qZLbtTsuSGS0lMMZ0Ql41GMWwTNiwr3WjvVm0s9AYNG1g2O7AsZ25l5Feffqvuz9roqElvpycwyAmiHdbER8BeCKhuONikz3eXFBPE6gb5CuUzyheJlbHs6q9jdBOWdphO1d/R6uHIdT6ZAEUo7VYZsfSzDkOmUUu43KqEf83LxflBUCZjY0ISdx7bzIpwiFezruBWaHeUrdPE3WbwWCbnIuMfNHGY2H3zlKsq+EmBXM1xN73cMJMSp8TAirDH45rVjXHCBECiTUwgxo3/t8h8wMKqhDCyDJhCqTyeo1KaI3Ah1KnzRVlDML20Lg/hBdwPFqGSNLPVeQSxGYLumPvpoWkJyVURb8aqopP/pWH4kIcNG8=
