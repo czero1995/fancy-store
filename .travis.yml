@@ -8,10 +8,6 @@ node_js:
 branchs:
   only:
   - master
-before_install:
-- openssl aes-256-cbc -K $encrypted_87bf11d507f0_key -iv $encrypted_87bf11d507f0_iv
-  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
-- chmod 600 ~/.ssh/id_rsa
 script:
 - export SSHPASS=$DEPLOY_PASS
 - sshpass -e scp  -o stricthostkeychecking=no -r config root@47.98.240.154:/var/www/html/fancy
@@ -19,3 +15,6 @@ env:
   global:
   - secure: KmBd0nTB3SMBaIpGnM4nK+1hg0+q4nJV4dDg+iR1zPW7WDJFX2DibSvOuGz+qhj1T2TK+34Vmbqd6om1ze7eecSaGAHehF/GNQzEFQa9ZOK7QKGijjpsnn5xm7pRdxIuZ7BUXjf03WgWHyCp6yprT/YTz2TxEx5TOPavnQ5UyYR9Kn5inkLhznpXaumopqcntvUih+XZ5n0hkmEKB8kQ4Lwi4P/Natox8wDUjF7DArKCLcUjSzpG/rQXRUuFsBT7tn6QJ2116KeHCNfF7JyeZtHUmGN2B7d0c8QoPL/1h/4/Lbf9Om4MQlLktzZHRNMqscUFDefakpjD6m10IUv6SpUXzav7SWDtBJC1xFgjvkwTZq6lH3Mq7mqxFFBH8OIEYS2kI8Mrgaob6x2ze7tp09AZlmDfbE1IwIUSv222+sC1/h4WPAC0b7YEcNQ1rEL8207qkw3PBDMNW3gg13O1TFmILp63LoEJx68o92CJyw9seuSFIlj2b3qjpGTflcJIkycmYAXMPbXiyXjv5aYAt9GDhBJoYvVtpG0PfJ94ZDg763Es/Aple/mvh5MI43AygLCzS0OPfjPTrq2n9xdMVwWTfLv7xvBrMoCENlKx2U+/NCbXtnaVQ0Pvf/iMzdEcVvItTk3J8N4q5VvkVNP4LyKGI+TZe5MtnKbHnuPICiI=
   - secure: Tqa8DbMd70r8Pcfyzf0NSQd5cGG2BaHDfD+lpsL1lRbfSaHPKwyDvoeX5ioxhN/bVuVyZaqBdwGX/spscpQWrP0t3YsRXJZfspq+VQ8FJMAw1Z0AwLY7jk3CR8cXTTY7oskr05z2KylC1hCe9o0SSAWLwuFFjrnHA6LN0JjC3Eb+ChTKyhEzSlhHeIi1peJm5JyQYBZncxXWSFhzga+AlFyWXAGqIt4GP2pZmXj89i72GTjjt7rSRNSsQxZXTjGvzDCW59mxYKaJ958xBlLyXhA7XJ6xQQQdpjvV2K4yq3ZRojCEAlLG+eDbMFVzkM/Pzk4Ui8Vc/KczAYrORwPGmByVJHmEK1ecniIJI3hBW7zruHO3HOUmdARaRLge1YRV4VwbIbA0SrhUvw99TBOjgAp1ACBtHJmoYBxlpaSYRvq4GQQXoMEfy0Wv4iIxOxaOUe+63LOuiH0br/Su2dnTG1mYuveYM8z5An9kN4U6pM2kORiduPFjIE8/OSgs87HuDmZq+MrpuWpmvy1efKGqxVPRa3koQxE5lkl/tXGNYVxyYJ3E3LLeI4O3j73S0rPksYfJUzIYUEuMeon3K3HpUSV/zFY/Nta08ar0x0pN2xw7foLP8aQWScdm1cQ0RdwmZ6o5/dPgTHL+9YoM6+YXv5R1sWxoqMyEjrJS40wj+5A=
+before_install:
+- openssl aes-256-cbc -K $encrypted_87bf11d507f0_key -iv $encrypted_87bf11d507f0_iv
+  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
