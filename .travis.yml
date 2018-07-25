@@ -1,0 +1,21 @@
+language: node_js
+addons:
+  apt:
+    packages:
+    - sshpass
+node_js:
+  - 8
+branchs:
+  only:
+  - master  #指定只有检测到master分支有变动时才执行任务
+script:
+  - export SSHPASS=$DEPLOY_PASS
+  - npm install cnpm --registry=https://registry.npm.taobao.org
+  - cnpm install
+  - npm run build
+  - sshpass -e scp  -o stricthostkeychecking=no -r dist root@47.98.240.154:/var/www/html/fancy
+
+env:
+  global:
+  - secure: NZYplTQoi2W3uBxlUP3lmHxKtx4qQXg5nOeZMjqBJ2QXTHv1QCwUBfN6sQVFxD9CQF+thAfDZMQOcSebbMYHNUDqef4flfpXcvbX1q1HaKLdU4fgHxwrMTvSqK0eDOzJL8eUYbfLLH1y6yi9IYjScA59b+gwHuHWA7A1+bTtaKQ+D8QOZ69wWaxTM21YzUJOpWxkOZTNinwV33P4Lj7AYasVxbnR0+wxodFmW31q1YOhl1spOjw3cg88RQIbWAaXcUoFbSzNTHrJjoRoqtfHeCaNHEd/n5WhzezyzeMotY7DVnwhMrlOQLC5lTXyB8egwH5UV6G3YB8J2BSJly9PNVv7qtO2MYHIEzbU2CB4edvZ0MVZnFwZoQsSMG923Y25AmlkBk0xtJ7rjmfeglRt6VpYRIbLQW6vhJ+3nQV50FFk/DVAisdqSfbpMcZj/iVRKdBTtzM9O+C1soCtV2c8TFNCL5oj9CcCWv7Z6Cv5UltVWdebZx6MDjrGRCJebN9BSL9vnA1t6UVmAp/KjzaVceEgdhEcBQCKc1fcndiIlYZ5/mBhK88GwNznOL8LwPJWL2iijVFDt8GHokemNH+k6mv6LXRiCrZQ/mtQvBl/uSDKqDjDF7veQu30JGrEBvy94VqU0NI0AbMKjL5hhlDuKIT7WdbSm9e1LnjQ0bj6QMU=
+  - secure: l6XEWhVS9BpXitvz43QyF/mBIHyfap4cxXLflRVtw8P1cKD5Qy4E956oS8d4Gd/FI6X8yTjAvcH8zinLEBzLXnMgJXTipyESRzZrj482pfHUndv5GQYoKSDkT78AUyr833CzTATVsLCQFQse4ZjqadDNY9EYcszppjMktS8QILz5GhoB/I+SBkL5eZ1Yw59z+5KwcMxx//6G03nMptLDGSFs7M8zvbM42xo5r2/qCnpDG8TRIbaiGh8CF54wMpizpWEqbN1zLZtXQiuSGgS1dfd29xcg7CgiRuCmQkt3ypWi8UFEJ+L6u9+9UwcCzRGoRsB9wRb22AkCJlIZS+ArPyIMbL4r8vh6HBAq8A9l5bLH5jKQybWfJpeiJxJ22ho9BpLfXMI/Y2CsfhLRXS/GPkbhKGXJLXW5F/9szHHjScDD6/fJPmGuv48VlyeAvYx32G6utC9ifkPeaz/gf9WCGo35bgbO0v2lvcMHepAamY0EHBdenxqiDD0Baq7tR0UOX3IpxuTQjxJy8c1aLlICggYk9yttN+UFt1guOy7zZlJcg3UVrP3nbz9/PS1/DSG0rIXWXl4tzGS8fHEAxQBbxqOJYw2AKqmNzClt2WMIpCgVItBFFan1Z2u1KD+ywfx+DwEAYgoEsvyvdXFyMyc50S01WfMC8nHy6HVP8MKX/wA=
