@@ -1,12 +1,12 @@
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d5877d1923662?w=370&h=661&f=gif&s=2564480)
 
-在线地址:[http://fancy.czero.cn/fancy-store/dist](http://fancy.czero.cn/fancy-store/dist)
+在线地址:[https://fancy.czero.cn](http://fancy.czero.cn)
 
 手机扫描二维码查看:
 
 
 
-![](https://user-gold-cdn.xitu.io/2018/7/16/164a3baca13c5bd9?w=280&h=280&f=png&s=1820)
+![](https://user-gold-cdn.xitu.io/2018/7/25/164d1c98a029c222?w=280&h=280&f=png&s=1411)
  
 [点击下载安卓apk安装包](http://github.czero.cn/fancyapp.apk)
 
@@ -260,7 +260,57 @@
 	npm run dev或npm run build
 	
 
+## Vue-cli开启PWA(Service Worker)和引入骨架屏
 
+![](https://user-gold-cdn.xitu.io/2018/7/25/164d1bf4111ff701?w=2712&h=1150&f=png&s=769314)
+
+![](https://user-gold-cdn.xitu.io/2018/7/25/164d1bf8aecc348e?w=2840&h=1076&f=png&s=527706)
+
+参考文章:
+
+[https://github.com/czero1995/vue-pwa-skeleton](https://github.com/czero1995/vue-pwa-skeleton)
+
+[https://zhuanlan.zhihu.com/p/37408373](https://zhuanlan.zhihu.com/p/37408373)
+
+## 持续集成服务 Travis CI
+
+利用Travis CI，监听Github项目master，一旦检测到master有代码变动，自动执行脚本，并把编译打包完成的项目自动发送部署到服务器，不用再像以前一样，需要ssh登录到服务器，再执行git pull操作。
+本地添加.travis.yml
+
+    language: node_js
+    node_js:
+    - 8
+    branchs:
+      only:
+      - master
+    before_install:
+    - openssl aes-256-cbc -K $encrypted_87bf11d507f0_key -iv $encrypted_87bf11d507f0_iv
+      -in id_rsa.enc -out ~/.ssh/id_rsa -d
+    - chmod 600 ~/.ssh/id_rsa
+    - echo -e "Host 47.98.240.154\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    script:
+    - npm install cnpm --registry=https://registry.npm.taobao.org
+    - cnpm install
+    - npm run build
+    - scp -r dist root@47.98.240.154:/var/www/html/fancy
+    - 
+
+
+
+遇到了很多的坑，失败了无数次，终于知道问题所在:
+
+![](https://user-gold-cdn.xitu.io/2018/7/25/164d1b1333bfc7ce?w=1577&h=980&f=png&s=191206)
+
+
+## 生产环境错误监控
+[sentry](https://sentry.io/welcome/)是国外开源的错误监控库，有线上环境，也可以部署到自己的服务器，可以跟踪错误出现的步骤和错误的详细信息，方便开发人员进行快速定位。
+![](https://user-gold-cdn.xitu.io/2018/7/25/164d1b8eb9c5276d?w=1204&h=426&f=png&s=96403)
+
+## 免费升级到HTTPS
+`升级到https后，服务器可以开启http2.0版本，对比http1.x性能和缓存各方面要更好，还有其他新特性，
+可以启动service work功能，更好的进行离线缓存，更好的离线体验。
+HTTPS证书可以免费申请，阿里云跟腾讯云都可以申请，按照文档指示进行申请下载，然后将下载的证书上传到服务器，配置服务器的内容，就可以开启https、http2.0、service work等功能了。
+`
 
 
 # 使用说明
