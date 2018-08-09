@@ -13,6 +13,7 @@ export default vConsole
 var VueTouch = require('vue-touch')
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
+import VueI18n from 'vue-i18n'
 Raven
   .config('https://ce431a99e0884612a053541eef0f2810@sentry.io/1245961', {
     release: process.env.RELEASE_VERSION,
@@ -25,6 +26,15 @@ require('../mock')
 fastclick.attach(document.body) //解决移动端点击事件200ms延迟
 
 Vue.use(Vuex)
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: 'zh',    // 语言标识
+  //this.$i18n.locale // 通过切换locale的值来实现语言切换
+  messages: {
+    'zh': require('./lang/zh'),   // 中文语言包
+    'en': require('./lang/en')    // 英文语言包
+  }
+})
 Vue.prototype.$http = axios;
 Vue.use(VueTouch, {
   name: 'v-touch'
@@ -48,6 +58,7 @@ Vue.use(VueLazyLoad, { //懒加载声明错误图和占位图
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  i18n,
   router,
   store,
   template: '<App/>',

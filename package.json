@@ -21,6 +21,7 @@
     "vconsole": "^3.2.0",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.0.6",
+    "vue-i18n": "^8.0.0",
     "vue-router": "^3.0.1",
     "vue-skeleton-webpack-plugin": "^1.1.18",
     "webpack-sentry-plugin": "^1.16.0",
