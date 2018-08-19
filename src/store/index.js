@@ -13,6 +13,6 @@ export default new Vuex.Store({
 	getters,
 	state,
 	mutations,
-	strice:debug,
-	plugins:debug?[createLogger()]:[]
+	strice: debug,
+	plugins: debug ? [createLogger()] : []
 })
