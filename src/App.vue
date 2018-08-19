@@ -24,7 +24,6 @@ export default {
     window.addEventListener("beforeunload", () => {
       localStorage.setItem("userMsg", JSON.stringify(this.$store.state));
     });
-    console.log(window.aaa.eee());
   }
 };
 </script>
