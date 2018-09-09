@@ -116,28 +116,14 @@ export default {
         : (this.$i18n.locale = "zh");
     },
     /*获取商品列表*/
-    getGoodsList() {
-      const that = this;
-      this.$http
-        .get("/api/homedata")
-        .then(function(res) {
-          that.productList = res.data.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    async getGoodsList() {
+      let res = await this.$http.get("/api/homedata");
+      this.productList = res.data.data;
     },
     /*获取轮播列表*/
-    getBannerList() {
-      const that = this;
-      this.$http
-        .get("/api/bannerdata")
-        .then(function(res) {
-          that.bannerList = res.data.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    async getBannerList() {
+      let res = await this.$http.get("/api/bannerdata");
+      this.bannerList = res.data.data;
     },
     /*进入商品详情*/
     onGoodsDetail(item, id) {

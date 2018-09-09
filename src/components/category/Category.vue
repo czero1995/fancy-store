@@ -86,36 +86,20 @@ export default {
   },
   methods: {
     /*获取分类栏目*/
-    getMenuList: function() {
-      const that = this;
-      this.$http
-        .get("/api/menudata", {})
-        .then(function(res) {
-          that.menuList = res.data.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    async getMenuList() {
+      let res = await this.$http.get("/api/menudata");
+      this.menuList = res.data.data;
     },
     /*获取分类列表*/
-    getCategoryList: function() {
-      const that = this;
-      this.$http
-        .post("/api/categorydata", {})
-        .then(function(res) {
-          that.categoryList = res.data.data;
-          that.categoryContent = that.categoryList[0];
-        })
-
-        .catch(function(error) {
-          console.log(error);
-        });
+    async getCategoryList() {
+      let res = await this.$http.post("/api/categorydata");
+      this.categoryList = res.data.data;
+      this.categoryContent = this.categoryList[0];
     },
     /*切换分类*/
     onBar(index) {
-      const that = this;
       this.setTabindex(index);
-      that.categoryContent = that.categoryList[this.$store.state.tabindex];
+      this.categoryContent = this.categoryList[this.$store.state.tabindex];
     },
     /*添加购物车*/
     onAddCart(item) {
