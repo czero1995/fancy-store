@@ -1,6 +1,6 @@
 <template>
 	<header id="headerTab" class="flex flex-align-center">
-		<img src="../../../static/img/icon/arrowBack.png" @click="onBack" />
+		<i  @click="onBack"></i>
 		<p>{{tabname}}</p>
 	</header>
 
@@ -42,10 +42,11 @@
 		top: 0;
 	}
 
-	img {
+	i {
 		width: .4rem;
 		height: .4rem;
 		margin-left: .2rem;
+		background: url('../../../static/img/icon/common_sprites.png') -10px -374px;
 	}
 
 	p {

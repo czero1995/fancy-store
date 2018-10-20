@@ -10,17 +10,17 @@
 				<div v-show="havePage">
 					<div class="chooseAddress" @click="onAddress()">
 						<div class="flex-align-center chooseBox">
-							<img src="../../../static/img/icon/item_address.png" />
+							<i class="address_img"></i>
 							<div class="flex-align-center flex-between">
 								<p v-show="!this.$store.state.chooseaddress">选择送货地址</p>
 								<p v-show="this.$store.state.chooseaddress">{{this.$store.state.chooseaddress}}</p>
-								<img src="../../../static/img/icon/arrowRight.png" alt="" />
+								<i class="arrow_next"></i>
 							</div>
 
 						</div>
 
 					</div>
-					<div class="orderItem flex" v-for="orderItem in $store.state.orders">
+					<div class="orderItem flex" v-for="(orderItem,orderIndex) in $store.state.orders" v-key="orderItem" :key="orderIndex">
 						<img :src="orderItem.GoodsImage" class="goodsImg" />
 						<div>
 							<p class="goods-name">{{orderItem.GoodsName}}</p>
@@ -155,5 +155,18 @@
 		line-height: .8rem;
 		padding: 0 .2rem;
 		box-sizing: border-box;
+	}
+
+	.arrow_next{
+		width: 0.4rem;
+    height: 0.4rem;
+  		background: url('../../../static/img/icon/common_sprites.png') -10px -710px;
+
+	}
+	.address_img{
+		width: 0.6rem;
+    height: 0.48rem;
+  		background: url('../../../static/img/icon/common_sprites.png') -10px -506px;
+
 	}
 </style>

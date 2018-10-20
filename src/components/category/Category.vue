@@ -24,7 +24,8 @@
 									<p class="goods-name">{{categoryItem.GoodsName}}</p>
 									<p class="goods-coach">¥{{categoryItem.GoodsPrice}}</p>
 									<div class="goods-cartBox">
-										<img src="../../../static/img/icon/shop_addCart.png" @click.stop="onAddCart(categoryItem)" />
+                      <i class="goods_cart" @click.stop="onAddCart(categoryItem)"></i>
+
 									</div>
 								</div>
 							</div>
@@ -202,9 +203,12 @@ export default {
   margin-right: 0.4rem;
   width: 0.4rem;
   height: 0.4rem;
-  img {
+  i {
+    display: inline-block;
     width: 100%;
     height: 100%;
+  background: url('../../../static/img/icon/common_sprites.png') -10px -169px;
+
   }
 }
 </style>

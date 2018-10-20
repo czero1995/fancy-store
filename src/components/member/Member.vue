@@ -10,15 +10,15 @@
 				</div>
 				<div class="floor floor_item floor_two  flex-align-center flex-between" @click="onInfo">
 					<p>{{$t('m.member.info')}}</p>
-					<img src="../../../static/img/icon/arrowBack.png" alt="" />
+          <i></i>
 				</div>
 				<div class="floor floor_item floor_two  flex-align-center flex-between" @click="onOrder">
 					<p>{{$t('m.member.order')}}</p>
-          <img src="../../../static/img/icon/arrowBack.png" alt="" />
+          <i></i>
 				</div>
 				<div class="floor floor_item floor_two  flex-align-center flex-between " @click="onAddress">
 					<p>{{$t('m.member.address')}}</p>
-          <img src="../../../static/img/icon/arrowBack.png" alt="" />
+          <i></i>
 				</div>
 			</div>
 		</transition>
@@ -118,9 +118,11 @@ export default {
   font-size: 0.28rem;
   background: @base_color;
   margin-bottom: 0.4rem;
-  img {
+  i {
     width: 0.4rem;
     height: 0.4rem;
+  background: url('../../../static/img/icon/common_sprites.png') -10px -710px;
+
   }
 }
 </style>

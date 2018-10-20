@@ -49,7 +49,8 @@
 * rem(阿里用的那套rem算法)
 * Flex(弹性布局)
 * vue-touch(用于实现购物车左滑删除功能)
-*动画（vue原生transition实现原生app的效果）
+* 动画（vue原生transition实现原生app的效果）
+* 雪碧图（雪碧图在线合成工具: ![](https://www.toptal.com/developers/css/sprite-generator)）
 	
 ## 数据请求：
 
@@ -69,6 +70,7 @@
 ## 优化方案: 
 
 * 腾讯智图(压缩图片，减少图片的体积) 
+* 雪碧图（雪碧图在线合成工具: ![](https://www.toptal.com/developers/css/sprite-generator)） 
 * vue-lazyload(图片懒加载，缓解加载数据,提高网页性能)
 * fastclick(解决移动端300ms延迟，提高页面交互流畅度)
 * vue-rouer(路由懒加载,分离app的js为多个js文件，到对应的页面再执行对应的js)

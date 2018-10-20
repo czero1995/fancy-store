@@ -24,7 +24,7 @@
 							<p class="productTop-text">{{productItem.Category.TopText}}</p>
 							<div class="flex-align-center">
 								<p class="productTop-text">{{productIndex+1}}F</p>
-								<img src="../../static/img/icon/arrowBack.png" class="arrowImg" />
+                <i class="arrowImg"></i>
 
 							</div>
 						</div>
@@ -41,8 +41,8 @@
 
 										<div class="addCartBox flex-between">
 											<p><span class="goods-price">¥ {{goodsItem.GoodsPrice}}</span></p>
-											<img src="../../static/img/icon/shop_addCart.png" @click="onAddCart(goodsItem,goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart" />
-											<img src="../../static/img/icon/shop_addCart_select.png" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart" />
+                      <i class="goods_cart" @click="onAddCart(goodsItem,goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart"></i>
+                      <i class="goods_cart_select" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart"></i>
 										</div>
 
 									</div>
@@ -186,8 +186,9 @@ export default {
 }
 
 .arrowImg {
-  width: 0.4rem;
-  height: 0.4rem;
+  width: 0.32rem;
+  height: 0.32rem;
+  background: url('../../static/img/icon/common_sprites.png') -10px -394px;
 }
 .floorItem:nth-last-child(1) {
   margin-bottom: 0.88rem;
@@ -210,15 +211,23 @@ export default {
 }
 
 .addCartBox {
-  img {
+  i {
     width: 0.4rem;
     height: 0.4rem;
     padding-right: 0.2rem;
   }
+  .goods_cart{
+  background: url('../../static/img/icon/common_sprites.png') -10px -169px;
+
+  }
+  .goods_cart_select{
+  background: url('../../static/img/icon/common_sprites.png') -10px -234px;
+
+  }
 }
 
 .langBox {
-  position: absolute;
+  position: fixed;
   right: 0.2rem;
   top: 0.2rem;
   font-size: 0.26rem;

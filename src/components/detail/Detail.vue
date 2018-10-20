@@ -1,7 +1,7 @@
 <template>
 
 	<div class="page">
-		<headers :tabname="$t('m.HeaderDetail')"></headers>
+		<headersec :tabname="$t('m.HeaderDetail')"></headersec>
 		<transition :name="slidename" >
 		<div class="container" v-show="mainarea">
 			<div v-show="!havePage">
@@ -19,7 +19,7 @@
 		</transition>
 	<div class="detail-bottom flex-align-center flex-around">
 			<div class="toCart">
-				<img src="../../../static/img/icon/cart_white.png" @click="toCart" />
+        <i @click="toCart"></i>
 				<transition name="bullet" >
 					<p v-show="cartNum">{{cartLength}}</p>
 				</transition>
@@ -43,7 +43,7 @@
 						<div class="cartModel-text">
 							<div class="flex-between">
 								<p class="goods-name">{{$store.state.goods.GoodsName}}</p>
-								<img src="../../../static/img/icon/close.png" class="cartClose" @click.stop="addCartModel=false" />
+                <i class="cartClose" @click.stop="addCartModel=false"></i>
 							</div>
 
 							<p class="goods-price">¥{{$store.state.goods.GoodsPrice}}</p>
@@ -53,9 +53,9 @@
 					<div class="cartModel-bottom flex-between">
 						<p>购买数量</p>
 						<div class="goodsOp flex">
-							<img src="../../../static/img/icon/shop_cut.png" @click="onCutCart()" />
+              <i class="shop_cut" @click="onCutCart()"></i>
 							<input type="text" :value="goodsNum" readonly="" />
-							<img src="../../../static/img/icon/shop_add.png" @click="onAddCart()" />
+              <i class="shop_add" @click="onAddCart()"></i>
 						</div>
 					</div>
 					<div @click.stop="onBuy">
@@ -205,6 +205,12 @@ export default {
 }
 .toCart {
   position: relative;
+  i{
+    width: .48rem; 
+    height: .48rem;
+    display: inline-block;
+    background: url('../../../static/img/icon/common_sprites.png') -10px -302px;
+  }
   p {
     position: absolute;
     text-align: center;
@@ -233,17 +239,25 @@ export default {
 .cartClose {
   width: 0.4rem;
   height: 0.4rem;
+    background: url('../../../static/img/icon/common_sprites.png') -10px -62px;
 }
 .goodsOp {
   input {
-    font-size: 0.24rem;
+    font-size: 0.36rem;
     border: none;
     width: 0.6rem;
     text-align: center;
   }
-  img {
-    width: 0.32rem;
-    height: 0.32rem;
+  i {
+    width: 0.48rem;
+    height: 0.48rem;
+  }
+  .shop_cut{
+    
+    background: url('../../../static/img/icon/common_sprites.png') -10px -574px;
+  }
+  .shop_add{
+    background: url('../../../static/img/icon/common_sprites.png') -10px -642px;
   }
 }
 .cartModel-bottom {

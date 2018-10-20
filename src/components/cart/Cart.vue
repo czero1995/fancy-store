@@ -12,8 +12,8 @@
 						<v-touch @swipeleft="onSwipeLeft(cartIndex)" @swiperight="onSwipeRight(cartIndex)">
 							<div class="cart-content flex-align-center">
 								<div class="goods-radio" @click.stop="onGoodsRadio(cartItem)">
-									<img src="../../../static/img/icon/radio.png" v-show="!cartItem.goodsRadio" />
-									<img src="../../../static/img/icon/radio_select.png" v-show="cartItem.goodsRadio" />
+                  <i class="cart_radio" v-show="!cartItem.goodsRadio" ></i>
+                  <i class="cart_radio_select" v-show="cartItem.goodsRadio"></i>
 								</div>
 								<div class="flex">
 									<div class="goods-img">
@@ -22,16 +22,18 @@
 									<div class="goods-textBox">
 										<p class="goods-name">{{cartItem.GoodsName}}</p>
 										<div class="goodsOp flex">
-											<img src="../../../static/img/icon/shop_cut.png" @click.stop="onCutCart(cartItem)" />
+                      <i class="shop_cut" @click.stop="onCutCart(cartItem)"></i>
 											<input type="text" :value="cartItem.GoodsNum" />
-											<img src="../../../static/img/icon/shop_add.png" @click.stop="onAddCart(cartItem)" />
+                      <i class="shop_add" @click.stop="onAddCart(cartItem)"></i>
 										</div>
 										<p class="goods-coach">¥{{cartItem.GoodsPrice}}</p>
 									</div>
 								</div>
 							</div>
 							<!--v-show="itemIndex === cartIndex"-->
-							<div class="remove" @click.stop="onRemove(cartItem)"><img src="../../../static/img/icon/remove.png" /></div>
+							<div class="remove" @click.stop="onRemove(cartItem)">
+               <i></i>
+               </div>
 						</v-touch>
 					</div>
 				</div>
@@ -42,8 +44,8 @@
 		<div class="cartBottom-detail flex-between" v-show="$store.state.carts" v-cloak>
 			<div class="flex">
 				<div class="shopRadio" @click="onSelectAll()">
-					<img src="../../../static/img/icon/radio.png" class="goods-radio" v-show="!goodsRadioAll" />
-					<img src="../../../static/img/icon/radio_select.png" class="goods-radio" v-show="goodsRadioAll" />
+          <i class="cart_radio" v-show="!goodsRadioAll" ></i>
+          <i class="cart_radio_select" v-show="goodsRadioAll"></i>
 				</div>
 				<div class="bottom-left">
 					<p>合计: <span class="shopCoach">¥{{allCoach}}</span> </p>
@@ -228,14 +230,15 @@ export default {
   position: absolute;
   right: -18%;
   top: 0;
-  img {
+  i {
     position: absolute;
     top: 0;
     bottom: 0;
     margin: auto;
     left: 20%;
     width: 0.4rem;
-    height: 0.4rem;
+    height: 0.48rem;
+    background: url('../../../static/img/icon/common_sprites.png') -10px -438px;
   }
 }
 
@@ -252,12 +255,21 @@ export default {
   margin: 0 0.2rem;
   width: 0.34rem;
   height: 0.34rem;
-  img {
+  i {
+    display: inline-block;
     width: 100%;
     height: 100%;
   }
+  
 }
+.cart_radio{
+    background: url('../../../static/img/icon/common_sprites.png') -10px -114px;
 
+  }
+  .cart_radio_select{
+    background: url('../../../static/img/icon/common_sprites.png') -10px -10px;
+    
+  }
 .goods-img {
   margin-right: 0.2rem;
   width: 2rem;
@@ -273,22 +285,29 @@ export default {
 }
 
 .goods-coach {
-  font-size: 0.24rem;
+  font-size: 0.3rem;
   color: red;
   align-self: flex-end;
 }
 
 .goodsOp {
   margin: 0.4rem 0;
-  img {
-    width: 0.34rem;
-    height: 0.34rem;
+  i {
+    width: 0.48rem;
+    height: 0.48rem;
   }
   input {
     border: none;
-    font-size: 0.28rem;
+    font-size: 0.36rem;
     text-align: center;
     width: 0.6rem;
+  }
+   .shop_cut{
+    
+    background: url('../../../static/img/icon/common_sprites.png') -10px -574px;
+  }
+  .shop_add{
+    background: url('../../../static/img/icon/common_sprites.png') -10px -642px;
   }
 }
 
@@ -302,11 +321,12 @@ export default {
   color: @base_color;
   background: @theme_background;
   /*background:red;*/
-  img {
+  i {
+    display: inline-block;
     vertical-align: middle;
     margin: 0 0.2rem;
     width: 0.3rem;
-    height: 0.3rem;
+    height: 0.36rem;
   }
 }
 

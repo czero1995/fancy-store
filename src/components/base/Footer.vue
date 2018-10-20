@@ -87,7 +87,7 @@ footer {
   height: 0.4rem;
   display: block;
   margin: 0 auto;
-  margin-bottom: 0.1rem;
+  margin-bottom: 4px;
   text-align: center;
 }
 
@@ -96,23 +96,24 @@ footer {
 }
 
 .footerIcon {
-  background-size: 100% 100% !important;
+  width: 0.48rem;
+  height: .48rem;
 }
 
 .footerHomeIcon {
-  background: url("../../../static/img/icon/tab_home.png");
+   background: url('../../../static/img/icon/footer_sprites.png') -10px -10px;
 }
 
 .footerCategoryIcon {
-  background: url("../../../static/img/icon/tab_category.png");
+  background: url('../../../static/img/icon/footer_sprites.png') -10px -146px;
 }
 
 .footerCartIcon {
-  background: url("../../../static/img/icon/tab_activity.png");
+  background: url('../../../static/img/icon/footer_sprites.png') -10px -282px;
 }
 
 .footerMemberIcon {
-  background: url("../../../static/img/icon/tab_member.png");
+  background: url('../../../static/img/icon/footer_sprites.png') -10px -418px;
 }
 
 .active .footer-title {
@@ -120,18 +121,18 @@ footer {
 }
 
 .active .footerHomeIcon {
-  background: url("../../../static/img/icon/tab_home_select.png");
+  background: url('../../../static/img/icon/footer_sprites.png') -10px -78px;
 }
 
 .active .footerCategoryIcon {
-  background: url("../../../static/img/icon/tab_category_select.png");
+  background: url('../../../static/img/icon/footer_sprites.png') -10px -214px;
 }
 
 .active .footerCartIcon {
-  background: url("../../../static/img/icon/tab_activity_select.png");
+  background: url('../../../static/img/icon/footer_sprites.png') -10px -350px;
 }
 
 .active .footerMemberIcon {
-  background: url("../../../static/img/icon/tab_member_select.png");
+  background: url('../../../static/img/icon/footer_sprites.png') -10px -486px;
 }
 </style>
