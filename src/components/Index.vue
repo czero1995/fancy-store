@@ -65,7 +65,7 @@
 import Headers from "./base/Header.vue";
 import Footers from "./base/Footer.vue";
 import Message from "./base/Message.vue";
-import "../../static/css/swiper.min.css";
+
 import Swiper from "../../static/js/swiper.min";
 import { mapGetters, mapMutations } from "vuex";
 
@@ -165,6 +165,7 @@ export default {
 
 <style lang="less" scoped>
 @import "../../static/less/variable.less";
+@import "../../static/css/swiper.min.css";
 .swiper-slide img {
   width: 100%;
   height: 100%;

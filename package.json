@@ -8,6 +8,7 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js  --open",
     "start": "npm run dev",
     "build": "node build/build.js",
+    "analyz": "NODE_ENV=production npm_config_report=true npm run build",
     "dll": "webpack --config ./build/webpack.dll.config.js"
   },
   "dependencies": {
