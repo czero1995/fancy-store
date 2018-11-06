@@ -12,7 +12,20 @@
 
 ![](https://user-gold-cdn.xitu.io/2018/1/8/160d5877d1923662?w=370&h=661&f=gif&s=2564480)
 
-在线地址:[https://fancy.czero.cn](http://fancy.czero.cn)
+在线地址:[https://fancy.czero.cn](https://fancy.czero.cn)
+
+vue-router开启history模式: 
+
+router mode 设置history模式
+
+nginx配置：
+
+	location/ {
+		try_files $uri $uri/ /index.html
+	}
+
+[https://router.czero.cn](https://router.czero.cn)
+
 
 手机扫描二维码查看:
 
