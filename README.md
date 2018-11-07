@@ -24,7 +24,7 @@ nginx配置：
 		try_files $uri $uri/ /index.html
 	}
 
-[https://router.czero.cn](https://router.czero.cn)
+[http://router.czero.cn](http://router.czero.cn)
 
 
 手机扫描二维码查看:
