@@ -201,7 +201,7 @@ export default {
 
 .goods-cartBox {
   margin-right: 0.4rem;
-  width: 0.4rem;
+  width: 0.6rem;
   height: 0.4rem;
   i {
     display: inline-block;
