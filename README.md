@@ -14,21 +14,21 @@
 
 在线地址:[https://fancy.czero.cn](https://fancy.czero.cn)
 
-vue-router开启history模式: 
+## vue-router开启history模式和Prerender预渲染模式: 
 
 router mode 设置history模式
 
 nginx配置：
 
 	location/ {
-		try_files $uri $uri/ /index.html
+		try_files $uri /index.html
 	}
 
 [http://router.czero.cn](http://router.czero.cn)
 
 
-手机扫描二维码查看:
 
+手机扫描二维码查看:
 
 
 ![](https://user-gold-cdn.xitu.io/2018/7/25/164d1c98a029c222?w=280&h=280&f=png&s=1411)
