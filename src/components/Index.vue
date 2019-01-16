@@ -1,64 +1,54 @@
 <template>
+  <div class="page">
+    <message ref="message"></message> <headers :tabname="$t('m.HeaderIndex')"></headers>
+    <div class="langBox" @click="changeLang">{{ $t("m.local") }}</div>
+    <transition :name="slidename">
+      <div class="container" v-show="mainarea">
+        <!-- Swiper -->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(bannerItem, bannerIndex) in bannerList" :key="bannerIndex"><img :src="bannerItem.img" /></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
 
-	<div class="page">
-		<message ref="message"></message>
-		<headers :tabname="$t('m.HeaderIndex')"></headers>
-		<div class="langBox" @click="changeLang">{{$t('m.local')}}</div>
-		<transition :name="slidename">
-			<div class="container" v-show="mainarea">
-				<!-- Swiper -->
-				<div class="swiper-container">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide" v-for="(bannerItem,bannerIndex) in bannerList" :key="bannerIndex">
-							<img :src="bannerItem.img" />
-						</div>
-					</div>
-					<div class="swiper-pagination"></div>
-				</div>
-
-				<div class="content" v-cloak>
-					
-					<div v-for="(productItem,productIndex) in productList" class="floorItem" :key="productIndex">
-
-						<div class="productTop flex-between" @click="onCategory(productIndex)">
-							<p class="productTop-text">{{productItem.Category.TopText}}</p>
-							<div class="flex-align-center">
-								<p class="productTop-text">{{productIndex+1}}F</p>
+        <div class="content" v-cloak>
+          <div v-for="(productItem, productIndex) in productList" class="floorItem" :key="productIndex">
+            <div class="productTop flex-between" @click="onCategory(productIndex)">
+              <p class="productTop-text">{{ productItem.Category.TopText }}</p>
+              <div class="flex-align-center">
+                <p class="productTop-text">{{ productIndex + 1 }}F</p>
                 <i class="arrowImg"></i>
+              </div>
+            </div>
+            <div class="productContent">
+              <div class="productBox flex" ref="div">
+                <div class="productItem" v-for="(goodsItem, goodsIndex) in productItem.SalesProduct" :key="goodsIndex">
+                  <div class="itemBox">
+                    <div @click="onGoodsDetail(goodsItem, goodsItem.CategoryId)">
+                      <img v-lazy="goodsItem.GoodsImage" class="itemImg" />
+                      <div>
+                        <p class="goods-name text-ellipsis">{{ goodsItem.GoodsName }}</p>
+                      </div>
+                    </div>
 
-							</div>
-						</div>
-						<div class="productContent">
-							<div class="productBox flex" ref='div'>
-								<div class="productItem" v-for="(goodsItem,goodsIndex) in productItem.SalesProduct" :key="goodsIndex">
-									<div class="itemBox">
-										<div @click="onGoodsDetail(goodsItem,goodsItem.CategoryId)">
-											<img v-lazy="goodsItem.GoodsImage" class="itemImg" />
-											<div>
-												<p class="goods-name text-ellipsis">{{goodsItem.GoodsName}}</p>
-											</div>
-										</div>
-
-										<div class="addCartBox flex-between">
-											<p><span class="goods-price">¥ {{goodsItem.GoodsPrice}}</span></p>
-                      <i class="goods_cart" @click="onAddCart(goodsItem,goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart"></i>
+                    <div class="addCartBox flex-between">
+                      <p>
+                        <span class="goods-price">¥ {{ goodsItem.GoodsPrice }}</span>
+                      </p>
+                      <i class="goods_cart" @click="onAddCart(goodsItem, goodsItem.GoodsName)" v-show="!goodsItem.shopAddCart"></i>
                       <i class="goods_cart_select" @click="onAddCart(goodsItem.GoodsName)" v-show="goodsItem.shopAddCart"></i>
-										</div>
-
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-		</transition>
-		<footers :urlRouter="$route.path" :cartnum='cartLength' ref="footer"></footers>
-	</div>
-
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+    <footers :urlRouter="$route.path" :cartnum="cartLength" ref="footer"></footers>
+  </div>
 </template>
 
 <script>
@@ -111,9 +101,7 @@ export default {
   methods: {
     /*切换语言包 */
     changeLang() {
-      this.$i18n.locale == "zh"
-        ? (this.$i18n.locale = "en")
-        : (this.$i18n.locale = "zh");
+      this.$i18n.locale == "zh" ? (this.$i18n.locale = "en") : (this.$i18n.locale = "zh");
     },
     /*获取商品列表*/
     async getGoodsList() {
@@ -189,7 +177,7 @@ export default {
 .arrowImg {
   width: 0.32rem;
   height: 0.32rem;
-  background: url('../../static/img/icon/common_sprites.png') -10px -394px;
+  background: url("../../static/img/icon/common_sprites.png") -10px -394px;
 }
 .floorItem:nth-last-child(1) {
   margin-bottom: 0.88rem;
@@ -217,13 +205,11 @@ export default {
     height: 0.4rem;
     padding-right: 0.2rem;
   }
-  .goods_cart{
-  background: url('../../static/img/icon/common_sprites.png') -10px -169px;
-
+  .goods_cart {
+    background: url("../../static/img/icon/common_sprites.png") -10px -169px;
   }
-  .goods_cart_select{
-  background: url('../../static/img/icon/common_sprites.png') -10px -234px;
-
+  .goods_cart_select {
+    background: url("../../static/img/icon/common_sprites.png") -10px -234px;
   }
 }
 

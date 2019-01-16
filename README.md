@@ -76,7 +76,9 @@ nginx配置：
 * vue-router(组件间的路由跳转)
 * vuex(全局状态的管理)
 
-
+## 自动代码格式化
+  每次提交代码 git commit 的时候用husky lint-staged prettier自动格式化代码
+  
 ## 调试
 * vConsole(在移动端查看调试器)
 
