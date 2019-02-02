@@ -1,68 +1,84 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import App from './App'
-import router from './router'
-import store from './store'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import axios from '../static/js/axios'
-import VueLazyLoad from 'vue-lazyload'
-import fastclick from 'fastclick'
-import Vconsole from 'vconsole'
-let vConsole = new Vconsole()
-export default vConsole
-var VueTouch = require('vue-touch')
-import Raven from 'raven-js';
-import RavenVue from 'raven-js/plugins/vue';
-import VueI18n from 'vue-i18n'
-Raven
-  .config('https://ce431a99e0884612a053541eef0f2810@sentry.io/1245961', {
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import i18n from "./lang";
+import axios from "../public/js/axios";
+import VueTouch from "vue-touch";
+import VueLazyLoad from "vue-lazyload";
+import Vconsole from "vconsole";
+import fastclick from "fastclick";
+import Raven from "raven-js";
+import RavenVue from "raven-js/plugins/vue";
+import { mapGetters, mapMutations } from "vuex";
+// import "../public/js/rem.js";
+// 控制台插件
+let vConsole = null;
+process.env.NODE_ENV == "development" && (vConsole = new Vconsole());
+export default vConsole;
+
+// axios全局拦截
+Vue.prototype.$http = axios;
+
+// mock模拟数据
+require("../mock");
+
+// 去除移动端点击200ms延迟
+fastclick.attach(document.body);
+
+// Sentry错误日志监控
+Raven.config("https://ce431a99e0884612a053541eef0f2810@sentry.io/1245961", {
     release: process.env.RELEASE_VERSION,
     debug: true
-  })
-  .addPlugin(RavenVue, Vue)
-  .install();
-
-require('../mock')
-fastclick.attach(document.body) //解决移动端点击事件200ms延迟
-
-Vue.use(Vuex)
-Vue.use(VueI18n)
-const i18n = new VueI18n({
-  locale: 'zh',    // 语言标识
-  //this.$i18n.locale // 通过切换locale的值来实现语言切换
-  messages: {
-    'zh': require('./lang/zh'),   // 中文语言包
-    'en': require('./lang/en')    // 英文语言包
-  }
 })
-Vue.prototype.$http = axios;
+    .addPlugin(RavenVue, Vue)
+    .install();
+
+// 图片懒加载
+Vue.use(VueLazyLoad, {
+    //懒加载声明错误图和占位图
+    preLoad: 1.3,
+    error: "./img/github.png",
+    loading: "./img/github.png"
+});
+
+// 手势滑动事件
 Vue.use(VueTouch, {
-  name: 'v-touch'
-}) //滑动事件
-VueTouch.config.swipe = { //配置滑动区域为左滑动，解决和滚动事件的冲突
-  direction: 'horizontal',
-  threshold: 200
-}
-Vue.config.productionTip = false //vuex开启开发环境日志
-const isDebug_mode = process.env.NODE_ENV !== 'production'
-Vue.config.debug = isDebug_mode
-Vue.config.devtools = isDebug_mode
-Vue.config.productionTip = isDebug_mode
+    name: "v-touch"
+});
+VueTouch.config.swipe = {
+    direction: "horizontal",
+    threshold: 200
+};
 
-// or with options
-Vue.use(VueLazyLoad, { //懒加载声明错误图和占位图
-  preLoad: 1.3,
-  error: './static/img/github.png',
-  loading: './static/img/github.png',
-})
-/* eslint-disable no-new */
+Vue.config.productionTip = false;
+
+Vue.mixin({
+    data() {
+        return {
+            cartLength: 0,
+            slidename: "slide-go",
+            mainarea: false
+        };
+    },
+    mounted() {
+        this.mainarea = true;
+    },
+    computed: {
+        ...mapGetters(["this.$store.state.comname"])
+    },
+    methods: {
+        ...mapMutations({
+            setGoods: "SET_GOODS",
+            setCarts: "SET_CARTS",
+            setTabindex: "SET_TABINDEX",
+            setComname: "SET_COMNAME"
+        })
+    }
+});
 new Vue({
-  el: '#app',
-  i18n,
-  router,
-  store,
-  template: '<App/>',
-  components: {
-    App,
-  }
-})
+    router,
+    store,
+    i18n,
+    render: h => h(App)
+}).$mount("#app");
