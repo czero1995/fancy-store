@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 8
+  - 11.9.0
 branchs:
   only:
     - master
@@ -10,8 +10,6 @@ before_install:
   - chmod 600 ~/.ssh/id_rsa
   - echo -e "Host 47.98.240.154\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 script:
-  - rm -f package-lock.json
-  - npm install cnpm --registry=https://registry.npm.taobao.org
-  - cnpm install
+  - npm install
   - npm run build
   - scp -r dist root@47.98.240.154:/var/www/html/fancy
