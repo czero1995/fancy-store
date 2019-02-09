@@ -6,7 +6,6 @@
     </div>
 </template>
 <script>
-// import "../public/js/rem.js";
 export default {};
 </script>
 <style lang="less">

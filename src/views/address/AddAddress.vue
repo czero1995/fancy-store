@@ -47,12 +47,14 @@
                 </div>
             </div>
         </transition>
-        <div class="pageBottom" @click="onSave"><span class="tabbar-label">保存</span></div>
+        <div class="pageBottom" @click="onSave">
+            <span class="tabbar-label">保存</span>
+        </div>
     </div>
 </template>
 
 <script>
-import init_city_picker from "../../../public/js/data.city.js";
+import init_city_picker from "../../assets/js/data.city.js";
 import { mapMutations } from "vuex";
 export default {
     data() {

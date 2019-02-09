@@ -6,6 +6,7 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
+        "analyz": "npm_config_report=true npm run build",
         "precommit": "lint-staged"
     },
     "dependencies": {
@@ -26,7 +27,8 @@
         "vue-lazyload": "^1.2.6",
         "vue-router": "^3.0.1",
         "vue-touch": "^2.0.0-beta.4",
-        "vuex": "^3.0.1"
+        "vuex": "^3.0.1",
+        "webpack-bundle-analyzer": "^3.0.3"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.3.0",
