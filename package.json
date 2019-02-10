@@ -6,7 +6,6 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "analyz": "npm_config_report=true npm run build",
         "precommit": "lint-staged"
     },
     "dependencies": {
