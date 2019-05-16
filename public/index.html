@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- DNS预解析 -->
+    <link rel="dns-prefetch" href="//cdn.bootcss.com" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui,viewport-fit=cover"
+    />
+
+    <link rel="shortcut icon" href="./img/github.png" />
+    <!-- 使用CDN加速的CSS文件，配置在vue.config.js下 -->
+    <% for (var i in
+    htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
+    <link
+      href="<%= htmlWebpackPlugin.options.cdn.css[i] %>"
+      rel="preload"
+      as="style"
+    />
+    <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
+    <% } %>
+
+    <title>fancystore</title>
+  </head>
+
+  <body>
+    <noscript>
+      <strong
+        >We're sorry but vuedemo doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong
+      >
+    </noscript>
+    <div id="app"></div>
+    <!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
+    <% for (var i in
+    htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
+
+    <!-- built files will be auto injected -->
+  </body>
+</html>

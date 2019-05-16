@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - 11.9.0
+branchs:
+  only:
+    - master
+before_install:
+  - openssl aes-256-cbc -K $encrypted_87bf11d507f0_key -iv $encrypted_87bf11d507f0_iv
+    -in id_rsa.enc -out ~/.ssh/id_rsa -d
+  - chmod 600 ~/.ssh/id_rsa
+  - echo -e "Host 47.98.240.154\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+script:
+  - npm install -g cnpm --registry=https://registry.npm.taobao.org
+  - cnpm install
+  - npm run build
+  - scp -r dist root@47.98.240.154:/var/www/html/fancy
