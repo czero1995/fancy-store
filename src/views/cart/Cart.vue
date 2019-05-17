@@ -1,6 +1,6 @@
 <template>
     <div class="page">
-        <van-nav-bar :title="$t('m.header.carts')">
+        <van-nav-bar :title="$t('m.header.carts')" fixed>
             <van-icon name="edit" slot="right" @click="onEdit" />
         </van-nav-bar>
         <div class="container">
@@ -180,7 +180,10 @@ export default {
 
 <style lang="less" scoped>
 @import "../../../public/less/variable.less";
-
+.container {
+    padding-top: 40px;
+    padding-bottom: 90px;
+}
 .cart-item {
     border-bottom: 1px solid #cccccc;
     height: 120px;

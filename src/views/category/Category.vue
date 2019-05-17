@@ -1,8 +1,8 @@
 <template>
     <div class="page">
-        <van-nav-bar :title="$t('m.header.category')" />
+        <van-nav-bar :title="$t('m.header.category')" fixed />
         <div class="container flex" id="container">
-            <van-tabs @click="onBar" animated>
+            <van-tabs @click="onBar" animated sticky>
                 <van-tab :title="menuItem.title" v-for="(menuItem, menuIndex) in menuList" :key="menuIndex">
                     <div class="rightItem" v-for="(categoryItem, categoryIndex) in categoryList" @click="onDetail(categoryItem._id)" :key="categoryIndex">
                         <div class="category-item flex">
@@ -99,9 +99,12 @@ export default {
 .container {
     display: flex;
     align-items: flex-start;
-    padding-bottom: 40px;
+    padding-top: 40px;
+    padding-bottom: 52px;
 }
-
+.van-nav-bar {
+    z-index: 1000 !important;
+}
 .category-item {
     border-bottom: 1px solid #ccc;
     height: 110px;

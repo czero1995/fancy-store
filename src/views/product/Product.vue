@@ -92,7 +92,11 @@ export default {
         },
         async onAddCart(item) {
             let res = await apiAddCart(item._id);
-            res.data.code == 1 && Toast.success(this.$t("m.message.addSuccess"));
+            res.data.code == 1 &&
+                Toast.success({
+                    message: this.$t("m.message.addSuccess"),
+                    duration: 500
+                });
         },
         onCategory(index) {
             this.setTabindex(index);
