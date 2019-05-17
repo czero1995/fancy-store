@@ -150,7 +150,7 @@ export default {
                     document.getElementById("uploadFileInput").value = ""; //上传成功，把input的value设置为空，不然 无法两次选择同一张图片
                 })
                 .catch(function(err) {
-                    console.log("err", err);
+                    console.log("errs", err);
                 });
         },
         async editUser() {
