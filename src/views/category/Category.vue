@@ -100,6 +100,9 @@ export default {
     display: flex;
     align-items: flex-start;
     padding-top: 40px;
+    // padding-bottom: 52px;
+}
+.van-tab__pane {
     padding-bottom: 52px;
 }
 .van-nav-bar {

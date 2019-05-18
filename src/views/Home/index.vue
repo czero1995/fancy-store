@@ -18,7 +18,7 @@ import { Tabbar, TabbarItem } from "vant";
 export default {
     data() {
         return {
-            active: Number
+            active: 0
         };
     },
     components: {
