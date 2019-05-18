@@ -1,6 +1,7 @@
 # 在线预览:
 
 [https://www.fancystore.cn](https://www.fancystore.cn)
+
 ![](https://user-gold-cdn.xitu.io/2019/5/17/16ac5dbf00191132?w=374&h=666&f=gif&s=1528988)
 
 ### 手机直接扫描二维码真机体验:
