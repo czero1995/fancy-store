@@ -43,7 +43,9 @@ export default {
         [Cell.name]: Cell,
         [CellGroup.name]: CellGroup
     },
-    mounted() {},
+    mounted() {
+        console.log("金如意");
+    },
     methods: {
         onInfo() {
             this.$store.state.user.user ? this.$router.push("./info") : this.toLogin();

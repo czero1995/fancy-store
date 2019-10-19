@@ -285,13 +285,22 @@ div {
   flex: 1;
   font-size: 14px;
 }
+.overflow_hidden {
+  overflow: hidden;
+}
 .product_title {
-  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+}
+.price_pre {
+  margin-right: 4px;
 }
 .product_price {
   color: red;
   margin-top: 4px;
-  font-size:13px;
+  font-size: 14px;
 }
 .detailPic {
   img {

@@ -1,6 +1,6 @@
 <template>
     <div class="page">
-        <van-nav-bar :title="$t('m.header.detail')" left-arrow @click-left="onBack" />
+        <van-nav-bar :title="$t('m.header.detail')" left-arrow @click-left="onBack" fixed />
 
         <div class="container">
             <div>
@@ -48,7 +48,7 @@
 import { mapMutations } from "vuex";
 import { NavBar, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn, ImagePreview, Icon, Toast } from "vant";
 import { apiGetDetail } from "@/api/product.js";
-import { apiAddCart } from "@/api/cart.js";
+import { apiActionCart } from "@/api/cart.js";
 export default {
     metaInfo() {
         return {
@@ -91,8 +91,8 @@ export default {
             this.isBuy = false;
         },
         async getData() {
-            let res = await apiGetDetail(this.$route.query.id);
-            this.detailInfo = res.data.result;
+            let res = await apiGetDetail(this.$route.query.uid);
+            this.detailInfo = res.data.data;
             const regex = new RegExp("<img", "gi");
             this.detailInfo.detailInfo.content = this.detailInfo.detailInfo.content.replace(regex, `<img style="width: 100%;"`);
         },
@@ -113,10 +113,19 @@ export default {
             if (this.isBuy) {
                 this.setOrders([this.detailInfo]);
                 this.$router.push("./orderwait");
-            } else {
                 if (!this.cartNum) {
-                    await apiAddCart(this.$route.query.id);
-                    Toast.success(this.$t("m.message.addSuccess"));
+                    let res = await apiActionCart(this.$route.query.uid, "add");
+                    if (res.data.code === 0) {
+                        Toast.success({
+                            message: this.$t("m.message.addSuccess"),
+                            duration: 500
+                        });
+                    } else {
+                        Toast.fail({
+                            message: res.data.msg,
+                            position: "bottom"
+                        });
+                    }
                     this.addCartModel = false;
                 }
             }
@@ -132,6 +141,7 @@ export default {
 @import "../../../public/less/variable.less";
 .container {
     padding-bottom: 80px;
+    padding-top: 40px;
 }
 .goodsImg {
     width: 100%;

@@ -93,17 +93,17 @@ export default {
         },
         async getUser() {
             let res = await apiGetUser();
-            this.userData = res.data.result;
+            this.userData = res.data.data;
             this.userData.sex == "women" && (this.userData.sex = "女");
             this.userData.sex == "man" && (this.userData.sex = "男");
             this.sex = this.userData.sex;
         },
         async onSelect(item) {
-            let sex = "";
+            let params = {};
             this.show = false;
             this.userData.sex = item.name;
-            item.name == "男" ? (sex = "man") : (sex = "women");
-            await apiEditUser(sex, this.userData.avatar);
+            item.name == "男" ? (params.sex = "man") : (params.sex = "women");
+            await apiEditUser(params);
         },
         async onUpload() {
             const res = await apiGetQiNiuToken();
@@ -154,7 +154,8 @@ export default {
                 });
         },
         async editUser() {
-            await apiEditUser(this.sex, this.userData.avatar);
+            let params = { avatar: this.userData.avatar };
+            await apiEditUser(params);
         },
         ...mapMutations({
             setUser: "SET_USER",

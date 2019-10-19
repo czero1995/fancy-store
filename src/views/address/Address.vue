@@ -53,7 +53,7 @@ export default {
                 query: {
                     state: "edit",
                     item: item,
-                    id: item.id
+                    id: item.uid
                 }
             });
         },
@@ -67,13 +67,13 @@ export default {
                 }, 300);
                 return;
             }
-            this.addressData = res.data.result;
+            this.addressData = res.data.data;
             if (this.addressData.length == 0) {
                 this.title = this.$t("m.address.noAddressTip");
                 this.$refs.nopage.onDisplay();
             }
             this.addressData.map(item => {
-                item.checked && (this.chosenAddressId = item.id);
+                item.checked && (this.chosenAddressId = item.uid);
             });
         }
     }

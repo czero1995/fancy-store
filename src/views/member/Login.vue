@@ -59,11 +59,10 @@ export default {
             } else {
                 let res = await apiLogin(this.userAccount, this.userPasswd);
                 if (res.data.code == 0) {
-                    console.log("resdata", res.data);
-                    console.log("res.data.result.userInfo: ", res.data.result.userInfo);
                     this.setReset();
-                    this.setUser(res.data.result.userInfo);
-                    this.setAddress(res.data.result.address[0]);
+                    this.setUser(res.data.data);
+                    console.log("res.data.data", res.data.data);
+                    localStorage.setItem("userId", res.data.data.uid);
                     this.onBack();
                 } else {
                     Toast({

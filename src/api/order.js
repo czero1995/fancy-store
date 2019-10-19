@@ -1,8 +1,8 @@
 import axios from "../utils/axios";
 
-export function apiAddOrder(id, address, price, status) {
+export function apiAddOrder(productIds, address, price, status) {
     return axios.post(`order/add`, {
-        id: id,
+        productIds: productIds,
         address: address,
         price: price,
         status: status
@@ -18,9 +18,10 @@ export function apiDeleteOrder(id) {
         id: id
     });
 }
-export function apiUpdateOrder(id, status) {
+export function apiUpdateOrder(uid, status) {
+    console.log("uid", uid);
     return axios.post(`order/update`, {
-        id: id,
-        status: status
+        uid: uid,
+        params: { status }
     });
 }

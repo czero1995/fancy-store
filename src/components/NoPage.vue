@@ -1,7 +1,7 @@
 <template>
     <div class="flex" v-show="havePage">
         <img src="../../public/img/github.png" />
-        <p>{{ title }}</p>
+        <p @click="onHome">{{ title }}</p>
         <router-link to="./login" class="to_login" v-if="toLogin">
             <van-button size="small" type="info">去登陆</van-button>
         </router-link>
@@ -29,6 +29,9 @@ export default {
         },
         onLogin() {
             this.toLogin = true;
+        },
+        onHome() {
+            this.$router.push("./product");
         }
     }
 };

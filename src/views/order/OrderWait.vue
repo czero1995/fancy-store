@@ -5,7 +5,7 @@
         <div class="container">
             <div>
                 <div class="address_show" @click="onAddressChoose">
-                    <div v-if="addressInfo == undefined">
+                    <div v-if="$route.query.status == 'todo' && !addressInfo.name">
                         <van-cell :title="$t('m.order.chooseAddress')" is-link />
                     </div>
                     <div v-else>
@@ -97,20 +97,26 @@ export default {
         this.getAddress();
         if (this.$route.query.status == "todo") {
             this.$store.state.orders.forEach(item => {
+                item.priceNow = item.productItems.priceNow;
+                item.imgCover = item.productItems.imgCover;
+                item.title = item.productItems.title;
                 this.allCoach += item.priceNow * item.num;
-                this.allCoach = this.allCoach * 100;
-                this.productId.push({ id: item._id, num: item.num });
+                console.log("item.uid", item.uid);
+                this.productId.push({ uid: item.productId, num: item.num });
             });
-            this.addressInfo = this.$store.state.address;
+            this.allCoach = this.allCoach * 100;
             this.orderData = this.$store.state.orders;
+            console.log("this.orderData", this.orderData);
         } else {
+            console.log("进入这里", this.$store.state.orders);
             this.addressInfo = this.$store.state.orders.address;
-            this.$store.state.orders.products.forEach(item => {
+            this.$store.state.orders.productItems.forEach(item => {
                 this.allCoach += item.priceNow * item.num;
-                this.allCoach = this.allCoach * 100;
-                this.productId.push({ id: item._id, num: item.num });
+                // this.productId.push({ uid: item.uid, num: item.num });
             });
-            this.orderData = this.$store.state.orders.products;
+            this.allCoach = this.allCoach * 100;
+            this.orderData = this.$store.state.orders.productItems;
+            console.log("this.orderData: ", this.orderData);
         }
     },
 
@@ -133,6 +139,7 @@ export default {
             });
         },
         onSelect(item) {
+            console.log("item", item);
             this.showList = false;
             this.addressInfo = item;
         },
@@ -148,9 +155,12 @@ export default {
         },
         async getAddress() {
             let res = await apiGetAddress();
-            this.addressData = res.data.result;
+            this.addressData = res.data.data;
         },
         onOrder() {
+            if (!this.addressInfo.name) {
+                return Toast(this.$t("m.strategies.address"));
+            }
             Dialog.confirm({
                 message: this.$t("m.order.orderConfirm")
             })
@@ -164,30 +174,36 @@ export default {
                 });
         },
         async onDone() {
-            await apiUpdateOrder(this.$store.state.orders._id, "done");
+            await apiUpdateOrder(this.$store.state.orders.uid, "done");
             Toast(this.$t("m.order.orderDone"));
             this.setOrderStatus("done");
             this.onBack();
         },
         async onPay() {
-            console.log("this.$store.state.orders._id", this.$store.state.orders._id);
-            await apiUpdateOrder(this.$store.state.orders._id, "payed");
+            await apiUpdateOrder(this.$store.state.orders.uid, "payed");
             Toast(this.$t("m.order.orderPayed"));
             this.onBack();
         },
         async addOrder(status) {
-            await apiAddOrder(this.productId, this.addressInfo, this.allCoach, status);
-            await apiDeleteCart(this.productId);
+            const res = await apiAddOrder(this.productId, this.addressInfo, this.allCoach, status);
+            await apiDeleteCart(this.productId.map(item => item.uid));
             this.setOrderStatus(status);
-            if (status == "payed") {
-                setTimeout(() => {
-                    this.$router.replace({
+            if (res.data.code === 0) {
+                if (status == "payed") {
+                    setTimeout(() => {
+                        this.$router.replace({
+                            path: "/order"
+                        });
+                    }, 1000);
+                } else {
+                    this.$router.push({
                         path: "/order"
                     });
-                }, 1000);
+                }
             } else {
-                this.$router.push({
-                    path: "/order"
+                Toast.fail({
+                    message: res.data.msg,
+                    duration: 500
                 });
             }
         },

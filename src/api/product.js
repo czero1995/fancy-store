@@ -6,6 +6,6 @@ export function apiGetProduct(pageNum, type) {
 export function apiGetBanner() {
     return axios.get(`banner/all`);
 }
-export function apiGetDetail(id) {
-    return axios.get(`product/detail?id=${id}`);
+export function apiGetDetail(uid) {
+    return axios.get(`product/detail?uid=${uid}`);
 }

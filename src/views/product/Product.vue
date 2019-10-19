@@ -1,6 +1,6 @@
 <template>
     <div class="page">
-        <van-nav-bar :title="$t('m.header.home')" />
+        <van-nav-bar :title="$t('m.header.home')" fixed />
 
         <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
             <div class="container">
@@ -11,17 +11,17 @@
                 </van-swipe>
                 <div class="product_header">{{ $t("m.product.recommentTitle") }}</div>
                 <div class="content flex">
-                    <div v-for="(productItem, productIndex) in productList" class="product_item" :key="productIndex" @click.stop="onProductDetail(productItem._id)">
+                    <div v-for="(productItem, productIndex) in productList" class="product_item" :key="productIndex" @click.stop="onProductDetail(productItem.uid)">
                         <img v-lazy="productItem.imgCover" alt />
                         <div class="flex-space">
-                            <div class="product_item_text">
+                            <div class="product_item_text overflow_hidden">
                                 <div class="product_title">{{ productItem.title }}</div>
                                 <div class="product_price flex">
-                                    <div>￥{{ productItem.priceNow }}</div>
+                                    <div><span class="price_pre">¥</span>{{ productItem.priceNow }}</div>
                                 </div>
                             </div>
                             <div class="goods-cartBox">
-                                <van-icon name="cart-o" @click.stop="onAddCart(productItem)" />
+                                <van-icon size="20px" name="cart-o" @click.stop="onAddCart(productItem)" />
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ export default {
     methods: {
         async getProductData() {
             let res = await apiGetProduct(this.pageNum, "热门");
-            this.productList = res.data.result;
+            this.productList = res.data.data;
             this.isLoading = false;
         },
         onRefresh() {
@@ -80,23 +80,29 @@ export default {
         },
         async getBannerList() {
             let res = await apiGetBanner();
-            this.bannerList = res.data.result;
+            this.bannerList = res.data.data;
         },
-        onProductDetail(id) {
+        onProductDetail(uid) {
             this.$router.push({
                 path: "/detail",
                 query: {
-                    id: id
+                    uid: uid
                 }
             });
         },
         async onAddCart(item) {
-            let res = await apiAddCart(item._id);
-            res.data.code == 1 &&
+            let res = await apiAddCart(item.uid);
+            if (res.data.code === 0) {
                 Toast.success({
                     message: this.$t("m.message.addSuccess"),
                     duration: 500
                 });
+            } else {
+                Toast.fail({
+                    message: res.data.msg,
+                    position: "bottom"
+                });
+            }
         },
         onCategory(index) {
             this.setTabindex(index);
@@ -112,11 +118,12 @@ export default {
     overflow: auto;
 }
 .swiper {
-    height: 100px;
+    height: 160px;
 }
 .swipe_img {
     width: 100%;
     height: 160px;
+    margin-top: 46px;
 }
 .container {
     padding-bottom: 0;
@@ -136,6 +143,7 @@ export default {
     box-sizing: border-box;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
     background: white;
     &:nth-of-type(even) {
         border-right: none;

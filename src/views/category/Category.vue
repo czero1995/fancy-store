@@ -6,12 +6,12 @@
                 <van-tab :title="menuItem.title" v-for="(menuItem, menuIndex) in menuList" :key="menuIndex">
                     <div class="rightItem" v-for="(categoryItem, categoryIndex) in categoryList" @click="onDetail(categoryItem._id)" :key="categoryIndex">
                         <div class="category-item flex">
-                            <div class="item flex detail-item">
+                            <div class="item flex overflow_hidden">
                                 <img class="goods-img" v-lazy="categoryItem.imgCover" />
                                 <div>
                                     <p class="product_title">{{ categoryItem.title }}</p>
-                                    <p class="product_price">¥{{ categoryItem.priceNow }}</p>
-                                    <van-icon name="cart-o" @click.stop="onAddCart(categoryItem)" />
+                                    <p class="product_price"><span class="price_pre">¥</span> {{ categoryItem.priceNow }}</p>
+                                    <van-icon size="20px" name="cart-o" @click.stop="onAddCart(categoryItem)" />
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@ export default {
             categoryList: [],
             categoryContent: [],
             pageNum: 0,
-            type: "热门"
+            type: ""
         };
     },
     mixins: [dataMixin],
@@ -61,25 +61,36 @@ export default {
 
     mounted() {
         this.getMenuList();
-        this.getCategoryList();
+        // this.getCategoryList();
     },
     methods: {
         async getMenuList() {
             let res = await apiGetCategoryMenu();
-            this.menuList = res.data.result;
+            this.menuList = res.data.data.slice(1);
+            console.log("menuList: ", this.menuList);
+            this.type = this.menuList[0].title;
+            this.getCategoryList();
         },
         async getCategoryList() {
             let res = await apiGetProduct(this.pageNum, this.type);
-            this.categoryList = res.data.result;
+            this.categoryList = res.data.data;
         },
         onBar(index, title) {
             this.type = title;
             this.getCategoryList();
         },
         async onAddCart(item) {
-            let res = await apiAddCart(item._id);
-            if (res.data.code == 1) {
-                Toast.success(this.$t("m.message.addSuccess"));
+            let res = await apiAddCart(item.uid);
+            if (res.data.code === 0) {
+                Toast.success({
+                    message: this.$t("m.message.addSuccess"),
+                    duration: 500
+                });
+            } else {
+                Toast.fail({
+                    message: res.data.msg,
+                    position: "bottom"
+                });
             }
         },
         onDetail(id) {

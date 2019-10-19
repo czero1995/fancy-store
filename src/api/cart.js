@@ -1,23 +1,18 @@
 import axios from "../utils/axios";
 
-export function apiAddCart(id) {
-    return axios.post(`cart/add`, {
-        id: id
-    });
+export function apiActionCart(uid, action) {
+    return axios.post(`cart/action`, { productId: uid, action });
+}
+export function apiAddCart(uid) {
+    return axios.post(`cart/add`, { productId: uid });
+}
+export function apiCutCart(uid) {
+    return axios.post(`cart/cut`, { productId: uid });
+}
+export function apiDeleteCart(uid) {
+    return axios.post(`cart/delete`, { productId: uid });
 }
 
 export function apiGetCart() {
     return axios.get(`cart/all`);
-}
-
-export function apiDeleteCart(id) {
-    return axios.post(`cart/delete`, {
-        id: id
-    });
-}
-export function apiUpdateCart(id, state) {
-    return axios.post(`cart/update`, {
-        id: id,
-        add: state
-    });
 }

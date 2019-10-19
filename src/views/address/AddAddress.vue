@@ -9,7 +9,7 @@
             <van-field v-model="addressInfo.post" required clearable :label="$t('m.address.port')" :placeholder="$t('m.address.portHolder')" />
             <van-field v-model="addressInfo.address" required clearable :label="$t('m.address.address')" :placeholder="$t('m.address.addressHolder')" @click="onAddress" />
             <van-field v-model="addressInfo.detailAddress" type="textarea" :label="$t('m.address.detailAddress')" :placeholder="$t('m.address.detailAddressHolder')" rows="2" required autosize />
-            <van-switch-cell v-model="addressInfo.checked" :title="$t('m.address.isDefault')" />
+            <van-switch-cell v-model="addressInfo.isDefault" :title="$t('m.address.isDefault')" />
         </van-cell-group>
         <div class="area" v-show="showArea">
             <van-area :area-list="areaList" value="440305" @cancel="onCancel" @confirm="onComfirm" />
@@ -41,12 +41,12 @@ export default {
     data() {
         return {
             addressInfo: {
-                name: "",
-                tel: "",
-                post: "",
-                address: "",
-                detailAddress: "",
-                checked: false
+                name: "名字",
+                tel: "13641418385",
+                post: "518000",
+                address: "深圳市南山区",
+                detailAddress: "腾讯",
+                isDefault: false
             },
             areaList: null,
             showArea: false,

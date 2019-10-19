@@ -5,19 +5,19 @@
         </van-nav-bar>
         <div class="container">
             <nopage ref="nopage" :title="title"></nopage>
-            <div>
+            <div v-if="cartsData.length > 0">
                 <div class="cart-item flex-space" :class="{ selected: itemIndex === cartIndex }" v-for="(cartItem, cartIndex) in cartsData" :key="cartIndex">
-                    <div class="flex">
-                        <van-checkbox v-model="cartItem.goodsRadio" @change="onGoodsRadio(cartItem)"></van-checkbox>
-                        <img class="goods-img" v-lazy="cartItem.imgCover" @click.stop="onDetail(cartItem._id)" />
+                    <div class=" flex overflow_hidden">
+                        <van-checkbox size="20px" v-model="cartItem.goodsRadio" @change="onGoodsRadio(cartItem)"></van-checkbox>
+                        <img class="goods-img" v-lazy="cartItem.productItems.imgCover" @click.stop="onDetail(cartItem._id)" />
                         <div class="goods-textBox" @click.stop="onDetail(cartItem._id)">
-                            <p class="product_title">{{ cartItem.title }}</p>
+                            <p class="product_title">{{ cartItem.productItems.title }}</p>
                             <div class="goodsOp flex">
-                                <van-icon name="diamond-o" @click.stop="onCutCart(cartItem)" />
-                                <input type="text" :value="cartItem.num" />
-                                <van-icon name="add-o" @click.stop="onAddCart(cartItem)" />
+                                <van-icon size="20px" name="diamond-o" @click.stop="onCutCart(cartItem)" />
+                                <input type="number" :value="cartItem.num" />
+                                <van-icon size="20px" name="add-o" @click.stop="onAddCart(cartItem)" />
                             </div>
-                            <p class="product_price">¥{{ cartItem.priceNow }}</p>
+                            <p class="product_price"><span class="price_pre">¥</span> {{ cartItem.productItems.priceNow }}</p>
                         </div>
                     </div>
                     <van-icon v-show="showEdit" class="remove" name="delete" @click.stop="onRemove(cartItem, cartIndex)" />
@@ -32,9 +32,9 @@
 
 <script>
 import { mapMutations } from "vuex";
-import { apiGetCart, apiDeleteCart, apiUpdateCart } from "@/api/cart.js";
+import { apiGetCart, apiAddCart, apiCutCart, apiDeleteCart } from "@/api/cart.js";
 import { dataMixin } from "@/mixins/dataMixin.js";
-import { NavBar, Checkbox, CheckboxGroup, SubmitBar, Icon, Dialog } from "vant";
+import { NavBar, Checkbox, CheckboxGroup, SubmitBar, Icon, Dialog, Toast } from "vant";
 export default {
     metaInfo() {
         return {
@@ -65,8 +65,10 @@ export default {
         [CheckboxGroup.name]: CheckboxGroup,
         [SubmitBar.name]: SubmitBar,
         [Icon.name]: Icon,
-        [Dialog.name]: Dialog
+        [Dialog.name]: Dialog,
+        [Toast.name]: Toast
     },
+
     created() {
         this.getCart();
     },
@@ -83,7 +85,7 @@ export default {
                 return;
             }
 
-            this.cartsData = res.data.result;
+            this.cartsData = res.data.data;
 
             if (this.cartsData.length == 0) {
                 this.title = this.$t("m.carts.noCarts");
@@ -113,21 +115,39 @@ export default {
             this.onCalAllCoach();
         },
         async onAddCart(item) {
-            await apiUpdateCart(item._id, "add");
-            item.num++;
+            let res = await apiAddCart(item.productId);
+            if (res.data.code === 0) {
+                Toast.success({
+                    message: this.$t("m.message.addSuccess"),
+                    duration: 500
+                });
+                item.num++;
+            } else {
+                Toast.fail({
+                    message: res.data.msg,
+                    position: "bottom"
+                });
+            }
+
             this.onCalAllCoach();
         },
         async onCutCart(item) {
             if (item.num > 1) {
-                await apiUpdateCart(item._id, "cut");
-                item.num--;
+                let res = await apiCutCart(item.productId, "cut");
+                if (res.data.code === 0) {
+                    console.log("减少成功");
+                    Toast.success("减少成功");
+                    item.num--;
+                } else {
+                    Toast.fail(res.data.msg);
+                }
                 this.onCalAllCoach();
             }
         },
         onCalAllCoach() {
             this.allCoach = 0;
             this.cartsData.forEach(item => {
-                item.goodsRadio && (this.allCoach += item.num * item.priceNow);
+                item.goodsRadio && (this.allCoach += item.num * item.productItems.priceNow);
             });
             this.allCoach = this.allCoach * 100;
         },
@@ -139,8 +159,8 @@ export default {
             });
         },
         async sureRemove(item, index) {
-            await apiDeleteCart(item._id);
-            this.cartsData.splice(index, 1);
+            const res = await apiDeleteCart(item.uid);
+            res.data.code === 0 && this.cartsData.splice(index, 1);
         },
         /*提交订单*/
         onOrder() {
@@ -207,7 +227,7 @@ export default {
     margin: 20px 0;
     input {
         border: none;
-        font-size: 12px;
+        font-size: 14px;
         text-align: center;
         width: 30px;
     }

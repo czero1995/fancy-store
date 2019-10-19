@@ -14,7 +14,7 @@
                         </div>
                         <div class="order-content flex-space">
                             <div class="flex">
-                                <div class="flex" v-for="(itemProduct, indexProduct) in itemPay.products" :key="indexProduct">
+                                <div class="flex" v-for="(itemProduct, indexProduct) in itemPay.productItems" :key="indexProduct">
                                     <img class="order-img" :src="itemProduct.imgCover" />
                                 </div>
                             </div>
@@ -119,7 +119,7 @@ export default {
 
         async getOrder() {
             let res = await apiGetOrder(this.type);
-            this.orderData = res.data.result.map(item => {
+            this.orderData = res.data.data.map(item => {
                 if (item.status == "payed") {
                     item.color = "success";
                 } else if (item.status == "paying") {
@@ -129,6 +129,7 @@ export default {
                 }
                 return item;
             });
+            console.log(" this.orderData ", this.orderData);
             this.orderData.length == 0 ? Toast(this.$t("m.order.noOrderState")) : Toast.clear();
         },
         onBar(index, title) {

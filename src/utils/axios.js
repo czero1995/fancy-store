@@ -8,6 +8,7 @@ const http = axios.create({
 // http request 拦截器
 http.interceptors.request.use(
     config => {
+        config.headers["userId"] = localStorage.getItem("userId");
         return config;
     },
     error => {
@@ -22,13 +23,18 @@ http.interceptors.response.use(
         if (response.data.code == -1) {
             store.commit("SET_RESET");
             Toast({
-                message: "用户未登陆",
+                message: response.data.msg,
                 position: "bottom"
             });
         }
         return response;
     },
     error => {
+        Toast({
+            message: `${error.response.status}:${error.response.data}`,
+            position: "bottom"
+        });
+        console.log("请求出错", error);
         return Promise.reject(error);
     }
 );
