@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <van-nav-bar :title="title" left-arrow @click-left="onBack">
-            <van-icon name="delete" slot="right" v-if="state == 'edit'" @click="onDelete" />
+            <van-icon size="20px" color="#f44" name="delete" slot="right" v-if="state == 'edit'" @click="onDelete" />
         </van-nav-bar>
         <van-cell-group>
             <van-field v-model="addressInfo.name" required :label="$t('m.address.name')" :placeholder="$t('m.address.nameHolder')" />
@@ -42,7 +42,7 @@ export default {
         return {
             addressInfo: {
                 name: "名字",
-                tel: "13641418385",
+                tel: "13641414141",
                 post: "518000",
                 address: "深圳市南山区",
                 detailAddress: "腾讯",
@@ -50,7 +50,7 @@ export default {
             },
             areaList: null,
             showArea: false,
-            title: this.$t("addAddressTitle"),
+            title: this.$t("m.address.addAddressTitle"),
             state: "add"
         };
     },
@@ -73,7 +73,7 @@ export default {
         if (this.$route.query.state == "edit") {
             let data = this.$route.query.item;
             this.addressInfo = data;
-            this.title = this.$t("editAddressTitle");
+            this.title = this.$t("m.address.editAddressTitle");
             this.state = "edit";
         }
     },
@@ -95,7 +95,7 @@ export default {
         },
         onDelete() {
             Dialog.confirm({
-                message: this.$t("message.deleteSure")
+                message: this.$t("m.message.deleteSure")
             }).then(() => {
                 this.sureDelete();
             });

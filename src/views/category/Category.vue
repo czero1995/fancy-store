@@ -4,7 +4,7 @@
         <div class="container flex" id="container">
             <van-tabs @click="onBar" animated sticky>
                 <van-tab :title="menuItem.title" v-for="(menuItem, menuIndex) in menuList" :key="menuIndex">
-                    <div class="rightItem" v-for="(categoryItem, categoryIndex) in categoryList" @click="onDetail(categoryItem._id)" :key="categoryIndex">
+                    <div class="rightItem" v-for="(categoryItem, categoryIndex) in categoryList" @click="onDetail(categoryItem.uid)" :key="categoryIndex">
                         <div class="category-item flex">
                             <div class="item flex overflow_hidden">
                                 <img class="goods-img" v-lazy="categoryItem.imgCover" />
@@ -93,12 +93,10 @@ export default {
                 });
             }
         },
-        onDetail(id) {
+        onDetail(uid) {
             this.$router.push({
                 path: "/detail",
-                query: {
-                    id: id
-                }
+                query: { uid }
             });
         }
     }

@@ -1,7 +1,8 @@
 <template>
     <div class="page orderpage container">
         <van-nav-bar :title="$t('m.header.myOrder')" left-arrow @click-left="onBack">
-            <van-icon name="edit" slot="right" @click="onEdit" />
+            <van-icon v-if="!showEdit" size="20px" name="edit" slot="right" @click="onEdit" />
+            <van-icon v-else size="20px" name="cross" slot="right" @click="showEdit = !showEdit" />
         </van-nav-bar>
 
         <van-tabs v-model="active" animated @click="onBar">
@@ -18,7 +19,7 @@
                                     <img class="order-img" :src="itemProduct.imgCover" />
                                 </div>
                             </div>
-                            <van-icon v-show="showEdit" class="remove" name="delete" @click.stop="onRemove(itemPay._id, itemIndex)" />
+                            <van-icon color="#f44" size="30px" v-show="showEdit" class="remove" name="delete" @click.stop="onRemove(itemPay.uid, itemIndex)" />
                         </div>
                     </div>
                 </div>
@@ -104,16 +105,16 @@ export default {
             });
         },
 
-        onRemove(id, index) {
+        onRemove(uid, index) {
             Dialog.confirm({
                 message: this.$t("m.message.deleteSure")
             }).then(() => {
-                this.sureRemove(id, index);
+                this.sureRemove(uid, index);
             });
         },
 
-        async sureRemove(id, index) {
-            await apiDeleteOrder(id);
+        async sureRemove(uid, index) {
+            await apiDeleteOrder(uid);
             this.orderData.splice(index, 1);
         },
 
@@ -211,5 +212,8 @@ export default {
 }
 .order_num {
     flex: 1;
+}
+.remove {
+    margin-top: 8px;
 }
 </style>

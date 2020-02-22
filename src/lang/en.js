@@ -123,7 +123,8 @@ export const m = {
         submitOrder: "submitOrder",
         noCarts: "carts no data,go to shoping",
         addCarts: "addCarts",
-        buyNow: "buyNow"
+        buyNow: "buyNow",
+        cutSuccess: "cutSuccess"
     },
     order: {
         orderNum: "orderNumber",
@@ -137,7 +138,8 @@ export const m = {
         submitOrder: "submitOrder",
         pay: "pay",
         confirmPack: "confirmPack",
-        orderConfirm: "Paying Order Now?"
+        orderConfirm: "Paying Order Now?",
+        choiceConfirm: "Please Choice"
     },
     footer: {
         product: "product",

@@ -28,15 +28,14 @@
                         <div class="cartModel-text">
                             <div class="flex-space">
                                 <p class="product_title">{{ detailInfo.title }}</p>
-                                <van-icon name="close" @click.stop="addCartModel = false" />
+                                <van-icon size="30px" class="close" name="close" @click.stop="addCartModel = false" />
                             </div>
 
                             <p class="product_price">¥{{ detailInfo.priceNow }}</p>
                         </div>
                     </div>
                     <div @click.stop="onBuy">
-                        <p class="cartModel-addCart" v-show="!isBuy">{{ $t("m.carts.addCarts") }}</p>
-                        <p class="cartModel-addCart" v-show="isBuy">{{ $t("m.carts.buyNow") }}</p>
+                        <p class="cartModel-addCart" @click="onAddCart" v-show="!isBuy">{{ $t("m.carts.addCarts") }}</p>
                     </div>
                 </div>
             </div>
@@ -49,6 +48,7 @@ import { mapMutations } from "vuex";
 import { NavBar, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn, ImagePreview, Icon, Toast } from "vant";
 import { apiGetDetail } from "@/api/product.js";
 import { apiActionCart } from "@/api/cart.js";
+import { apiAddCart } from "@/api/cart.js";
 export default {
     metaInfo() {
         return {
@@ -100,8 +100,23 @@ export default {
             this.addCartModel = true;
             this.isBuy = true;
         },
-        onAddCart() {
-            this.goodsNum++;
+        async onAddCart(item) {
+            let res = await apiAddCart(this.$route.query.uid);
+            if (res.data.code === 0) {
+                Toast.success({
+                    message: this.$t("m.message.addSuccess"),
+                    duration: 500
+                });
+                item.num++;
+                this.addCartModel = false;
+            } else {
+                Toast.fail({
+                    message: res.data.msg,
+                    position: "bottom"
+                });
+            }
+
+            this.onCalAllCoach();
         },
         onCutCart() {
             this.goodsNum > 1 && this.goodsNum--;
@@ -187,7 +202,7 @@ export default {
 }
 .cartModel-text {
     width: 100%;
-    padding: 10px;
+    padding: 2px 10px;
 }
 .cartClose {
     width: 33px;
@@ -222,5 +237,10 @@ export default {
 }
 .wscnph {
     width: 100%;
+}
+.close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
 }
 </style>

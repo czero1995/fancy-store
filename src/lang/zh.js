@@ -123,7 +123,8 @@ export const m = {
         submitOrder: "提交订单",
         noCarts: "购物车暂无数据,请前往添加~",
         addCarts: "加入购物车",
-        buyNow: "立即购买"
+        buyNow: "立即购买",
+        cutSuccess: "减少成功"
     },
     order: {
         orderNum: "订单号",
@@ -137,7 +138,8 @@ export const m = {
         submitOrder: "提交订单",
         pay: "付款",
         confirmPack: "确定收货",
-        orderConfirm: "是否现在结算该订单?"
+        orderConfirm: "是否现在结算该订单?",
+        choiceConfirm: "请选择订单"
     },
     footer: {
         product: "产品",

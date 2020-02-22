@@ -1,7 +1,8 @@
 <template>
     <div class="page">
         <van-nav-bar :title="$t('m.header.carts')" fixed>
-            <van-icon name="edit" slot="right" @click="onEdit" />
+            <van-icon v-if="!showEdit" size="20px" name="edit" slot="right" @click="onEdit" />
+            <van-icon v-else size="20px" name="cross" slot="right" @click="showEdit = !showEdit" />
         </van-nav-bar>
         <div class="container">
             <nopage ref="nopage" :title="title"></nopage>
@@ -9,18 +10,18 @@
                 <div class="cart-item flex-space" :class="{ selected: itemIndex === cartIndex }" v-for="(cartItem, cartIndex) in cartsData" :key="cartIndex">
                     <div class=" flex overflow_hidden">
                         <van-checkbox size="20px" v-model="cartItem.goodsRadio" @change="onGoodsRadio(cartItem)"></van-checkbox>
-                        <img class="goods-img" v-lazy="cartItem.productItems.imgCover" @click.stop="onDetail(cartItem._id)" />
-                        <div class="goods-textBox" @click.stop="onDetail(cartItem._id)">
+                        <img class="goods-img" v-lazy="cartItem.productItems.imgCover" @click.stop="onDetail(cartItem.uid)" />
+                        <div class="goods-textBox" @click.stop="onDetail(cartItem.uid)">
                             <p class="product_title">{{ cartItem.productItems.title }}</p>
                             <div class="goodsOp flex">
-                                <van-icon size="20px" name="diamond-o" @click.stop="onCutCart(cartItem)" />
+                                <van-icon size="20px" name="delete" @click.stop="onCutCart(cartItem)" />
                                 <input type="number" :value="cartItem.num" />
                                 <van-icon size="20px" name="add-o" @click.stop="onAddCart(cartItem)" />
                             </div>
                             <p class="product_price"><span class="price_pre">¥</span> {{ cartItem.productItems.priceNow }}</p>
                         </div>
                     </div>
-                    <van-icon v-show="showEdit" class="remove" name="delete" @click.stop="onRemove(cartItem, cartIndex)" />
+                    <van-icon color="#f44" size="30px" v-show="showEdit" class="remove" name="delete" @click.stop="onRemove(cartItem, cartIndex)" />
                 </div>
             </div>
         </div>
@@ -135,8 +136,7 @@ export default {
             if (item.num > 1) {
                 let res = await apiCutCart(item.productId, "cut");
                 if (res.data.code === 0) {
-                    console.log("减少成功");
-                    Toast.success("减少成功");
+                    Toast.success(this.$t("m.cart.cutSuccess"));
                     item.num--;
                 } else {
                     Toast.fail(res.data.msg);
@@ -153,13 +153,13 @@ export default {
         },
         onRemove(item, index) {
             Dialog.confirm({
-                message: "确定删除"
+                message: this.$t("m.message.deleteSure")
             }).then(() => {
                 this.sureRemove(item, index);
             });
         },
         async sureRemove(item, index) {
-            const res = await apiDeleteCart(item.uid);
+            const res = await apiDeleteCart(item.productId);
             res.data.code === 0 && this.cartsData.splice(index, 1);
         },
         /*提交订单*/
@@ -169,25 +169,26 @@ export default {
                 item.goodsRadio && orderArr.push(item);
             });
 
-            if (orderArr.length) {
-                this.$router.push({
-                    path: "orderwait",
-                    query: {
-                        status: "todo"
-                    }
-                });
-                this.setOrders(orderArr);
+            if (!orderArr.length) {
+                return Toast.fail(this.$t("m.order.choiceConfirm"));
             }
+            this.$router.push({
+                path: "orderwait",
+                query: {
+                    status: "todo"
+                }
+            });
+            this.setOrders(orderArr);
         },
         onEdit() {
             this.showEdit = !this.showEdit;
         },
         /*进入商品详情*/
-        onDetail(id) {
+        onDetail(uid) {
             this.$router.push({
                 path: "/detail",
                 query: {
-                    id: id
+                    uid
                 }
             });
         },

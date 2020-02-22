@@ -1,12 +1,12 @@
 <template>
     <div class="page">
-        <van-nav-bar :title="$t('m.register.register')" :left-text="$t('m.header.back')" left-arrow @click-left="onBack" />
+        <van-nav-bar :title="$t('m.register.register')" left-arrow @click-left="onBack" />
         <div class="register">
             <van-cell-group>
                 <van-field v-model="userAccount" required clearable left-icon="contact" :label="$t('m.register.name')" :placeholder="$t('m.register.nameHolder')" />
 
-                <van-field v-model="userPasswd" left-icon="closed-eye" type="password" :label="$t('m.register.pwd')" :placeholder="$t('m.register.pwdHolder')" required />
-                <van-field v-model="userPasswdConfim" left-icon="closed-eye" type="password" :label="$t('m.register.pwdConfirm')" :placeholder="$t('m.register.pwdConfirmHolder')" required />
+                <van-field v-model="userPasswd" left-icon="edit" :type="passwordType" :label="$t('m.register.pwd')" :placeholder="$t('m.register.pwdHolder')" required />
+                <van-field v-model="userPasswdConfim" left-icon="edit" type="password" :label="$t('m.register.pwdConfirm')" :placeholder="$t('m.register.pwdConfirmHolder')" required />
             </van-cell-group>
             <van-button class="login_btn" size="small" round type="info" @click="onRegister">{{ $t("m.register.register") }}</van-button>
         </div>

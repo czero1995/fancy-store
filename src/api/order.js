@@ -13,10 +13,8 @@ export function apiGetOrder(status) {
     return axios.get(`order/all?status=${status}`);
 }
 
-export function apiDeleteOrder(id) {
-    return axios.post(`order/delete`, {
-        id: id
-    });
+export function apiDeleteOrder(uid) {
+    return axios.post(`order/delete`, { uid });
 }
 export function apiUpdateOrder(uid, status) {
     console.log("uid", uid);

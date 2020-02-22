@@ -6,7 +6,7 @@
             <van-cell-group>
                 <van-field v-model="userAccount" required clearable left-icon="contact" :label="$t('m.login.name')" :placeholder="$t('m.login.nameHolder')" />
 
-                <van-field v-model="userPasswd" left-icon="closed-eye" type="password" :label="$t('m.login.pwd')" :placeholder="$t('m.login.pwdHolder')" required />
+                <van-field v-model="userPasswd" left-icon="edit" type="password" :label="$t('m.login.pwd')" :placeholder="$t('m.login.pwdHolder')" required />
             </van-cell-group>
             <van-button class="login_btn" size="small" round type="info" @click="onLogin">{{ $t("m.login.login") }}</van-button>
         </div>

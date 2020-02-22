@@ -9,8 +9,8 @@ export function apiAddCart(uid) {
 export function apiCutCart(uid) {
     return axios.post(`cart/cut`, { productId: uid });
 }
-export function apiDeleteCart(uid) {
-    return axios.post(`cart/delete`, { productId: uid });
+export function apiDeleteCart(productId) {
+    return axios.post(`cart/delete`, { productId });
 }
 
 export function apiGetCart() {
