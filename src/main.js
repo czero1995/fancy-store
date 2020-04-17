@@ -11,6 +11,15 @@ import { Lazyload } from "vant";
 import Raven from "raven-js";
 import RavenVue from "raven-js/plugins/vue";
 import "amfe-flexible";
+import { Dialog } from "vant";
+
+const isPc = !/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
+if (isPc) {
+    Dialog({
+        message: `请在移动端打开,或者开启调试模式，进入移动端查看。`
+    });
+}
+
 // 控制台插件
 let vConsole = null;
 process.env.NODE_ENV == "development" && (vConsole = new Vconsole());
