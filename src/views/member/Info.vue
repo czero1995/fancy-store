@@ -80,7 +80,7 @@ export default {
             console.log("data: ", data);
             axiosInstance({
                 method: "POST",
-                url: "http://upload.qiniu.com/", //上传地址
+                url: "https://up.qbox.me", //上传地址
                 data: data,
                 timeout: 30000 //超时时间，因为图片上传有可能需要很久
             })
@@ -135,7 +135,7 @@ export default {
             data.append("file", file);
             axiosInstance({
                 method: "POST",
-                url: "http://upload.qiniup.com/", //上传地址
+                url: "https://up.qbox.me", //上传地址
                 data: data,
                 timeout: 30000 //超时时间，因为图片上传有可能需要很久
             })
