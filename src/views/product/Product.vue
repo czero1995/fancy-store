@@ -70,7 +70,7 @@ export default {
 
     methods: {
         async getProductData() {
-            let res = await apiGetProduct(this.pageNum, "热门");
+            let res = await apiGetProduct(this.pageNum, 1);
             this.productList = res.data.data;
             this.isLoading = false;
         },

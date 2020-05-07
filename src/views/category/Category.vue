@@ -46,7 +46,7 @@ export default {
             categoryList: [],
             categoryContent: [],
             pageNum: 0,
-            type: ""
+            catetoryUid: 2
         };
     },
     mixins: [dataMixin],
@@ -67,16 +67,18 @@ export default {
         async getMenuList() {
             let res = await apiGetCategoryMenu();
             this.menuList = res.data.data.slice(1);
-            console.log("menuList: ", this.menuList);
-            this.type = this.menuList[0].title;
             this.getCategoryList();
         },
         async getCategoryList() {
-            let res = await apiGetProduct(this.pageNum, this.type);
+            console.log("this.catetoryUid: ", this.catetoryUid);
+            let res = await apiGetProduct(this.pageNum, this.catetoryUid);
             this.categoryList = res.data.data;
         },
         onBar(index, title) {
-            this.type = title;
+            let menuItem = this.menuList.find(function(item) {
+                return item.title === title;
+            });
+            this.catetoryUid = menuItem.uid;
             this.getCategoryList();
         },
         async onAddCart(item) {
