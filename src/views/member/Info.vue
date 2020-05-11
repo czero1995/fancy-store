@@ -8,7 +8,7 @@
         </div>
         <van-cell-group>
             <van-cell :title="$t('m.info.name')" :value="userData.user" />
-            <van-cell :title="$t('m.info.sex')" :value="userData.sex" @click="show = true" />
+            <van-cell :title="$t('m.info.sex')" :value="userData.gender" @click="show = true" />
         </van-cell-group>
         <div class="pageBottom van-button--danger" @click="onLogOut" v-if="$store.state.user.user">
             <span class="tabbar-label">{{ $t("m.set.logout") }}</span>
@@ -94,15 +94,16 @@ export default {
         async getUser() {
             let res = await apiGetUser();
             this.userData = res.data.data;
-            this.userData.sex == "women" && (this.userData.sex = "女");
-            this.userData.sex == "man" && (this.userData.sex = "男");
-            this.sex = this.userData.sex;
+            this.userData.gender == 0 && (this.userData.gender = "未知");
+            this.userData.gender == 1 && (this.userData.gender = "男");
+            this.userData.gender == 2 && (this.userData.gender = "女");
+            this.gender = this.userData.gender;
         },
         async onSelect(item) {
             let params = {};
             this.show = false;
-            this.userData.sex = item.name;
-            item.name == "男" ? (params.sex = "man") : (params.sex = "women");
+            this.userData.gender = item.name;
+            item.name == "男" ? (params.gender = 1) : (params.gender = 2);
             await apiEditUser(params);
         },
         async onUpload() {

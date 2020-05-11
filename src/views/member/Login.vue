@@ -62,7 +62,8 @@ export default {
                     this.setReset();
                     this.setUser(res.data.data);
                     console.log("res.data.data", res.data.data);
-                    localStorage.setItem("userId", res.data.data.uid);
+                    console.log("res.data.data.sessionID", res.data.data.sessionID);
+                    localStorage.setItem("sessionId", res.data.data.sessionID);
                     this.onBack();
                 } else {
                     Toast({

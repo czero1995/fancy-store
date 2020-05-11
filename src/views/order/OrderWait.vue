@@ -175,13 +175,13 @@ export default {
         },
         async onDone() {
             await apiUpdateOrder(this.$store.state.orders.uid, "done");
-            Toast(this.$t("m.order.orderDone"));
+            Toast(this.$t("m.strategies.orderDone"));
             this.setOrderStatus("done");
             this.onBack();
         },
         async onPay() {
             await apiUpdateOrder(this.$store.state.orders.uid, "payed");
-            Toast(this.$t("m.order.orderPayed"));
+            Toast(this.$t("m.strategies.orderPayed"));
             this.onBack();
         },
         async addOrder(status) {

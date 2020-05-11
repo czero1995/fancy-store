@@ -8,7 +8,7 @@ const http = axios.create({
 // http request 拦截器
 http.interceptors.request.use(
     config => {
-        config.headers["userId"] = localStorage.getItem("userId");
+        config.headers["sessionId"] = localStorage.getItem("sessionId");
         return config;
     },
     error => {

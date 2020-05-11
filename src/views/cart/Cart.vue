@@ -136,7 +136,7 @@ export default {
             if (item.num > 1) {
                 let res = await apiCutCart(item.productId, "cut");
                 if (res.data.code === 0) {
-                    Toast.success(this.$t("m.cart.cutSuccess"));
+                    Toast.success(this.$t("m.carts.cutSuccess"));
                     item.num--;
                 } else {
                     Toast.fail(res.data.msg);
